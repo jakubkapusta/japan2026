@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Japonia 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;500;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<script>
+// ╔══════════════════════════════════════════════════════════════════╗
+// ║  DANE PLANU — EDYTUJ TYLKO TĘ SEKCJĘ                          ║
+// ║  Reszta pliku (HTML/CSS/JS poniżej) się nie zmienia.           ║
+// ║  Format:                                                        ║
+// ║  Rezerwacja: tytuł | pilność | data | opis                     ║
+// ║  Dzień: == Dzień N | data | tytuł | hotel                      ║
+// ║  Rozkład: - HH:MM | tytuł | notatka                           ║
+// ╚══════════════════════════════════════════════════════════════════╝
+const PLAN_DATA = `
+### META
+title: Japonia 2026
+subtitle: Kuba, Asia i Michał · 31 lipca – 19 sierpnia · 20 dni
+updated: maj 2026
+
+### REZERWACJE
+🚗 Wynajem samochodu | Teraz | Odbiór 5.08 Kanazawa → Zwrot 12.08 Nagano · 7 dni | ToCoo! (tocoo.jp) lub Toyota Rent a Car (rent.toyota.co.jp/eng). Compact lub small SUV. Dodaj CDW + ETC card. Rozważ TEP (Expressway Pass) na ToCoo!.
+🪪 Międzynarodowe prawo jazdy (IDP) | Teraz | Potrzebne od 5.08 | Wyrobić w starostwie powiatowym lub WORD. Trwa kilka dni, ~50 zł. Bez IDP nie dostaniesz kluczyków. Weź też polskie prawo jazdy.
+🎨 teamLab Planets Tokio | Czerwiec | Wizyta śr 13.08 (dzień powszedni = taniej) | Bilety na sierpień pojawią się ~1 czerwca. Kupuj na teamlabplanets.dmm.com lub Klook. Slot wieczorny 19:00–21:00 najspokojniej. ¥3 800/dorosły, ¥2 800/nastolatek.
+🚅 Shinkansen Kioto → Kanazawa | Lipiec | Przejazd 5.08 · Thunderbird + Hokuriku Shinkansen · ~2h 15min | Rezerwacje od 5 lipca. JR West (westjr.co.jp). ~7 500 ¥/os. × 3 = ~22 500 ¥.
+🚅 Shinkansen Nagano → Tokio | Lipiec | Przejazd 12.08 · Hokuriku Shinkansen Kagayaki · ~1h 20min | Od 12 lipca na JR East (eki-net.com). ~8 500 ¥/os. × 3 = ~25 500 ¥. Tuż przed Obon!
+⛰️ Kamikōchi | Bez rezerwacji | Wizyta 7.08 · wjazd z Takayamy przez Hirayu | Wstęp wolny. Autobus Hirayu → Kamikōchi bez rezerwacji. Parking Akandana 600 ¥. Przyjechać 7:00–8:00. Gotówka! Temp. niższa o 5–9°C.
+🚃 Keisei Skyliner Tokio → Narita | Na miejscu | Przejazd 19.08 · ~40 min | Online na keisei.co.jp lub automat na miejscu. Co 20 min.
+🚃 Haruka Express KIX → Kioto | Na miejscu | Przejazd 31.07 · ~75 min · 2 200 ¥/os. (bilet turystyczny) | Kup online na westjr.co.jp (WEST QR E-Ticket — skan QR na bramce, zero kolejek). Pociągi co 30 min. Można też kupić na lotnisku w automacie.
+💳 Karty ICOCA (transport + płatności) | Na lotnisku KIX | Kupić zaraz po lądowaniu 31.07 na stacji JR Kansai Airport | Automaty z logo ICOCA na stacji JR (szybciej niż okienko). 2 000 ¥/karta (500 ¥ kaucja + 1 500 ¥ do użycia). Kupcie 3 karty — działają w CAŁEJ Japonii (Kioto, Osaka, Nara, Nagano, Tokio). Płacicie nimi pociągi, metro, autobusy, konbini, automaty, coin lockery. Doładowanie w każdym konbini lub na stacji. Na Androidzie NIE działa wersja mobilna — kupcie fizyczne karty. Kaucja 500 ¥ zwracana przy oddaniu karty.
+
+### PLAN
+# Część 1: Kioto / Osaka / Nara
+
+== Dzień 1 | czw 31.07 | Przylot + Gion | KABIN Minamiza, Kioto
+Przylot na Osaka KIX o 11:50. Karty ICOCA na lotnisku, Haruka do Kioto, wieczorny spacer po Gion. Jet lag (+7h) = wieczorem energia, rano jutro będziecie spać.
+- 11:50 | ✈️ Lądowanie na KIX (Osaka Kansai) | Tylko bagaż pokładowy = szybko przez paszportówkę, bez czekania na taśmę.
+- 12:30 | 💳 Kupno kart ICOCA na stacji JR Kansai Airport | Mostek z Terminala 1 (poziom 2F) prosto do stacji. Na stacji JR: automaty z logo ICOCA (szybciej niż okienko). 2 000 ¥/karta (500 ¥ kaucja + 1 500 ¥ do użycia). Kupcie 3 karty — działają w całej Japonii (Kioto, Osaka, Nara, Nagano, Tokio). Płacicie nimi pociągi, metro, autobusy, konbini, automaty z napojami, coin lockery. Doładowanie w każdym konbini lub automacie na stacji.
+- 12:45 | 🚃 Haruka Express → Kyoto Station (~75 min) | Bilet turystyczny 2 200 ¥/os. Kup online wcześniej (WEST QR E-Ticket — skan QR na bramce, zero kolejek). Pociągi co 30 min. Półki na bagaże na końcach wagonów.
+- 14:00 | 🚕 Kyoto Station → hotel taksówką (~10 min, ~1 000 ¥) | Z 3 walizkami pokładowymi to najwygodniej. Postój taxi na wyjściu Hachijo (południowe).
+- 14:15 | 🏨 Check-in KABIN Minamiza | Zostawcie rzeczy, odśwież się po locie.
+- 15:30 | 🍜 Późny lunch w okolicy hotelu | Gion-Shijo to centrum restauracji. Ramen, udon lub pierwszy kontakt z japońskim jedzeniem w izakaya.
+- 16:30 | 🏮 Spacer po Gion | Hanamikoji-dori (główna ulica gejsz), uliczki z drewnianymi machiya. Wieczorem szansa na spotkanie maiko (praktykujące gejsze).
+- 18:00 | ⛩️ Yasaka Shrine | Piękna o zmierzchu, podświetlone latarnie. Wstęp wolny. 5 min od hotelu.
+- 19:00 | 🍽️ Kolacja w Pontocho | Wąska uliczka z restauracjami wzdłuż rzeki Kamo. Yakitori, tempura lub kaiseki. Rezerwacja nie konieczna w czwartek.
+- 20:30 | 🌙 Spacer wzdłuż rzeki Kamo | Wieczorny klimat, podświetlone mosty, lokalni siedzą nad rzeką. Jet lag = pełna energia wieczorem!
+- 22:00 | 🏨 Powrót do hotelu | Jet lag sprawi, że nie będziecie senni — spróbujcie się położyć. Jutro nie spieszcie się z wstawaniem (będziecie spać do ~10:00).
+
+== Dzień 2 | pt 01.08 | Kiyomizu-dera + Fushimi Inari nocą | KABIN Minamiza, Kioto
+Jet lag (+7h): będziecie spać do południa i mieć energię do późna w nocy. Wykorzystajcie to — Kiyomizu-dera po południu, Fushimi Inari NOCĄ (otwarte 24/7, pusto i magicznie!).
+- 10:00 | 🍳 Późne wstawanie + śniadanie | Nie walczcie z jet lagiem pierwszego pełnego dnia. Śniadanie w konbini (onigiri, kanapki, kawa) lub kawiarnia przy Gion-Shijo.
+- 11:00 | 🛕 Kiyomizu-dera | Z hotelu: 20 min spacer przez Higashiyamę (pod górę uliczkami Gojo-zaka). Drewniany taras z widokiem na Kioto. Teren + okolica: ~1.5h. W sierpniu gorąco — weźcie wodę i wachlarz.
+- 12:30 | 🏮 Sannenzaka + Ninenzaka | Urocze uliczki w dół od Kiyomizu: tradycyjne domy, herbaciarnie, ceramika, słodycze. Starbucks ukryty w 100-letnim machiya. Powolny spacer.
+- 13:30 | 🍜 Lunch w Higashiyamie | Yudofu (tofu w dashi — specjalność Kioto) lub soba/udon w lokalnej restauracji. Spokojnie, jest czas.
+- 14:30 | 🍵 Herbaciarnia — matcha + wagashi | Np. Kagizen Yoshifusa przy Gion (od 1865). Tradycyjna herbata ze słodyczami w klimatyzacji — ratunek przed upałem.
+- 15:30 | 🛍️ Nishiki Market | "Kuchnia Kioto" — 400m kryta ulica: tsukemono (kiszonki), dango, tamagoyaki, mochi. Próbowanie na stojąco. Większość stoisk zamyka się 17:00–18:00.
+- 17:00 | 🏨 Przerwa w hotelu | Prysznic, przebranie. Przygotowanie na wieczór — będziecie mieć pełną energię!
+- 18:00 | 🍽️ Kolacja w Pontocho lub Gion | Wąskie uliczki z restauracjami. Yakitori, tempura, izakaya. Piątkowy wieczór — klimat!
+- 19:30 | 🚃 Keihan z Gion-Shijo → Fushimi-Inari (~5 min) | Krótki przejazd na wieczorną wizytę.
+- 20:00 | ⛩️ Fushimi Inari Taisha NOCĄ | Otwarte 24/7. Po zmroku: latarnie podświetlają torii, tłumy znikają, atmosfera mistyczna. Trasa do Yotsutsuji (punkt widokowy, nocna panorama Kioto): ~45 min w górę. Pełna pętla na szczyt: ~2h. Latarka w telefonie wystarczy — szlak jest oznakowany.
+- 21:30 | 🚃 Powrót Keihan do Gion-Shijo | 5 min jazdy.
+- 22:00 | 🌙 Spacer wzdłuż rzeki Kamo / drink | Jet lag = pełna energia o tej porze. Możecie się przejść, wejść do baru, albo po prostu cieszyć się ciepłym wieczorem.
+- 23:30 | 🏨 Hotel | Spróbujcie zasnąć — nawet jeśli nie chce się spać, połóżcie się. Z każdym dniem zegar się przestawi.
+
+== Dzień 3 | sob 02.08 | Osaka — street food i neony | KABIN Minamiza, Kioto
+Całodniowa wyprawa do Osaki. Start później (jet lag!), Dotonbori wieczorem — tam jest najlepsza akcja.
+- 10:00 | 🚃 Gion-Shijo → Osaka (Keihan, ~50 min, 420 ¥) | Peron 2, kier. Yodoyabashi. Limited Express. Nie spieszcie się ze śniadaniem — zjecie w Osace.
+- 11:00 | 🏯 Zamek Osaka | Metro do Tanimachi-Yonchome. Wieża widokowa + muzeum. Park zamkowy ogromny. ~1.5h.
+- 12:30 | 🦐 Kuromon Ichiba Market (lunch) | Metro do Nippombashi. Sashimi, krewetki, mochi, matcha lody. To jest wasze śniadanie + lunch w jednym.
+- 14:00 | 🗼 Shinsekai | Retro dzielnica lat 60. Tsutenkaku. Kushikatsu — nie maczać dwa razy!
+- 15:30 | 🎮 Den Den Town | Retro gry, manga, figurki. Klimatyzacja = ulga od upału. Syn tu zostanie na dłużej.
+- 17:00 | ☕ Przerwa / chłodzenie | Kawiarnia lub konbini. Możecie tu odpocząć przed wieczorem.
+- 18:00 | 🌆 Dotonbori | Neony, krab Kani Doraku, Glico Man, kanał. Po zmroku wygląda najlepiej.
+- 18:30 | 🐙 Takoyaki + Okonomiyaki (kolacja) | Dwa "must try". Jedzcie w różnych budkach!
+- 19:30 | 🛍️ Shinsaibashi + Amerikamura | 600m kryta galeria. Vintage, Don Quijote. Jet lag = macie energię na shopping.
+- 21:00 | 🌃 Spacer po Dotonbori nocą | Kanał nocą = magia. Zdjęcie z Glico Man!
+- 21:30 | 🚃 Powrót do Kioto | Namba → Yodoyabashi (3 min), Keihan ~50 min. Pociąg do Demachiyanagi, NIE Nakanoshima! Ostatni ~23:15.
+- 22:30 | 🏨 KABIN Minamiza | Transport: Keihan ~840 ¥ + metro day pass 820 ¥ = ~1 660 ¥/os.
+
+== Dzień 4 | nd 03.08 | Arashiyama + Kinkaku-ji | KABIN Minamiza, Kioto
+Dzień w Kioto bez dalekiego dojazdu — odpoczynek od wczorajszej Osaki. Arashiyama rano, Kinkaku-ji popołudniu.
+- 9:30 | 🍳 Śniadanie w okolicy hotelu | Jet lag się powoli przestawia — dziś powinniście wstać ok. 9:00. Konbini lub kawiarnia przy Gion-Shijo.
+- 10:00 | 🚃 Keihan do Demachiyanagi → przesiadka na Randen/JR do Saga-Arashiyama | Albo autobus #28 z centrum (~40 min). Albo Hankyu do Arashiyama (~25 min z przesiadką w Katsura).
+- 10:45 | 🎋 Las bambusowy Arashiyama | Idziecie prosto — tunel bambusowy zaczyna się 5 min od stacji. W niedzielę rano będą ludzie, ale jeszcze znośnie. Spacer przez las: ~20 min.
+- 11:15 | 🐒 Monkey Park Iwatayama | Wejście przy rzece Oi. 20 min pod górę, na szczycie dzikie makaki + panorama Kioto. Wstęp ~550 ¥. Warto! Syn powinien to polubić.
+- 12:30 | 🍜 Lunch w Arashiyamie | Przy głównej ulicy dużo opcji — matcha soba, yudofu, unagi (węgorz). Albo street food przy rzece.
+- 13:30 | 🌊 Most Togetsukyo + spacer nad rzeką Oi | Ikoniczny most, w tle góry. Można wynająć łódkę wiosłową (~1 400 ¥/30 min) albo po prostu posiedzieć nad wodą.
+- 14:30 | 🚌 Autobus z Arashiyamy do Kinkaku-ji (~25 min) | Autobus #11 lub #93 jedzie prawie prosto.
+- 15:00 | 🏯 Kinkaku-ji (Złoty Pawilon) | Pawilon odbijający się w stawie = najsłynniejszy widok w Kioto. Teren: ~45 min. Wstęp 500 ¥. W upał ogród wokół daje trochę cienia.
+- 16:00 | 🍦 Matcha soft cream przy Kinkaku-ji | Budki z lodami matcha tuż przy wyjściu — obowiązkowy przystanek.
+- 16:30 | 🚌 Powrót do centrum | Autobus #12 lub #205 do Shijo (~30 min). Albo taksówka jeśli upał zabija (~1 500 ¥).
+- 17:00 | 🏨 Hotel — przerwa | Prysznic, odpoczynek. Kioto w niedzielne popołudnie jest spokojne.
+- 18:30 | 🍽️ Kolacja | Zostańcie w Gion/Pontocho — kolejny wieczór, kolejna restauracja. Spróbujcie tonkatsu (smażony kotlet) albo kaiseki (jeśli chcecie coś eleganckiego).
+- 20:00 | 🏮 Wieczorny Gion lub rzeka Kamo | Spacer bez celu. Ciepły letni wieczór. Możecie wrócić do Yasaka Shrine — nocą jest piękna.
+- 21:30 | 🏨 Hotel | Jet lag powoli odpuszcza — spróbujcie zasnąć przed 23:00.
+
+== Dzień 5 | pon 04.08 | Nara | KABIN Minamiza, Kioto
+Wycieczka do Nary — jelenie, wielki Budda, spokojne tempo. Ostatni dzień w Kioto, jutro Shinkansen do Kanazawy.
+- 9:30 | 🍳 Śniadanie + pakowanie | Piąty dzień = jet lag prawie pokonany. Spakujcie się na wieczór — jutro rano wyjeżdżacie z Kioto. Śniadanie w konbini lub kawiarni.
+- 10:15 | 🚃 Gion-Shijo → Tambabashi (Keihan, ~12 min) | Wszystkie pociągi Keihan tu stają. Na Tambabashi wyjdźcie bramkami i idźcie korytarzem ~50m do stacji Kintetsu Tambabashi — jest oznakowane po angielsku.
+- 10:30 | 🚃 Kintetsu Tambabashi → Kintetsu Nara (~35 min) | Express (急行) jedzie bez dopłaty. Limited Express jest szybszy ale +520 ¥ za miejscówkę — nie warto na 35 min. Uwaga: część pociągów nie jedzie do Nara, tylko do Saidaiji — sprawdźcie tablicę (kierunek "Kintetsu Nara").
+- 11:15 | 🦌 Nara Park — jelenie! | 5 min od stacji Kintetsu Nara. Kupcie shika senbei (krakersy dla jeleni, ~200 ¥) i karmcie jelenie. Kłaniają się po jedzenie! Syn będzie zachwycony. Uwaga: jelenie potrafią być natarczywe — schowajcie mapki i torebki.
+- 12:00 | 🛕 Todai-ji — Wielki Budda (Daibutsu) | 15-metrowy brązowy posąg Buddy w największym drewnianym budynku świata. Robi wrażenie nawet na nastolatku. Wstęp 600 ¥. Za budynkiem jest mniejsza kolumna z dziurą — kto się przezmieści, ma gwarantowane oświecenie.
+- 13:00 | 🍜 Lunch w okolicy Todai-ji | Restauracje przy Nandaimon Gate. Kakinoha sushi (sushi zawinięte w liść persymony) to specjalność Nary. Albo zwykły udon/soba.
+- 14:00 | ⛩️ Kasuga Taisha | Świątynia z 3000 kamiennych i brązowych latarni. 15 min spacer od Todai-ji przez las. Droga latarniami jest magiczna nawet w dzień. Wstęp na teren wolny, wnętrze 500 ¥.
+- 15:00 | 🌳 Spacer przez Nara Park | Wracajcie powoli w stronę stacji przez park. Jelenie są wszędzie, drzewa dają cień. Spokojne tempo — to nie dzień na pęd.
+- 15:30 | 🍦 Lody / matcha przy Higashimuki Street | Kryta uliczka handlowa przy stacji Kintetsu Nara. Lody matcha, mochi, pamiątki z motywem jeleni.
+- 16:00 | 🚃 Kintetsu Nara → Tambabashi → Keihan do Gion-Shijo | Powrót tą samą trasą, ~50 min. Na Tambabashi przejście Kintetsu → Keihan tym samym korytarzem.
+- 17:00 | 🏨 Hotel — odpoczynek | Ostatni wieczór w Kioto. Odpocznijcie, dopakujcie się.
+- 18:30 | 🍽️ Pożegnalna kolacja w Kioto | Coś wyjątkowego na ostatni wieczór — np. unagi (grillowany węgorz) w Gion lub tempura w Pontocho. Albo wracajcie do ulubionego miejsca z poprzednich dni.
+- 20:00 | 🌙 Ostatni spacer po Gion | Pożegnanie z Kioto. Rzeka Kamo, Yasaka Shrine, ciche uliczki Gion.
+- 21:30 | 🏨 Hotel — wcześniej spać! | Jutro Shinkansen do Kanazawy — trzeba wstać i wymeldować się rano.
+
+# Część 2: Alpy Japońskie / Nagano
+
+== Dzień 6 | wt 05.08 | Kanazawa → Takayama | WAT Hotel, Takayama
+Duży dzień logistyczny: pociąg do Kanazawy, ogród Kenroku-en, odbiór auta, Shirakawa-go po drodze, wieczór w Takayamie.
+- 7:30 | 🍳 Wczesne wstanie + wymeldowanie z KABIN Minamiza | Śniadanie w konbini po drodze na stację. Walizki ze sobą — dziś zmieniacie bazę!
+- 8:15 | 🚶 Gion-Shijo → JR Kyoto Station | Keihan do Tofukuji (~3 min), przesiadka na JR Nara Line do Kyoto Station (~3 min). Albo taksówka z walizkami (~10 min, ~1 000 ¥).
+- 8:45 | 🚃 Thunderbird z Kyoto → Tsuruga (~50 min) | Peron 0 (tak, zero — specjalny peron Thunderbirda!). Pociąg w pełni z rezerwacją miejsc. Kupiony wcześniej na JR West (od 5 lipca).
+- 9:40 | 🚅 Przesiadka Tsuruga → Hokuriku Shinkansen → Kanazawa (~45 min) | Przesiadka w Tsuruga jest prosta — stacja mała, dwa perony, oznakowane. Macie ~10 min na przejście.
+- 10:30 | 🧳 Kanazawa Station — zostawienie bagaży | Coin lockery przy wschodnim wyjściu (East Exit). Duże szafki ~700 ¥. Albo baggage storage w pobliżu.
+- 10:45 | 🚌 Autobus do Kenroku-en (~15 min) | Kanazawa Loop Bus z przystanku #7 (East Exit), 200 ¥. Albo Kenrokuen Shuttle z przystanku #6.
+- 11:00 | 🏯 Kenroku-en + Kanazawa Castle | Jeden z trzech najpiękniejszych ogrodów Japonii. Stawy, latarnie, herbaciarnie, widoki. Obok Zamek Kanazawa — wolny wstęp do parku. Kenroku-en wstęp: 320 ¥/os. Spokojny spacer: ~1.5h.
+- 12:30 | 🍣 Lunch: Omicho Market | "Kuchnia Kanazawy" — 10 min spacer od Kenroku-en. Świeże sushi z Morza Japońskiego, donburi z owocami morza, kraby. To jeden z najlepszych rynków rybnych w Japonii.
+- 13:30 | 🚌 Powrót na stację + odbiór bagaży | Autobus lub spacer (~20 min).
+- 14:00 | 🚗 Odbiór samochodu — Toyota Rent a Car (Kanazawa Eki Nishiguchi) | Zachodnie wyjście stacji (West Exit), budynek TRL na parterze. Formalności: ~30 min (IDP + paszport + karta). Ustaw nawigację na japońsku (albo Google Maps — działa świetnie).
+- 14:30 | 🚗 Kanazawa → Shirakawa-go (~1h autostrady) | Hokuriku Expressway → Tokai-Hokuriku Expressway. Piękna trasa przez góry. ETC card na bramkach.
+- 15:30 | 🏘️ Shirakawa-go | UNESCO — wioska z domami gassho-zukuri (strome dachy jak dłonie do modlitwy). Wejdźcie na punkt widokowy Ogimachi Observatory (~10 min pod górę) — widok na całą wioskę. Spacer po wiosce, spróbujcie gohei-mochi (grillowany ryż z miso). Parking: Seseragi (~1 000 ¥). Czas w wiosce: ~1.5–2h.
+- 17:30 | 🚗 Shirakawa-go → Takayama (~50 min) | Malownicza droga przez góry. Droga się kręci ale jest dobra.
+- 18:30 | 🏨 Check-in WAT Hotel, Takayama | Rozgośćcie się. Zostawcie walizki.
+- 19:00 | 🥩 Kolacja: wołowina Hida! | Specjalność Takayamy — marmurkowa wołowina Hida na grilu. Restauracje przy starym mieście (Sanmachi). To jeden z kulinarnych highlightów całej podróży.
+- 20:30 | ♨️ Prywatny onsen na dachu WAT Hotel | Rooftop onsen z widokiem na góry. Idealny sposób na zakończenie dnia po podróży. Onsen etykieta: wchodzicie nago, najpierw prysznic, potem moczenie.
+- 21:30 | 🏨 Dobranoc | Jutro spokojny dzień w Takayamie.
+
+== Dzień 7 | śr 06.08 | Takayama + Hida no Sato | WAT Hotel, Takayama
+Spokojny dzień po wczorajszym maratonie. Poranny targ, stare miasto, Hida no Sato samochodem. Wieczór: onsen.
+- 8:00 | 🍳 Śniadanie w hotelu WAT | Spokojne wstawanie. Japońskie śniadanie w hotelu.
+- 9:00 | 🛒 Poranny targ (Miyagawa Morning Market) | Nad rzeką Miyagawa, 10 min spacer od hotelu. Stoiska z lokalnymi warzywami, kiszonkami, miso, rękodziełem. Działa codziennie 7:00–12:00. Spróbujcie mitarashi dango (grillowane kulki ryżowe z sosem sojowym).
+- 10:00 | 🏮 Stare miasto (Sanmachi Suji) | Trzy równoległe uliczki z drewnianymi domami, browary sake, sklepy z rękodziełem. Spokojny spacer — degustacja sake (małe kubeczki za ~200–300 ¥). Tu jest kwintesencja Takayamy.
+- 11:30 | 🚗 Przejazd do Hida no Sato (~10 min) | Autem to nic — parking przy muzeum 300 ¥.
+- 11:45 | 🏘️ Hida no Sato (Hida Folk Village) | Skansen z 30+ tradycyjnymi domami z regionu Hida, w tym gassho-zukuri (jak w Shirakawa-go). Pokazy rękodzieła: tkactwo, rzeźba w drewnie, ceramika (10:00–15:00). Wstęp: 700 ¥/dorosły, 100 ¥/nastolatek. Wokół staw, las, spokój. Czas na zwiedzanie: ~1.5–2h.
+- 13:30 | 🚗 Powrót do miasta (~10 min) |
+- 13:45 | 🍜 Lunch: Takayama ramen lub soba | Takayama ramen (chuka soba) to lokalna specjalność — lekki bulion sojowy, kręcone noodle. Bardzo inny od tokijskiego ramenu. Popularne miejsce: Masagosobaten lub Nakatsubo.
+- 14:30 | 🏨 Hotel — odpoczynek / drzemka | Spokojne popołudnie. Odpoczywajcie, czytajcie, śpijcie. Po wczorajszym dniu jest na to czas i zasługa.
+- 16:30 | ☕ Kawa + spacer bez planu | Kawiarnia w starym mieście lub nad rzeką. Takayama wieczorem jest spokojna i piękna. Możecie zajrzeć do Takayama Jinya (dawny urząd prefekturalny — drewniany budynek z Edo, wstęp 440 ¥).
+- 18:00 | 🍽️ Kolacja | Hoba miso (miso grillowane na liściu magnolii z warzywami i mięsem) — kolejna lokalna specjalność. Albo izakaya z lokalnym sake.
+- 19:30 | ♨️ Prywatny onsen na dachu WAT Hotel | Drugi wieczór w onsenie. Tym razem bez stresu po podróży — czysta relaksacja z widokiem na góry.
+- 21:00 | 🏨 Dobranoc | Jutro Kamikōchi — trzeba wstać wcześnie!
+
+== Dzień 8 | czw 07.08 | Kamikōchi | WAT Hotel, Takayama
+Górska wyprawa do doliny Kamikōchi — Alpy Japońskie na 1500 m n.p.m. Płaski szlak wzdłuż rzeki Azusa, mosty, stawy, widoki na szczyty 3000 m. Wstać wcześnie!
+- 6:30 | 🍳 Wczesne śniadanie w hotelu | Dziś jedyny dzień kiedy musicie wstać wcześnie — na parkingu Hirayu robi się tłoczno po 9:00.
+- 7:00 | 🚗 Takayama → parking Hirayu Akandana (~40 min) | Trasa 158, droga górska ale dobra. Parking 600 ¥/dzień. Samochody NIE wjeżdżają do Kamikōchi — zostawiamy auto i przesiadamy się na autobus.
+- 7:45 | 🚌 Autobus Hirayu → Kamikōchi (~30 min) | Bilet w kasie na parkingu, ~1 300 ¥/os. w jedną stronę (2 600 ¥ tam-powrót). Bez rezerwacji — wsiadacie i jedziecie. Autobusy co 20–30 min.
+- 8:15 | 🏔️ Wysiadka na przystanku Taisho Pond | Pro tip: wysiadźcie TUTAJ (1 przystanek przed terminalem), a nie na Bus Terminal. Dzięki temu idziecie Taisho Pond → Kappa Bridge w jednym kierunku, bez wracania.
+- 8:20 | 🌲 Taisho Pond (Taisho-ike) | Staw powstały po erupcji wulkanu w 1915. Martwe drzewa wystające z wody, w tle dymiący wulkan Yake-dake i szczyty Hotaka. Magiczny widok rano gdy mgła unosi się nad wodą.
+- 8:45 | 🚶 Szlak: Taisho Pond → Tashiro Pond → Kappa Bridge (~70 min, 3.7 km) | Płaski teren wzdłuż rzeki Azusa. Drewniane kładki, las brzozowy i modrzewiowy, bagna. Turkusowa woda w rzece. Temperatura ok. 20–25°C — cudowna ulga po upałach na nizinach!
+- 10:00 | 🌉 Kappa Bridge (Most Kappa) | Ikona Kamikōchi — drewniany most wiszący z widokiem na szczyty Hotaka (3190 m). Najsłynniejszy widok w Alpach Japońskich. Zdjęcia obowiązkowe! Wokół mostu: toalety, sklepy, restauracje, centrum informacji.
+- 10:15 | 🚶 Kappa Bridge → Myojin Pond (~60 min, 3 km) | Dalej w górę rzeki — tu jest ciszej, mniej ludzi. Las, kładki, czasem makaki (japońskie małpy). Szlak oznakowany, nie da się zgubić.
+- 11:15 | ⛩️ Myojin Pond (Myojin-ike) | "Staw, w którym mieszka bóg" — kryształowo czysta woda z odbiciem gór. Mała świątynia (Hotaka Shrine), brama torii. Wstęp na teren stawu: 500 ¥. Cisza, spokój, koniec szlaku.
+- 11:45 | 🍜 Lunch przy Myojin: Kamonjigoya Lodge | Historyczna schronisko/restauracja przy stawie. Grillowany pstrąg (iwana), soba, curry. Jedzenie w górach smakuje inaczej!
+- 12:30 | 🚶 Powrót: Myojin → Kappa Bridge → Bus Terminal (~70 min) | Wracajcie drugą stroną rzeki (prawy brzeg) — inne widoki niż w drodze tam. Monument Westona po drodze (Anglik, który "odkrył" Alpy Japońskie).
+- 13:45 | 🚌 Autobus Kamikōchi Bus Terminal → Hirayu (~30 min) | Nie czekajcie do późnego popołudnia — kolejki na autobus rosną. Wyjazd ok. 14:00 to sweet spot.
+- 14:30 | ♨️ OPCJA: Hirayu Onsen | Na parkingu Hirayu jest publiczny onsen — gorące źródła po spacerze w górach! Szybka kąpiel ~30 min, ~600 ¥. Idealne po 5h chodzenia.
+- 15:30 | 🚗 Hirayu → Takayama (~40 min) | Powrót tą samą trasą.
+- 16:15 | 🏨 Hotel WAT — odpoczynek | Nogi będą zmęczone. Leżenie, prysznic.
+- 18:00 | 🍽️ Kolacja w Takayamie | Ostatni wieczór tu — wróćcie do ulubionego miejsca na starym mieście albo spróbujcie czegoś nowego. Hoba miso jeśli nie jedliście wczoraj.
+- 19:30 | ♨️ Onsen na dachu WAT Hotel | Trzeci i ostatni wieczór w onsenie. Pożegnanie z Takayamą.
+- 21:00 | 🏨 Dobranoc | Jutro spokojny przejazd do Nagano przez Matsumoto.
+
+== Dzień 9 | pt 08.08 | Matsumoto → Nagano | Nagano Home, Nagano
+Spokojny dzień przejazdowy. Takayama → Matsumoto (~1h autem), Zamek Kruka, lunch, → Nagano (~1h). Nowa baza na 4 noce.
+- 8:00 | 🍳 Śniadanie w hotelu WAT | Ostatnie śniadanie w Takayamie. Spakujcie się, wymeldowanie.
+- 9:00 | 🚗 Takayama → Matsumoto (~1h) | Trasa 158 przez Alpy — malownicza droga przez tunel Abo i przełęcze. Przejeżdżacie obok wjazdu do Kamikōchi (wczorajsze wspomnienia!). Droga dobra, ale kręta — spokojnie jedźcie.
+- 10:00 | 🅿️ Parking w centrum Matsumoto | Parkingi miejskie przy zamku ~300 ¥/h. Albo parking "Matsumoto City" przy zamku (~500 ¥ za całość).
+- 10:15 | 🏯 Zamek Matsumoto (Zamek Kruka) | Jeden z 5 zamków-skarbów narodowych Japonii — oryginał z XVI w., nigdy nie odbudowywany! Czarna fasada odbita w fosie to ikoniczny widok. Wejście do środka: strome drewniane schody (140 stopni, kąt do 61°!), zbroje, broń, widok z 6. piętra na Alpy. Wstęp: 1 200 ¥ online / 1 300 ¥ na miejscu. Czas: ~1–1.5h. Zdejmujecie buty — dostajecie torebkę.
+- 11:45 | 🐸 Nawate Dori (Frog Street) | 3 min od zamku. Uliczka z małymi sklepami wzdłuż strumienia. Motyw przewodni: żaby (kaeru = "kupować" i "wracać"). Pamiątki, słodycze, antyki. Fajne dla syna.
+- 12:15 | 🍜 Lunch w Matsumoto | Soba (gryczane kręgle) to specjalność Nagano — Matsumoto ma świetne restauracje soba. Albo shinshu salmon donburi. Nawate Dori i okolice mają dużo opcji.
+- 13:00 | 🚗 Matsumoto → Nagano (~1h) | Autostrada Nagano Expressway. Prosta, szybka trasa. ETC card na bramkach.
+- 14:00 | 🏨 Check-in Nagano Home | Nowa baza na 4 noce! Rozgośćcie się, rozpakujcie.
+- 15:00 | ☕ Spacer po okolicy / odpoczynek | Nagano to spokojne miasto. Możecie odpocząć albo spacerować — bez planu. Konbini na zapasy.
+- 17:00 | 🛍️ Monzen-machi (ulica do Zenkō-ji) | Ulica prowadząca do świątyni Zenkō-ji — pełna sklepów, restauracji, kawiarni. Warto przejść się wieczorem, nawet jeśli samą świątynię zostawiacie na inny dzień.
+- 18:30 | 🍽️ Kolacja w Nagano | Oyaki (pieczone pierożki z warzywami — specjalność Nagano!), shinshu soba, albo izakaya z lokalnym sake. Pierwszy wieczór w nowym mieście.
+- 20:30 | 🏨 Hotel | Spokojny wieczór. Jutro Togakushi — autem przez góry.
+
+== Dzień 10 | sob 09.08 | Togakushi | Nagano Home, Nagano
+Aleja 400-letnich cedrów, górzka świątynia, najlepsza soba w Japonii. Spokojny dzień w górskim lesie. Autem ~45 min z Nagano.
+- 8:00 | 🍳 Śniadanie w drodze | Brak śniadań w Nagano Home. Zróbcie zapasy wieczorem w konbini (onigiri, kanapki, kawa) albo zatrzymajcie się na kawę i tosty w sieci kawiarni po drodze (np. Komeda Coffee przy trasie — klasyk japoński).
+- 8:45 | 🚗 Nagano → Togakushi (~45 min) | Droga 406 przez góry — kręta ale malownicza. Jedźcie prosto do parkingu przy Okusha (górna świątynia). Parking bezpłatny przy wejściu na szlak do Okusha.
+- 9:30 | 🚶 Szlak do Okusha (Górna Świątynia) | 2 km w jedną stronę, ~30 min w górę. Pierwszy kilometr — szeroka ścieżka przez las. Po drodze brama Zuishinmon z trawiastym dachem.
+- 9:45 | 🌲 Aleja cedrów (Cedar Avenue) | Tu jest magia Togakushi! Za bramą Zuishinmon — aleja ponad 200 cedrów, wiele z nich ma 400+ lat. Gigantyczne pnie po obu stronach ścieżki, cisza, zapach żywicy. Jeden z najpiękniejszych widoków natury w Japonii. Wolny spacer, zdjęcia, oddychanie.
+- 10:15 | ⛩️ Okusha + Kuzuryusha | Na końcu alei strome kamienne schody i dwie świątynie u podnóża klifu góry Togakushi. Okusha (bóg siły) + Kuzuryusha (dziewięciogłowy smok). Mistyczne miejsce — skała wisi nad głową. Chwila ciszy.
+- 10:45 | 🚶 Powrót tą samą alejq (~25 min) | W drodze powrotnej aleja wygląda inaczej — inne światło, inna perspektywa.
+- 11:15 | 🚗 Przejazd do Chusha (Środkowa Świątynia, ~5 min autem) | Albo 30 min spacer lasem jeśli macie siły.
+- 11:30 | ⛩️ Chusha (Środkowa Świątynia) | 800-letnie cedry przy bramie torii! Bóg mądrości — uczniowie modlą się tu przed egzaminami. Mniejsza, spokojniejsza, piękna.
+- 12:00 | 🍜 LUNCH: Togakushi soba! | Togakushi jest jednym z trzech najsłynniejszych regionów soba w Japonii. Restauracje soba są skupione wokół Chusha — podają ręcznie robione kręgle z lokalnej mąki gryczanej. Musicie spróbować "boccchi" soba (podawanej na okrągłych koszyczkach bambusowych). To kulinarny highlight dnia.
+- 13:00 | 🪞 OPCJA A: Kagami-ike (Mirror Pond) | 15 min od Chusha. Staw, w którym odbijają się szczyty Togakushi. Najlepszy w bezwietrzny poranek, ale i popołudniu robi wrażenie. Krótki spacer wokół (~20 min).
+- 13:00 | 🥷 OPCJA B: Chibikko Ninja Village | Jeśli syn ma dość świątyń — park ninja dla rodzin, 5 min od Chusha. Tory linowe, ścianki wspinaczkowe, rzut shuriken. Wstęp ~500 ¥. Sezonowy (otwarty latem).
+- 14:00 | 🚗 Powrót do Nagano (~45 min) | Spokojny przejazd w dół. Zrobiłiście sporo, ale nic nie było forsowne.
+- 15:00 | 🏨 Nagano Home — odpoczynek | Relaks, pranie (jeśli jest pralka — przyda się w połowie podróży!), planowanie.
+- 16:30 | 🛍️ Zakupy / spacer po Nagano | Konbini na zapasy na śniadanie. Albo MIDORI przy stacji Nagano — centrum handlowe z lokalnymi produktami i jedzeniem.
+- 18:00 | 🍽️ Kolacja | Oyaki (grillowane pierożki z nadzieniem warzywnym — specjalność Nagano). Albo shinshu soba w mieście. Albo izakaya z lokalnym sake i tempurą.
+- 20:30 | 🏨 Hotel | Jutro Snow Monkey Park + Obuse.
+
+== Dzień 11 | nd 10.08 | Snow Monkey Park + Obuse | Nagano Home, Nagano
+Rano małpy w Jigokudani, popołudniu miasteczko sztuki Obuse (kasztany + Hokusai). Oba autem, po drodze między sobą.
+- 8:00 | 🍳 Śniadanie z zapasów / konbini po drodze | Wyjazd wcześniej — latem park otwiera się o 8:30 i rano jest najspokojniej.
+- 8:15 | 🚗 Nagano → parking Jigokudani (~45 min) | Jedźcie w kierunku Yudanaka/Shibu Onsen. Latem jest otwarty prywatny parking bliżej wejścia (~500 ¥) — skraca spacer do 10–15 min. Darmowy parking dalej = 30 min spaceru.
+- 9:00 | 🐒 Spacer do Jigokudani Monkey Park (~15 min) | Ścieżka przez las wzdłuż rzeki. Latem łatwa i przyjemna — zielony las, chłodniej niż w mieście. Wstęp: 800 ¥/dorosły, 400 ¥/dziecko.
+- 9:15 | 🐒 Snow Monkey Park | Latem małpy NIE kąpią się w onsenie (za ciepło). Ale są tu cały rok — bawią się w wodzie, skaczą po skałach, małe makaqi jeżdżą na mamach. Podchodzą bardzo blisko — przyzwyczajone do ludzi. Nie dotykajcie i nie karmcie! Latem mniej turystów = spokojniejsza obserwacja. Czas w parku: ~45 min–1h (latem wystarczy).
+- 10:15 | 🚶 Powrót do parkingu (~15 min) |
+- 10:30 | ♨️ OPCJA: Shibu Onsen (10 min autem) | Historyczne miasteczko onsenowe z 9 publicznymi łaźniami. Można wejść do jednej (~500 ¥). Uliczki z ryokanami, ludzie w yukatach — klimat jak z anime "Spirited Away" (Chihiro). Szybki spacer: ~30 min.
+- 11:15 | 🚗 Jigokudani → Obuse (~30 min) | Obuse jest po drodze w stronę Nagano.
+- 11:45 | 🎨 Obuse — miasteczko sztuki i kasztanów | Małe, urocze miasteczko znane z dwóch rzeczy: kasztanów i malarza Hokusaia (tego od "Wielkiej Fali").
+- 12:00 | 🍜 Lunch: kasztanowe specjały! | Obuse jest stolicą kasztanów w Japonii. Spróbujcie: kurigohan (ryż z kasztanami), kuri okowa, albo Mont Blanc (deser kasztanowy). Restauracje: Obuse-do lub Sakuraikohjien.
+- 13:00 | 🖼️ Hokusai Museum | Katsushika Hokusai (autor "Wielkiej Fali") spędził tu ostatnie lata życia. Małe, świetne muzeum z jego drzeworytami. Wstęp: ~1 000 ¥. Czas: ~45 min.
+- 13:45 | 🏮 Spacer po Obuse | Uliczki z galeriami, sklepami z kasztanowymi słodyczami, browarami sake. Masuichi — 200-letni browar z degustacją sake i biblioteką. Otwarte sklepiki w odnowionych magazynach (kura).
+- 14:30 | 🍰 Deser: kasztanowy Mont Blanc lub soft cream | Nie wyjeżdżajcie z Obuse bez deseru kasztanowego! Obuse-do i Sakuraikohjien mają najlepsze.
+- 15:00 | 🚗 Obuse → Nagano (~30 min) | Spokojny powrót.
+- 15:30 | 🏨 Nagano Home — odpoczynek | Popołudnie wolne. Relaks, zakupy w konbini na jutrzejsze śniadanie.
+- 18:00 | 🍽️ Kolacja w Nagano | Przedostatni wieczór w Nagano. Izakaya, ramen, albo ponownie oyaki.
+- 20:30 | 🏨 Hotel | Jutro Zenkō-ji i ostatni dzień w Nagano.
+
+== Dzień 12 | pon 11.08 | Zenkō-ji + pożegnanie z Nagano | Nagano Home, Nagano
+Spokojny, ostatni dzień w Nagano. Zenkō-ji pieszo z domu (~25 min), uliczka Nakamise, zakupy. Jutro zwrot auta i Shinkansen do Tokio.
+- 8:30 | 🍳 Śniadanie z zapasów / w drodze | Śniadanie w domu z konbini-zapasów. Albo kawiarnia po drodze do Zenkō-ji — Chuo-dori ma kilka opcji.
+- 9:15 | 🚶 Spacer do Zenkō-ji (~25 min) | Pieszo z domu — nie potrzebujecie auta. Przyjemna poranna trasa przez miasto.
+- 9:45 | ⛩️ Brama Niomon | Dwie ogromne postacie strażników (Nio) po bokach — robią wrażenie. Wejście do kompleksu.
+- 10:00 | 🛕 Zenkō-ji — główna hala (Hondō) | Jedna z najważniejszych świątyń w Japonii, ~1400 lat historii. Najstarszy posąg Buddy w Japonii (ukryty, nigdy nie pokazywany). Hala to Skarb Narodowy.
+- 10:15 | 🔑 Okaidan Meguri (podziemne przejście) | Highlight! Schodzicie pod ołtarz w CAŁKOWITEJ ciemności. Po omacku wzdłuż ściany szukacie "Klucza do Oświecenia" (metalowy zamek). Kto dotknie — zyskuje błogosławieństwo. Syn będzie zachwycony! ~10 min. Bilet łączony (hala + podziemie): 600 ¥/dorosły, 200 ¥/liceum, 50 ¥/gimnazjum.
+- 10:30 | 🏯 Brama Sanmon (1750) | Można wejść na 2. piętro (500 ¥). Widok na aleję i miasto. Posągi Monju i czterech królów w środku.
+- 10:45 | 🗿 Binzuru + posągi Jizō | Posąg Binzuru: pocierajcie tam, gdzie was boli — twarz wygładzona przez wieki dotykania! Przed Sanmon — rząd Jizō w czerwonych czapkach.
+- 11:00 | 🏮 Nakamise Street | Uliczka ze sklepami w dół od świątyni. Yawataya Isogoro (od 1736) — zróbcie swoją mieszankę shichimi. Zenkō-ji Pudding — ceremonia matcha. Oyaki prosto z pieca. Pamiątki.
+- 12:00 | 🍜 Lunch na Nakamise | Soba, oyaki, albo teishoku. Spokojnie — ostatni lunch w Nagano.
+- 13:00 | 🚶 Powrót do domu (~25 min) | Albo boczne uliczki — Nagano w poniedziałek jest spokojne.
+- 13:30 | 🏨 Nagano Home — pakowanie! | Jutro Shinkansen do Tokio. Spakujcie się porządnie — następne 7 nocy w OMO5 Otsuka, bez przeprowadzek.
+- 15:00 | 🛍️ MIDORI przy stacji Nagano | Centrum handlowe — lokalne produkty, jedzenie, pamiątki z Nagano.
+- 16:00 | ☕ Kawa + odpoczynek | Ostatnie popołudnie. Kawiarnia, spacer, albo relaks w domu.
+- 18:00 | 🍽️ Pożegnalna kolacja | Wróćcie do ulubionego miejsca albo spróbujcie basashi (sashimi z koniny — specjalność Nagano dla odważnych!).
+- 20:30 | 🏨 Nagano Home | Sprawdźcie paliwo w aucie (oddajecie pełny bak). Wcześniej spać — jutro Tokio!
+
+# Część 3: Tokio
+
+== Dzień 13 | wt 12.08 | Nagano → Tokio | OMO5 Otsuka, Tokio
+Zwrot auta, Shinkansen do Tokio, zakwaterowanie. Popołudnie: pierwsze kroki w Tokio — okolica hotelu + Ikebukuro.
+- 8:00 | 🍳 Śniadanie + ostatnie pakowanie | Sprawdźcie czy nic nie zostało. Tankujcie auto do pełna (stacja benzynowa po drodze na stację — szukajcie "ENEOS" lub "Shell" w Google Maps).
+- 9:00 | 🚗 Przejazd do Toyota Rent a Car przy stacji Nagano (~10–15 min) | Punkt zwrotu: 3 min pieszo od stacji, wyjście Zenkoji (zachodnie). Formalności zwrotu: ~20–30 min (sprawdzenie auta, paliwo, ETC rozliczenie).
+- 9:45 | 🚶 Stacja JR Nagano | Coin lockery na walizki jeśli chcecie kupić bento na drogę. Kupcie ekiben (bento kolejowe) — to tradycja Shinkansena! Nagano ekiben: shinshu soba bento lub oyaki bento.
+- 10:15 | 🚅 Hokuriku Shinkansen Nagano → Tokio (~1h 20min) | Kagayaki (najszybszy, bez przystanków) lub Hakutaka. Bilety kupione wcześniej (od 12 lipca na eki-net.com). Jedzenie ekiben w pociągu z widokiem na góry — idealny rytuał pożegnania z Alpami.
+- 11:35 | 🚉 Tokyo Station | Przesiadka na linię Yamanote (zielona, kołowa) → kierunek Ikebukuro → stacja Otsuka. ~20 min. Karty ICOCA działają tu tak samo jak w Kansai — przykładacie do bramek.
+- 12:00 | 🚶 Stacja Otsuka → OMO5 Otsuka (~5 min) | Hotel jest tuż przy stacji. Zostawcie bagaże — check-in może być od 15:00, ale bagażownię mają wcześniej.
+- 12:30 | 🍜 Lunch w okolicy Otsuka | Otsuka to lokalny, nieturystyczny kawałek Tokio — autentyczne ramen-ya, izakaya, mniejsze restauracje. Spróbujcie czegoś na stojąco — to jest Tokio!
+- 13:30 | 🏮 Sugamo Jizō-dōri (~10 min pieszo lub 1 stacja Yamanote) | "Harajuku babć" — ulica handlowa z zupełnie innym klimatem. Tradycyjne słodycze (shio-daifuku!), red underwear shops (na szczęście!), lokalna atmosfera. Mało turystów, dużo autentycznego Tokio.
+- 14:30 | 🌳 Rikugi-en Garden (opcjonalnie, ~15 min pieszo z Sugamo) | Jeden z najpiękniejszych ogrodów Edo w Tokio. Spokojny, cichy, idealny po tygodniu w górach jako "miękkie lądowanie" w wielkim mieście. Wstęp: 300 ¥.
+- 15:30 | 🏨 OMO5 Otsuka — check-in | Rozgośćcie się na 7 nocy! Rozpakujcie się porządnie — to wasza baza do końca podróży.
+- 16:30 | 🚃 Ikebukuro (~5 min Yamanote z Otsuka) | Ogromna dzielnica handlowa — Sunshine City (centrum handlowe z akwarium na dachu), elektronika, Animate (manga/anime — syn!), Don Quijote. Tokijski chaos w pigułce na pierwszy wieczór.
+- 18:30 | 🍽️ Kolacja w Ikebukuro | Masa opcji: ramen yokocho (uliczka ramenowa), yakiniku (grill japoński), sushi, gyoza. Albo food court w Sunshine City. Pierwszy tokijski wieczór!
+- 20:30 | 🚃 Yamanote z powrotem do Otsuka (~5 min) |
+- 21:00 | 🏨 OMO5 Otsuka | Pierwszy wieczór w Tokio. Następne 7 dni to zupełnie inny film niż Alpy — wielkomiejski, szybki, neonowy. Odpoczywajcie!
+
+== Dzień 14 | śr 13.08 | teamLab Planets + Asakusa | OMO5 Otsuka, Tokio
+teamLab Planets wieczorem (najspokojniej w środę). Dzień: tradycyjna Asakusa — Senso-ji, rejs rzeką Sumida, Nakamise Street.
+- 9:30 | 🍳 Śniadanie + wyjście | Pierwszy pełny dzień w Tokio. Konbini lub kawiarnia przy Otsuka. W Tokio śniadanie w konbini to norma — onigiri, kanapki, kawa.
+- 10:00 | 🚃 Otsuka → Asakusa (~25 min) | Yamanote do Ueno, przesiadka na Ginza Line do Asakusa. Albo Yamanote do Nippori → Skyliner/Keisei do Asakusa. ICOCA na bramkach.
+- 10:30 | ⛩️ Senso-ji | Najstarsza świątynia w Tokio (628 r.). Ogromna czerwona latarnia Kaminarimon — najsłynniejszy widok w Tokio. Wstęp wolny. Wylosujcie omikuji (wróżbę) — jeśli wypadnie "zła", przywiążcie ją do stojaka i zostawcie pecha!
+- 11:00 | 🏮 Nakamise Street | 250m uliczka ze stojakami od bramy do świątyni. Senbei (krakersy), ningyo-yaki (ciastka w kształtach), matcha lody, wachlarze, pamiątki. Tłoczno ale klimatycznie.
+- 11:30 | 🍜 Lunch w Asakusa | Tempura, unagi lub soba — Asakusa słynie z tradycyjnego jedzenia. Albo monja-yaki (tokijska wersja okonomiyaki) — przygotowujecie sami na grillu!
+- 12:30 | 🛍️ Kappabashi-dori (Kitchen Street) | Metro Ginza Line: Asakusa → Tawaramachi (1 stacja!). Ulica z nożami japońskimi, atrapami jedzenia (sampuru). Nóż = świetna pamiątka. NIE idźcie pieszo z Asakusa — metro oszczędza 1.5 km.
+- 13:30 | 🚢 Rejs rzeką Sumida | Z molo Asakusa do Odaiba lub Toyosu. Tokio z perspektywy wody — mosty, skyline, wieża SkyTree w tle. ~40 min, ~800–1 000 ¥/os. Albo wodny autobus Tokyo Cruise do Hinode (~35 min, ~860 ¥).
+- 14:15 | 🌆 Spacer po Toyosu / okolice | Jeśli popłynęliście do Toyosu — jesteście blisko teamLab Planets! Możecie spacerować, kawiarnia, odpoczynek.
+- 15:00 | 🏨 Powrót do hotelu — przerwa | Albo jeśli macie energię, zostańcie w okolicy Toyosu. Prysznic, przebranie przed teamLab (ubierzcie się na boso + krótkie spodnie!).
+- 17:00 | 🚃 Do teamLab Planets (Shin-Toyosu Station) | Z Otsuka: Yamanote do Yurakucho → Yurakucho Line do Toyosu → Yurikamome do Shin-Toyosu. Albo z Asakusa jeśli zostaliście w okolicy.
+- 17:30 | 🎨 teamLab Planets | Zdejmujecie buty i skarpetki od razu. Chodzicie boso przez wodę po kolana (podwińcie spodnie!), przez lustrzane pokoje, ogrody świateł, wodospady projekcji. ~2–2.5h. Wieczorem mniej ludzi. Zróbcie screenshot biletu QR — w środku słaby zasięg! Syn powinien to uwielbiać.
+- 20:00 | 🍽️ Kolacja | W okolicy Toyosu (LaLaport Toyosu — duże centrum z restauracjami) lub wracajcie do Otsuka/Ikebukuro na kolację.
+- 21:30 | 🏨 OMO5 Otsuka | Pełny, bogaty dzień — tradycyjna Asakusa rano, futurystyczny teamLab wieczorem. Kontrast idealny.
+
+== Dzień 15 | czw 14.08 | Akihabara + Samurai Museum + Shinjuku | OMO5 Otsuka, Tokio
+Akihabara rano (arkady, manga, retro gry), Samurai Museum popołudniu, Shinjuku wieczorem. Oszczędzajcie nogi — metro między dzielnicami!
+- 9:30 | 🍳 Śniadanie | Konbini lub kawiarnia przy Otsuka.
+- 10:00 | 🚃 Otsuka → Akihabara (~15 min Yamanote) | Electric Town Exit — prosto w epicentrum otaku.
+- 10:15 | 🎮 SEGA / GiGO Arcade | Wielopiętrowe arkady: automaty z pazurkami, purikura, retro gry, Dance Dance Revolution.
+- 11:00 | 🏬 Radio Kaikan + Mandarake + Gachapon + Super Potato | Wszystko w promieniu 200m od siebie. Figurki, manga, retro gry, kapsułki. Syn tu zostanie na dłużej.
+- 12:15 | 🍛 Lunch w Akihabarze | Go! Go! Curry albo Kyushu Jangara Ramen. Szybko i tanio.
+- 13:00 | 🚃 Akihabara → Shinjuku (~15 min JR Chuo Line) | Metro zamiast spaceru — oszczędność nóg!
+- 13:30 | ⚔️ Samurai Museum (Kabukichō) | 8 min pieszo od Shinjuku East Exit. Zbroje, katany, hełmy, muszkiety. Tour po angielsku wliczony (~1 900 ¥/dorosły). Zdjęcie w zbroi! ~1–1.5h.
+- 15:00 | ☕ Kawa + odpoczynek | Kawiarnia w Kabukichō/Shinjuku. Nogi odpoczywają przed wieczorem. Nie chodźcie do Gyoen — oszczędźcie 2 km na wieczór.
+- 16:30 | 🏙️ TMG — darmowy taras widokowy | 10 min pieszo od Kabukichō. 45. piętro, panorama 360°. DARMOWE. Zachód słońca ok. 18:30.
+- 17:30 | 🍻 Omoide Yokocho (Memory Lane) | 5 min od TMG. Wąskie uliczki z yakitori barami. Dym, grill, lampiony.
+- 18:30 | 🍽️ Kolacja | Ichiran Ramen (indywidualne kabiny!), yakiniku, lub izakaya. Wszystko w promieniu 5 min od Omoide.
+- 19:30 | 🏮 Golden Gai + Kabukichō nocą | Spacer po malutkich barach, Godzilla na budynku Toho, neony. Wszystko w jednej okolicy — zero zbędnego chodzenia.
+- 20:30 | 🚃 Shinjuku → Otsuka (~15 min Yamanote) |
+- 21:00 | 🏨 OMO5 Otsuka | Otaku → samuraj → widoki → uliczki. Mniej km, tyle samo wrażeń.
+
+== Dzień 16 | pt 15.08 | Meiji Jingu + Shibuya | OMO5 Otsuka, Tokio
+Las i świątynia rano, potem Shibuya. Wszystko w jednej okolicy — mało chodzenia między punktami!
+- 9:30 | 🍳 Śniadanie | Konbini lub kawiarnia.
+- 10:00 | 🚃 Otsuka → Harajuku Station (~15 min Yamanote) | Prosto do Meiji Jingu.
+- 10:15 | ⛩️ Meiji Jingu | Ogromna torii, aleja przez las. Czujecie się jak w lesie, a jesteście w środku Tokio. Życzenie na ema (drewniana tabliczka). ~1h. Wstęp wolny.
+- 11:15 | 🌳 Meiji Jingu Gyoen (ogród wewnętrzny) | Piękny ogród z irysami i stawem. Wstęp 500 ¥. Spokojne 30 min w zieleni — warto po dniach w betonowym Tokio.
+- 11:45 | 🍜 Lunch przy Omotesando | Elegancka aleja 5 min od Meiji Jingu — ramen, curry, udon, kawiarnie.
+- 12:00 | 🚃 JR Harajuku → Shibuya (1 stacja, 2 min!) | Nie idźcie pieszo — metro oszczędza nogi na popołudnie w Shibuya.
+- 12:15 | 🏙️ Shibuya Sky (Scramble Square, 46. piętro) | Otwarty taras na 230m! Panorama 360°, leżanki na dachu. ~2 200 ¥/os., kupcie online. Widok na crossing z góry.
+- 13:30 | 🚶 Shibuya Crossing | Zejdźcie na dół i przejdźcie je — do 3000 ludzi na raz! Zdjęcie z Hachikō przy stacji.
+- 14:00 | 🛍️ Shibuya Center-gai | Sklepy, energia. Mega Don Quijote (pamiątki, słodycze, gadżety). Wszystko w promieniu 300m od stacji.
+- 15:00 | ☕ Przerwa — kawiarnia | Streamer Coffee lub Blue Bottle. Nogi odpoczywają.
+- 15:30 | 🎮 Nintendo Tokyo (Shibuya Parco, 6F) | 5 min od kawiarni. Oficjalny sklep Nintendo! Merchy Mario, Zelda, Splatoon. Interaktywna strefa.
+- 16:30 | 🏮 Nonbei Yokocho | Miniaturowa wersja Golden Gai, tuż obok stacji. Atmosferyczny spacer.
+- 17:00 | 🍽️ Kolacja w Shibuya | Genki Sushi (na taśmie z tabletu!), yakiniku, lub ramen.
+- 18:00 | 🌆 Shibuya Crossing nocą | Neony, tłumy, ekrany. Starbucks na rogu (2. piętro) = widok z góry na kawę.
+- 19:00 | 🚃 Shibuya → Otsuka (~15 min Yamanote) |
+- 19:30 | 🏨 OMO5 Otsuka | Krótszy dzień — nogi wdzięczne po wczorajszym maratonie.
+- 20:00 | 🚃 Shibuya → Otsuka (~15 min Yamanote) |
+- 20:30 | 🏨 OMO5 Otsuka | Dwa dni intensywnego Tokio za wami. Jutro można zwolnić tempo.
+
+== Dzień 17 | sob 16.08 | Yanaka + Ueno | OMO5 Otsuka, Tokio
+Stare Tokio, które przetrwało wojnę. Yanaka (nostalgiczne uliczki, koty, street food), Ueno Park (muzeum/zoo), Ameyoko (targowisko). Obon weekend — niektóre atrakcje spokojniejsze (Japończycy u rodzin), ale Ameyoko tłoczne.
+- 9:30 | 🍳 Śniadanie | Konbini lub kawiarnia przy Otsuka.
+- 10:00 | 🚃 Otsuka → Nippori (~5 min Yamanote!) | Jedna z najbliższych atrakcji do waszego hotelu — Nippori to brama do Yanaki.
+- 10:10 | 🌅 Yuyake Dandan (Sunset Steps) | Schody prowadzące w dół do Yanaka Ginza. Słynne z zachodu słońca, ale i rano widok na dachy starych domów jest piękny. Start spaceru.
+- 10:20 | 🏮 Yanaka Ginza | 170m uliczka z ~60 małymi sklepami — rzeźnik obok fryzjera, cukiernia obok zegarmistrza. Stare Tokio, które przetrwało trzęsienie ziemi 1923 i bombardowania. Street food: manju za 10 ¥ (!), korokke (krokiety), yakitori. Szukajcie posągów 7 szczęśliwych kotów rozsianych po ulicy.
+- 11:00 | 🐱 Spacer po Yanace | Boczne uliczki z drewnianymi domami z ery Shōwa, małe świątynie, galerie sztuki w odnowionych budynkach. SCAI the Bathhouse (galeria sztuki w dawnej łaźni publicznej). Hebi Road (Wężowa Droga — kręta uliczka z kawiarniami i sklepami artystycznymi). Koty — Yanaka jest słynna z wolno żyjących kotów, zobaczycie je na murach i w ogródkach.
+- 11:45 | ⛩️ Nezu Shrine | 15 min spacer z Yanaki. Świątynia z ok. 1700 r. — jedna z najstarszych w Tokio. Czerwone bramy torii (mini-Fushimi Inari!), staw z karpami koi, spokój. Wstęp wolny.
+- 12:30 | 🍜 Lunch w Yanace/Nezu | Lokalne restauracje — soba, curry, kawiarnia w starym domu. Albo wróćcie na Yanaka Ginza na więcej street foodu. Ueno Sakuragi Atari — 3 stare domy przerobione na browar craftowy, sklep z solą i oliwą, kawiarnia.
+- 13:30 | 🚶 Spacer do Ueno Park (~15 min) | Przez cmentarz Yanaka (spokojne ścieżki wśród drzew, groby samurajów i sumo zapaśników) prosto do parku.
+- 14:00 | 🏛️ Tokyo National Museum (OPCJA A) | Największe muzeum w Japonii — zbroje samurajskie, katany, ukiyo-e, ceramika, kimona. Jeśli Samurai Museum w Shinjuku wzbudził apetyt, tu jest pełna dawka. Wstęp: 1 000 ¥. Czas: ~1.5–2h.
+- 14:00 | 🐼 Ueno Zoo (OPCJA B) | Pandy! Jedno z najstarszych zoo na świecie (1882). Wstęp: 600 ¥. Jeśli syn woli zwierzęta niż muzeum.
+- 16:00 | 🛍️ Ameyoko (Ameya-Yokocho) | Targ pod torami kolejowymi — ryby, owoce, ubrania, torebki, przyprawy, streefood. Chaos, krzyki sprzedawców, tłum. Totalny kontrast do spokojnej Yanaki. Spróbujcie świeżych owoców na patyku (truskawki w czekoladzie!) i kebaba z tuńczyka.
+- 17:00 | ☕ Kawa + odpoczynek w Ueno | Kawiarnia w parku lub przy stacji.
+- 18:00 | 🍽️ Kolacja w okolicy Ueno | Izakaya pod torami (Ueno ma mnóstwo klimatycznych barów w starym stylu). Albo tonkatsu — Ueno słynie z najlepszych tonkatsu w Tokio (np. Hantei — tempura w 100-letnim drewnianym budynku).
+- 20:00 | 🚃 Ueno → Otsuka (~10 min Yamanote) |
+- 20:30 | 🏨 OMO5 Otsuka | Spokojniejszy dzień — stare Tokio, koty, park, targ. Idealna przerwa od neonów.
+
+== Dzień 18 | nd 17.08 | Zakupy + odpoczynek | OMO5 Otsuka, Tokio
+Niedziela + koniec Obon = tłumy na plażach i w pociągach. Idealny dzień na spokojne zakupy w Tokio i odpoczynek przed jutrzejszą wycieczką.
+- 9:30 | 🍳 Śniadanie | Spokojne wstawanie. Konbini lub kawiarnia.
+- 10:00 | 🧳 Kupno walizki! | Planujesz kupić dużą walizkę na pamiątki. Don Quijote (Ikebukuro, 5 min Yamanote — otwarty 24/7!) ma tanie walizki. Albo Nitori, Bic Camera. Tax-free z paszportem!
+- 11:00 | 🛍️ Zakupy pamiątkowe — Ikebukuro | Co warto: KitKaty w szalonych smakach (matcha, sake), Tokyo Banana, kosmetyki (Matsumoto Kiyoshi), sake/whisky japońska, gadżety z Akihabary, nóż japoński (jeśli nie kupiliście w Kappabashi).
+- 12:30 | 🍜 Lunch | Ulubione jedzenie jeszcze raz — co będziecie najbardziej wspominać?
+- 14:00 | 🛍️ Ginza (opcja elegantszych zakupów) | Yamanote do Yurakucho (~20 min). Uniqlo Ginza (12 pięter!), MUJI flagship, depachika (podziemne hale z jedzeniem w Mitsukoshi — idealne na prezenty do Polski).
+- 14:00 | 🏮 Powrót do ulubionej dzielnicy (alternatywa) | Yanaka na spacer? Shibuya? Asakusa na ostatnie zdjęcie z Kaminarimon?
+- 16:00 | 🏨 Hotel — odpoczynek | Spokojne popołudnie. Nogi odpoczywają przed jutrzejszą Kamakurą.
+- 18:00 | 🍽️ Kolacja | Izakaya, ramen, curry — cokolwiek chcecie. Wieczór bez planu.
+- 20:30 | 🏨 OMO5 Otsuka | Spokojny dzień — zasłużony po 17 dniach zwiedzania.
+
+== Dzień 19 | pon 18.08 | Kamakura + Enoshima + pożegnanie | OMO5 Otsuka, Tokio
+Poniedziałek po Obon = spokojniej niż niedziela! Wielki Budda, plaża, Enoshima. Wieczorem pożegnalna kolacja sushi.
+- 8:30 | 🍳 Śniadanie | Wcześniejszy start — dużo do zobaczenia, dojazd ~1h.
+- 9:00 | 🚃 Otsuka → Tokyo Station → Kamakura (~1h, JR Yokosuka Line, 940 ¥) | Yamanote do Tokyo Station, potem JR prosto do Kamakury. ICOCA na bramkach.
+- 10:00 | 🛍️ Komachi-dori | 360m uliczka z ~250 sklepami. Street food: warabi mochi, shirasu, matcha lody.
+- 10:30 | ⛩️ Tsurugaoka Hachimangu | Główna świątynia Kamakury. 800 lat historii. Wstęp wolny.
+- 11:15 | 🚃 Enoden do Hase (~5 min) | Retro pociąg — sam przejazd to atrakcja!
+- 11:30 | 🗿 Wielki Budda (Kōtoku-in) | 13.3m brąz z 1252 r. — na wolnym powietrzu od 1495! Można wejść DO ŚRODKA za 50 ¥. Wstęp: 300 ¥.
+- 12:00 | 🛕 Hase-dera | Taras widokowy na ocean, jaskinia z posągami, ogrody. 400 ¥.
+- 12:45 | 🏖️ Plaża Yuigahama | Piaszczysta plaża, surferzy. Zamoczyć nogi, odpocząć na piasku.
+- 13:30 | 🍜 Lunch | Shirasu-don (ryż z małymi rybkami — specjalność!). Restauracje przy Hase.
+- 14:15 | 🚃 Enoden do Enoshima (~20 min) | Wzdłuż wybrzeża — widoki na ocean!
+- 14:45 | 🏝️ Enoshima | Most na wyspę, Nakamise, takosenbei (krakers z ośmiornicą!).
+- 15:15 | ⛩️ Enoshima Shrine + Sea Candle (wieża) | Panorama 360° — w pogodny dzień FUJI! ~500 ¥.
+- 16:00 | 🌊 Klify + jaskinie Iwaya (opcja) | Zejście drugą stroną wyspy. Ocean z bliska.
+- 16:30 | 🍦 Lody przy moście | Odpoczynek przed powrotem.
+- 17:00 | 🚃 Powrót do Tokio | Enoden → Fujisawa → JR do Tokyo Station (~1h 15min). Albo Odakyu do Shinjuku.
+- 18:30 | 🍣 Pożegnalna kolacja sushi! | Ostatnia kolacja w Japonii. Sushizanmai, kaiten sushi, albo mała sushi-ya z omakase. Kampai z piwem Asahi! 20 dni wspomnień na jednym talerzu.
+- 20:30 | 🌙 Ostatni spacer | Pożegnajcie się z Tokio. Konbini na ostatnią kawę w puszce. Automat z napojami. To są rzeczy, za którymi będziecie tęsknić.
+- 21:30 | 🏨 OMO5 Otsuka | Spakujcie się! Jutro lot o 18:00 — ale macie jeszcze pół dnia.
+
+== Dzień 20 | wt 19.08 | Ostatni poranek + lot ✈️ | Lot powrotny
+Lot o 18:00 = musicie być na Narita ok. 15:00. Macie jeszcze pół dnia w Tokio!
+- 9:00 | 🍳 Ostatnie wstawanie + check-out | Spokojnie — nie musicie się śpieszyć. Ostatnie śniadanie z konbini. Check-out z OMO5, bagaże zostawcie w bagażowni hotelu (albo coin lockery na stacji).
+- 9:30 | ☕ Ostatni spacer po okolicy Otsuka | Kawiarnia, konbini, automat z napojami — pożegnajcie się z waszą dzielnicą. Albo podskoczycie Yamanote do ulubionego miejsca na ostatni spacer.
+- 10:00 | 🛍️ Ostatnie zakupy / Ikebukuro | 5 min Yamanote. Jeśli coś zostało do kupienia — Don Quijote (otwarty 24/7), Bic Camera, Sunshine City. Albo Nakamise przy Asakusa na ostatnie pamiątki.
+- 12:00 | 🍜 Ostatni lunch w Japonii | Ramen, sushi, curry — cokolwiek będziecie najbardziej wspominać. Jedźcie bez żalu!
+- 13:00 | 🏨 Odbiór bagaży | Wróćcie po walizki do hotelu/coin lockery.
+- 13:30 | 🚃 Otsuka → Nippori (Yamanote, ~5 min) | Nippori = przesiadka na Skyliner.
+- 13:40 | 🚶 Przejście na peron Keisei Skyliner (~4 min) | Znaki "Keisei Skyliner" prowadzą. Bilet: ~2 580 ¥/os. (turystyczny ~2 310 ¥). Automat lub online wcześniej.
+- 14:00 | 🚅 Keisei Skyliner Nippori → Narita (~36 min) | Miejsca rezerwowane, Wi-Fi, półki na bagaż. Kursuje co 20 min.
+- 14:36 | ✈️ Narita Airport | Sprawdźcie terminal (T1 lub T2/T3). Check-in, odprawa, duty free. Ostatnia szansa: KitKaty, Tokyo Banana, whisky, kosmetyki. Wydajcie resztę jenów! ICOCA karty — zostawcie na pamiątkę (wydajcie resztę salda w konbini/automacie wcześniej).
+- 18:00 | ✈️ Lot do domu | Sayōnara, Nihon! 日本、ありがとう！20 dni, 3 miasta, Alpy, wyspa, morze, neony, ramen, onsen, koty, jelenie, małpy, Budda, samuraj. Do zobaczenia następnym razem 🇯🇵
+`;
+// ╔══════════════════════════════════════════════════════════════════╗
+// ║  KONIEC DANYCH — PONIŻEJ NIE RUSZAJ                           ║
+// ╚══════════════════════════════════════════════════════════════════╝
+</script>
+
+<style>
+:root{--bg:#f7f5f0;--card:#fff;--red:#c0392b;--gold:#d4a017;--teal:#1a7a6d;--indigo:#3d5a80;--text:#2c2c2c;--muted:#6b6b6b;--border:#e0dcd4;--shadow:0 2px 12px rgba(0,0,0,.06);--p1:#c0392b;--p2:#1a7a6d;--p3:#3d5a80}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);padding:20px;min-height:100vh}
+.hdr{text-align:center;padding:28px 0 12px}
+.hdr h1{font-family:'Noto Sans JP',sans-serif;font-weight:700;font-size:2.1em;color:var(--red);letter-spacing:-.02em}
+.hdr .jp{font-family:'Noto Sans JP',sans-serif;font-size:.95em;color:var(--muted);letter-spacing:.3em;margin:2px 0 10px}
+.hdr .sub{font-size:.9em;color:var(--muted)}
+.tabs{max-width:740px;margin:0 auto 24px;display:flex;border-radius:10px;overflow:hidden;border:2px solid var(--border)}
+.tab{flex:1;padding:13px 6px;text-align:center;font-weight:700;font-size:.85em;cursor:pointer;background:var(--card);color:var(--muted);transition:.2s;border-right:1px solid var(--border);user-select:none}
+.tab:last-child{border-right:none}
+.tab.on{background:var(--red);color:#fff}
+.tab:hover:not(.on){background:#ede9e1}
+.pnl{display:none;max-width:740px;margin:0 auto}
+.pnl.on{display:block}
+.sl{font-family:'Noto Sans JP',sans-serif;font-weight:700;font-size:.8em;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);margin:28px 0 14px;padding-left:2px}
+.sl:first-child{margin-top:0}
+.rc{background:var(--card);border-radius:11px;padding:16px 20px;box-shadow:var(--shadow);margin-bottom:14px;border-left:4px solid var(--border);transition:transform .15s}
+.rc:hover{transform:translateX(3px)}
+.rc .rh{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;margin-bottom:5px}
+.rc .rt{font-weight:700;font-size:1em}
+.bdg{font-size:.68em;font-weight:700;padding:3px 9px;border-radius:18px;text-transform:uppercase;letter-spacing:.04em;white-space:nowrap}
+.bdg-now{background:var(--red);color:#fff}
+.bdg-soon{background:var(--gold);color:#fff}
+.bdg-july{background:var(--teal);color:#fff}
+.bdg-none{background:#e8e5de;color:var(--muted)}
+.rc .rd{font-size:.84em;color:var(--muted);margin-bottom:3px;font-weight:500}
+.rc .rx{font-size:.84em;color:var(--muted);line-height:1.5}
+.bl-r{border-left-color:var(--red)}.bl-g{border-left-color:var(--gold)}.bl-t{border-left-color:var(--teal)}.bl-n{border-left-color:#d0cbc2}
+.pdiv{display:flex;align-items:center;gap:12px;margin:32px 0 18px}
+.pdiv .ln{flex:1;height:2px;border-radius:2px}
+.pdiv .lb{font-family:'Noto Sans JP',sans-serif;font-weight:700;font-size:.88em;white-space:nowrap}
+.c1{color:var(--p1)}.c2{color:var(--p2)}.c3{color:var(--p3)}
+.bg1{background:var(--p1)}.bg2{background:var(--p2)}.bg3{background:var(--p3)}
+.dc{background:var(--card);border-radius:13px;box-shadow:var(--shadow);margin-bottom:18px;overflow:hidden}
+.dh{padding:14px 20px;color:#fff;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:4px}
+.dh .dn{font-weight:700;font-size:1.05em}
+.dh .dd{font-size:.85em;opacity:.85}
+.db{padding:16px 20px}
+.ds{font-size:.9em;line-height:1.55}
+.dht{margin-top:8px;font-size:.8em;color:var(--muted);display:flex;align-items:center;gap:5px}
+.tbd .ds{color:var(--muted);font-style:italic}
+.sch{margin-top:10px}
+.sr{display:flex;gap:12px;padding:7px 0;border-bottom:1px solid #f0ece4}
+.sr:last-child{border-bottom:none}
+.st{min-width:48px;font-weight:700;font-size:.83em;color:var(--indigo);padding-top:1px}
+.sc{font-size:.86em;line-height:1.45}
+.sc .n{color:var(--muted);font-size:.92em}
+.ft{text-align:center;margin-top:36px;font-size:.78em;color:var(--muted);font-family:'Noto Sans JP',sans-serif;line-height:1.6}
+@media(max-width:520px){body{padding:12px}.hdr h1{font-size:1.5em}.tabs{flex-direction:column;border-radius:8px}.tab{border-right:none;border-bottom:1px solid var(--border)}.tab:last-child{border-bottom:none}.dh,.db,.rc{padding:12px 14px}.st{min-width:42px}}
+/* Reservation checkboxes & done state */
+.chk-wrap{display:flex;align-items:center;cursor:pointer;margin-right:8px;flex-shrink:0}
+.chk-wrap input{display:none}
+.chk-box{width:20px;height:20px;border:2px solid var(--border);border-radius:5px;display:flex;align-items:center;justify-content:center;transition:.2s;flex-shrink:0}
+.chk-wrap input:checked+.chk-box{background:var(--teal);border-color:var(--teal)}
+.chk-wrap input:checked+.chk-box::after{content:'✓';color:#fff;font-size:13px;font-weight:700}
+.rc-done{opacity:.55;border-left-color:var(--teal)!important}
+.rc-done .rt{text-decoration:line-through}
+.bdg-done{background:var(--teal);color:#fff}
+.rc-link{margin-top:8px;display:flex;align-items:center;gap:8px;font-size:.82em}
+.rc-link a{color:var(--teal);text-decoration:none;border-bottom:1px dashed var(--teal);font-weight:500;word-break:break-all}
+.rc-link a:hover{color:var(--indigo)}
+.link-rm{background:none;border:none;color:var(--muted);cursor:pointer;font-size:.9em;padding:2px 4px;border-radius:3px}
+.link-rm:hover{background:#e8e5de;color:var(--red)}
+.rc-actions{margin-top:6px}
+.link-btn{background:none;border:1px dashed var(--border);color:var(--muted);cursor:pointer;font-size:.78em;padding:4px 10px;border-radius:6px;transition:.2s}
+.link-btn:hover{border-color:var(--teal);color:var(--teal);background:#f0faf8}
+/* Stats tab */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:24px}
+.stat-card{background:var(--card);border-radius:10px;padding:14px;text-align:center;box-shadow:var(--shadow)}
+.stat-label{font-size:.75em;color:var(--muted);margin-bottom:2px}
+.stat-val{font-size:1.4em;font-weight:700}
+.stat-val.red{color:var(--red)}
+.stat-val.teal{color:var(--teal)}
+.stat-val.indigo{color:var(--indigo)}
+.stat-val.gold{color:var(--gold)}
+.chart-wrap{position:relative;width:100%;height:300px;margin-bottom:24px}
+.dist-tbl{width:100%;border-collapse:collapse;font-size:.8em}
+.dist-tbl th{text-align:left;padding:8px 6px;font-weight:700;border-bottom:2px solid var(--border);color:var(--text)}
+.dist-tbl th.r{text-align:right}
+.dist-tbl td{padding:6px;border-bottom:.5px solid var(--border)}
+.dist-tbl td.r{text-align:right}
+.dist-tbl tr.warn td{font-weight:600}
+.dist-tbl .km-hi{color:var(--red);font-weight:700}
+.dist-tbl .km-mid{color:var(--gold);font-weight:600}
+.dist-tbl .part-row td{background:var(--bg);font-weight:700;font-size:.85em;color:var(--muted);letter-spacing:.05em;padding:10px 6px}
+.legend-row{display:flex;gap:16px;flex-wrap:wrap;font-size:.78em;color:var(--muted);margin:10px 0 0}
+.legend-row span{display:flex;align-items:center;gap:4px}
+.legend-dot{width:10px;height:10px;border-radius:2px}
+</style>
+
+<div class="hdr">
+  <h1>🇯🇵 Japonia 2026</h1>
+  <div class="jp">旅行プラン</div>
+  <div class="sub" id="subtitle"></div>
+</div>
+<div class="tabs">
+  <div class="tab on" onclick="sw(0)">📋 Rezerwacje</div>
+  <div class="tab" onclick="sw(1)">🗾 Plan dzień po dniu</div>
+  <div class="tab" onclick="sw(2)">📊 Dystanse</div>
+</div>
+<div class="pnl on" id="p0"></div>
+<div class="pnl" id="p1"></div>
+<div class="pnl" id="p2"></div>
+<div class="ft" id="footer"></div>
+
+<script>
+function sw(i){document.querySelectorAll('.tab').forEach((t,j)=>t.classList.toggle('on',j===i));document.querySelectorAll('.pnl').forEach((p,j)=>p.classList.toggle('on',j===i))}
+function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML}
+function uc(u){const l=u.toLowerCase();if(l==='teraz')return{bl:'bl-r',bdg:'bdg-now',lb:'Teraz'};if(l==='czerwiec')return{bl:'bl-g',bdg:'bdg-soon',lb:'Czerwiec'};if(l==='lipiec')return{bl:'bl-t',bdg:'bdg-july',lb:'Lipiec'};return{bl:'bl-n',bdg:'bdg-none',lb:u}}
+function pc(t){const l=t.toLowerCase();if(l.includes('kioto')||l.includes('osaka')||l.includes('nara'))return'1';if(l.includes('alpy')||l.includes('nagano'))return'2';return'3'}
+
+function parse(text){
+  const lines=text.split('\n'),meta={},res=[],parts=[];
+  let sec='',cp=null,cd=null;
+  for(const raw of lines){
+    const t=raw.trim();
+    if(t.startsWith('### ')){sec=t.slice(4).trim();continue}
+    if(sec==='META'){const m=t.match(/^(\w+):\s*(.+)$/);if(m)meta[m[1]]=m[2];continue}
+    if(sec==='REZERWACJE'){if(!t||t.startsWith('#'))continue;const p=t.split(' | ');if(p.length>=4)res.push({ti:p[0].trim(),ur:p[1].trim(),dt:p[2].trim(),dx:p[3].trim()});continue}
+    if(sec==='PLAN'){
+      if(t.startsWith('# ')){cp={title:t.slice(2).trim(),days:[]};parts.push(cp);cd=null;continue}
+      if(t.startsWith('== ')){const p=t.slice(3).split(' | ');cd={lb:p[0]||'',ds:p[1]||'',ts:p[2]||'',ht:p[3]||'',sm:'',sc:[]};if(cp)cp.days.push(cd);continue}
+      if(t.startsWith('- ')&&cd){const p=t.slice(2).split(' | ');cd.sc.push({tm:p[0]||'',ti:p[1]||'',nt:p[2]||''});continue}
+      if(t&&cd&&!t.startsWith('#')&&!t.startsWith('==')){cd.sm+=(cd.sm?' ':'')+t;continue}
+    }
+  }
+  return{meta,res,parts}
+}
+
+const D=parse(PLAN_DATA);
+document.getElementById('subtitle').textContent=D.meta.subtitle||'';
+document.getElementById('footer').innerHTML=`日本旅行 2026 · Ostatnia aktualizacja: ${esc(D.meta.updated||'?')}<br><span style="font-size:.9em;opacity:.7">Kursywa = dni do rozpisania</span>`;
+
+// Render reservations with checkboxes + confirmation links (localStorage)
+function getResState(){try{return JSON.parse(localStorage.getItem('jp26_res')||'{}')}catch(e){return{}}}
+function saveResState(s){localStorage.setItem('jp26_res',JSON.stringify(s))}
+function toggleRes(i){const s=getResState();s[i]=s[i]||{};s[i].done=!s[i].done;saveResState(s);renderAllRes()}
+function addLink(i){const url=prompt('Wklej link do potwierdzenia:');if(url&&url.trim()){const s=getResState();s[i]=s[i]||{};s[i].link=url.trim();saveResState(s);renderAllRes()}}
+function removeLink(i){const s=getResState();if(s[i])s[i].link='';saveResState(s);renderAllRes()}
+
+function renderAllRes(){
+  const s=getResState();
+  let h0='<div class="sl">Do załatwienia przed wyjazdem</div>';
+  D.res.forEach((r,i)=>{
+    const u=uc(r.ur);
+    const st=s[i]||{};
+    const done=st.done;
+    const link=st.link;
+    const doneClass=done?'rc-done':'';
+    h0+=`<div class="rc ${u.bl} ${doneClass}">`;
+    h0+=`<div class="rh"><label class="chk-wrap"><input type="checkbox" ${done?'checked':''} onchange="toggleRes(${i})"><span class="chk-box"></span></label><span class="rt">${esc(r.ti)}</span><span class="bdg ${done?'bdg-done':u.bdg}">${done?'✓ Gotowe':esc(u.lb)}</span></div>`;
+    h0+=`<div class="rd">${esc(r.dt)}</div>`;
+    h0+=`<div class="rx">${esc(r.dx)}</div>`;
+    if(link){h0+=`<div class="rc-link"><a href="${esc(link)}" target="_blank" rel="noopener">📎 Potwierdzenie</a><button class="link-rm" onclick="removeLink(${i})">✕</button></div>`}
+    h0+=`<div class="rc-actions"><button class="link-btn" onclick="addLink(${i})">${link?'🔄 Zmień link':'📎 Dodaj link potwierdzenia'}</button></div>`;
+    h0+=`</div>`;
+  });
+  document.getElementById('p0').innerHTML=h0;
+}
+renderAllRes();
+
+// Render plan
+let h1='';
+D.parts.forEach(part=>{
+  const c=pc(part.title);
+  h1+=`<div class="pdiv"><div class="ln bg${c}"></div><div class="lb c${c}">${esc(part.title)}</div><div class="ln bg${c}"></div></div>`;
+  part.days.forEach(d=>{
+    const has=d.sc.length>0,tbd=has?'':'tbd',label=d.ts?d.lb+' · '+d.ts:d.lb;
+    h1+=`<div class="dc"><div class="dh bg${c}"><span class="dn">${esc(label)}</span><span class="dd">${esc(d.ds)}</span></div><div class="db ${tbd}"><div class="ds">${esc(d.sm)}</div>`;
+    if(has){h1+='<div class="sch">';d.sc.forEach(s=>{h1+=`<div class="sr"><div class="st">${esc(s.tm)}</div><div class="sc"><strong>${esc(s.ti)}</strong>${s.nt?'<br><span class="n">'+esc(s.nt)+'</span>':''}</div></div>`});h1+='</div>'}
+    h1+=`<div class="dht">🏨 ${esc(d.ht)}</div></div></div>`;
+  });
+});
+document.getElementById('p1').innerHTML=h1;
+
+// Render stats tab
+const DAYS=[
+{d:1,n:'Przylot + Gion',walk:4,metro:0,car:0,train:75,part:1},
+{d:2,n:'Kiyomizu + Fushimi nocą',walk:14,metro:10,car:0,train:0,part:1},
+{d:3,n:'Osaka',walk:15,metro:40,car:0,train:100,part:1},
+{d:4,n:'Arashiyama + Kinkaku-ji',walk:10,metro:50,car:0,train:0,part:1},
+{d:5,n:'Nara',walk:10,metro:0,car:0,train:100,part:1},
+{d:6,n:'Kanazawa → Takayama',walk:6,metro:20,car:140,train:105,part:2},
+{d:7,n:'Takayama + Hida',walk:6,metro:0,car:10,train:0,part:2},
+{d:8,n:'Kamikōchi',walk:14,metro:0,car:80,train:0,part:2},
+{d:9,n:'Matsumoto → Nagano',walk:5,metro:0,car:160,train:0,part:2},
+{d:10,n:'Togakushi',walk:8,metro:0,car:90,train:0,part:2},
+{d:11,n:'Snow Monkey + Obuse',walk:6,metro:0,car:80,train:0,part:2},
+{d:12,n:'Zenkō-ji',walk:6,metro:0,car:0,train:0,part:2},
+{d:13,n:'Nagano → Tokio',walk:7,metro:30,car:0,train:80,part:3},
+{d:14,n:'teamLab + Asakusa',walk:12,metro:60,car:0,train:0,part:3},
+{d:15,n:'Akiba + Samurai + Shinjuku',walk:13,metro:30,car:0,train:0,part:3},
+{d:16,n:'Meiji Jingu + Shibuya',walk:12.5,metro:20,car:0,train:0,part:3},
+{d:17,n:'Yanaka + Ueno',walk:11,metro:15,car:0,train:0,part:3},
+{d:18,n:'Zakupy',walk:7,metro:30,car:0,train:0,part:3},
+{d:19,n:'Kamakura + Enoshima',walk:14,metro:0,car:0,train:150,part:3},
+{d:20,n:'Lot powrotny',walk:3,metro:0,car:0,train:40,part:3}
+];
+const totalWalk=DAYS.reduce((s,d)=>s+d.walk,0);
+const totalCar=DAYS.reduce((s,d)=>s+d.car,0);
+const totalTrain=DAYS.reduce((s,d)=>s+d.train,0);
+const avgWalk=Math.round(totalWalk/DAYS.length*10)/10;
+const maxWalk=Math.max(...DAYS.map(d=>d.walk));
+const maxDay=DAYS.find(d=>d.walk===maxWalk);
+
+const partNames={1:'Kioto / Osaka / Nara',2:'Alpy / Nagano',3:'Tokio'};
+const partColors={1:'var(--red)',2:'var(--teal)',3:'var(--indigo)'};
+
+let h2='<div class="stats-grid">';
+h2+=`<div class="stat-card"><div class="stat-label">Łącznie pieszo</div><div class="stat-val teal">${Math.round(totalWalk)} km</div></div>`;
+h2+=`<div class="stat-card"><div class="stat-label">Średnio dziennie</div><div class="stat-val indigo">${avgWalk} km</div></div>`;
+h2+=`<div class="stat-card"><div class="stat-label">Max dzień (D${maxDay.d})</div><div class="stat-val red">${maxWalk} km</div></div>`;
+h2+=`<div class="stat-card"><div class="stat-label">Autem łącznie</div><div class="stat-val gold">${totalCar} km</div></div>`;
+h2+='</div>';
+
+h2+='<div class="chart-wrap"><canvas id="statsChart"></canvas></div>';
+h2+='<div class="legend-row"><span><span class="legend-dot" style="background:#1D9E75"></span> pieszo (km)</span><span><span class="legend-dot" style="background:#EF9F27;width:10px;height:2px;border-radius:0"></span> 12+ km (dużo)</span><span><span class="legend-dot" style="background:#E24B4A;width:10px;height:2px;border-radius:0"></span> 15+ km (bardzo dużo)</span></div>';
+
+h2+='<div class="sl" style="margin-top:28px">Szczegóły dzień po dniu</div>';
+h2+='<table class="dist-tbl"><thead><tr><th>Dzień</th><th>Miejsce</th><th class="r">Pieszo</th><th class="r">Metro/bus</th><th class="r">Auto</th><th class="r">Pociąg</th></tr></thead><tbody>';
+
+let lastPart=0;
+DAYS.forEach(d=>{
+  if(d.part!==lastPart){
+    lastPart=d.part;
+    h2+=`<tr class="part-row"><td colspan="6">${esc(partNames[d.part])}</td></tr>`;
+  }
+  const cls=d.walk>=15?'km-hi':d.walk>=12?'km-mid':'';
+  h2+=`<tr${d.walk>=14?' class="warn"':''}><td>${d.d}</td><td>${esc(d.n)}</td><td class="r ${cls}">${d.walk} km</td><td class="r">${d.metro?d.metro+' min':'—'}</td><td class="r">${d.car?d.car+' km':'—'}</td><td class="r">${d.train?d.train+' min':'—'}</td></tr>`;
+});
+h2+=`<tr style="border-top:2px solid var(--border);font-weight:700"><td colspan="2">RAZEM</td><td class="r">${Math.round(totalWalk)} km</td><td class="r">${DAYS.reduce((s,d)=>s+d.metro,0)} min</td><td class="r">${totalCar} km</td><td class="r">${totalTrain} min</td></tr>`;
+h2+='</tbody></table>';
+document.getElementById('p2').innerHTML=h2;
+
+// Chart
+const sc=document.createElement('script');
+sc.src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js';
+sc.onload=function(){
+  const ctx=document.getElementById('statsChart');
+  if(!ctx)return;
+  const walkData=DAYS.map(d=>d.walk);
+  const barColors=walkData.map(v=>v>=15?'#E24B4A':v>=12?'#EF9F27':'#1D9E75');
+  new Chart(ctx,{
+    type:'bar',
+    data:{labels:DAYS.map(d=>'D'+d.d),datasets:[{data:walkData,backgroundColor:barColors,borderRadius:4}]},
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false}},
+      scales:{
+        y:{beginAtZero:true,max:20,grid:{color:'rgba(128,128,128,0.1)'},ticks:{callback:v=>v+' km',font:{size:11}}},
+        x:{grid:{display:false},ticks:{font:{size:10}}}
+      }
+    },
+    plugins:[{
+      id:'lines',
+      afterDraw(chart){
+        const ctx2=chart.ctx;
+        ctx2.save();
+        [15,12].forEach((v,i)=>{
+          const y=chart.scales.y.getPixelForValue(v);
+          ctx2.strokeStyle=i===0?'#E24B4A':'#EF9F27';
+          ctx2.lineWidth=1;
+          ctx2.setLineDash([6,4]);
+          ctx2.beginPath();
+          ctx2.moveTo(chart.chartArea.left,y);
+          ctx2.lineTo(chart.chartArea.right,y);
+          ctx2.stroke();
+        });
+        ctx2.restore();
+      }
+    }]
+  });
+};
+document.head.appendChild(sc);
+</script>
+</body>
+</html>
