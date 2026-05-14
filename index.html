@@ -32,6 +32,7 @@ updated: maj 2026
 🚃 Keisei Skyliner Tokio → Narita | Na miejscu | Przejazd 19.08 · ~40 min | Online na keisei.co.jp lub automat na miejscu. Co 20 min.
 🚃 Haruka Express KIX → Kioto | Na miejscu | Przejazd 31.07 · ~75 min · 2 200 ¥/os. (bilet turystyczny) | Kup online na westjr.co.jp (WEST QR E-Ticket — skan QR na bramce, zero kolejek). Pociągi co 30 min. Można też kupić na lotnisku w automacie.
 💳 Karty ICOCA (transport + płatności) | Na lotnisku KIX | Kupić zaraz po lądowaniu 31.07 na stacji JR Kansai Airport | Automaty z logo ICOCA na stacji JR (szybciej niż okienko). 2 000 ¥/karta (500 ¥ kaucja + 1 500 ¥ do użycia). Kupcie 3 karty — działają w CAŁEJ Japonii (Kioto, Osaka, Nara, Nagano, Tokio). Płacicie nimi pociągi, metro, autobusy, konbini, automaty, coin lockery. Doładowanie w każdym konbini lub na stacji. Na Androidzie NIE działa wersja mobilna — kupcie fizyczne karty. Kaucja 500 ¥ zwracana przy oddaniu karty.
+📱 Aplikacje — zainstalować przed wylotem | Teraz | Zainstalujcie i przetestujcie przed podróżą | ▸ MUST HAVE: ① Google Maps — nawigacja, transport publiczny, restauracje. Pobierzcie offline mapy: Kansai, Nagano, Tokio. ② Google Translate — tryb aparatu tłumaczy japońskie napisy na żywo (menu, znaki, automaty). Pobierzcie pakiet japoński offline. ③ Japan Travel by NAVITIME — lepsza niż Google Maps do pociągów. Pokazuje perony, przesiadki, koszty, rozkłady. ▸ TRANSPORT: ④ Suica w Apple Wallet (iOS, dla Asi) — Wallet → + → Transit Card → Suica. Nie trzeba fizycznej karty! Doładowanie kartą kredytową w telefonie. Express Mode = przykładasz iPhone bez odblokowywania. ⑤ Japan train card balance check / CardReader (Android, dla Kuby i Michała) — czytnik salda fizycznych kart ICOCA przez NFC. Przykładacie kartę do telefonu, widzicie saldo i 20 ostatnich transakcji. ⑥ GO Taxi — japoński Uber. Działa w 45/47 prefektur, po angielsku. ▸ ZAKUPY I JEDZENIE: ⑦ Payke (iOS + Android) — skaner kodów kreskowych w sklepach. Skanujecie → opis produktu po angielsku (składniki, użycie, alergeny). 500 000+ produktów. Idealne w drogeriach, aptekach, sklepach spożywczych. ⑧ Tabelog — japoński TripAdvisor do restauracji. Oceny wiarygodniejsze niż Google. ⑨ Ramen Beast (tylko iOS) — 700+ najlepszych ramenowni. ▸ INNE: ⑩ Ecbo Cloak — rezerwacja przechowalni bagażu (gdy coin lockery pełne). ⑪ XE Currency — przelicznik walut offline.
 
 ### PLAN
 # Część 1: Kioto / Osaka / Nara
@@ -475,6 +476,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);pad
 .legend-row{display:flex;gap:16px;flex-wrap:wrap;font-size:.78em;color:var(--muted);margin:10px 0 0}
 .legend-row span{display:flex;align-items:center;gap:4px}
 .legend-dot{width:10px;height:10px;border-radius:2px}
+/* Formatted reservation details (apps list) */
+.rx-section{font-weight:700;color:var(--text);margin:10px 0 4px;font-size:.9em;letter-spacing:.02em}
+.rx-section:first-child{margin-top:4px}
+.rx-item{padding:3px 0 3px 8px;border-left:2px solid var(--border);margin:3px 0 3px 4px;line-height:1.45}
 </style>
 
 <div class="hdr">
@@ -527,6 +532,21 @@ function toggleRes(i){const s=getResState();s[i]=s[i]||{};s[i].done=!s[i].done;s
 function addLink(i){const url=prompt('Wklej link do potwierdzenia:');if(url&&url.trim()){const s=getResState();s[i]=s[i]||{};s[i].link=url.trim();saveResState(s);renderAllRes()}}
 function removeLink(i){const s=getResState();if(s[i])s[i].link='';saveResState(s);renderAllRes()}
 
+function fmtRx(s){
+  let t=esc(s);
+  // Section headers: ▸ MUST HAVE: etc
+  t=t.replace(/▸\s*([^:]+):/g,'<div class="rx-section">▸ $1:</div>');
+  // Numbered items: ① ② etc - each on its own line
+  t=t.replace(/([①②③④⑤⑥⑦⑧⑨⑩⑪⑫])\s*/g,'<div class="rx-item">$1 ');
+  // Close items (before next item or section or end)
+  const parts=t.split('<div class="rx-item">');
+  if(parts.length>1){
+    t=parts[0];
+    for(let i=1;i<parts.length;i++){t+='<div class="rx-item">'+parts[i]+'</div>';}
+  }
+  return t;
+}
+
 function renderAllRes(){
   const s=getResState();
   let h0='<div class="sl">Do załatwienia przed wyjazdem</div>';
@@ -539,7 +559,7 @@ function renderAllRes(){
     h0+=`<div class="rc ${u.bl} ${doneClass}">`;
     h0+=`<div class="rh"><label class="chk-wrap"><input type="checkbox" ${done?'checked':''} onchange="toggleRes(${i})"><span class="chk-box"></span></label><span class="rt">${esc(r.ti)}</span><span class="bdg ${done?'bdg-done':u.bdg}">${done?'✓ Gotowe':esc(u.lb)}</span></div>`;
     h0+=`<div class="rd">${esc(r.dt)}</div>`;
-    h0+=`<div class="rx">${esc(r.dx)}</div>`;
+    h0+=`<div class="rx">${fmtRx(r.dx)}</div>`;
     if(link){h0+=`<div class="rc-link"><a href="${esc(link)}" target="_blank" rel="noopener">📎 Potwierdzenie</a><button class="link-rm" onclick="removeLink(${i})">✕</button></div>`}
     h0+=`<div class="rc-actions"><button class="link-btn" onclick="addLink(${i})">${link?'🔄 Zmień link':'📎 Dodaj link potwierdzenia'}</button></div>`;
     h0+=`</div>`;
