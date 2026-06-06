@@ -271,8 +271,8 @@ Zwrot auta, Shinkansen do Tokio, zakwaterowanie. Popołudnie: pierwsze kroki w T
 - 8:00 | 🍳 Śniadanie + ostatnie pakowanie | Sprawdźcie czy nic nie zostało. Tankujcie auto do pełna (stacja benzynowa po drodze na stację — szukajcie "ENEOS" lub "Shell" w Google Maps).
 - 9:00 | 🚗 Przejazd do Toyota Rent a Car przy stacji Nagano (~10–15 min) | Punkt zwrotu: 3 min pieszo od stacji, wyjście Zenkoji (zachodnie). Formalności zwrotu: ~20–30 min (sprawdzenie auta, paliwo, ETC rozliczenie).
 - 9:45 | 🚶 Stacja JR Nagano | Coin lockery na walizki jeśli chcecie kupić bento na drogę. Kupcie ekiben (bento kolejowe) — to tradycja Shinkansena! Nagano ekiben: shinshu soba bento lub oyaki bento. | Nagano Station
-- 10:15 | 🚅 Hokuriku Shinkansen Nagano → Tokio (~1h 20min) | Kagayaki (najszybszy, bez przystanków) lub Hakutaka. Bilety kupione wcześniej (od 12 lipca na eki-net.com). Jedzenie ekiben w pociągu z widokiem na góry — idealny rytuał pożegnania z Alpami.
-- 11:35 | 🚉 Tokyo Station | Przesiadka na linię Yamanote (zielona, kołowa) → kierunek Ikebukuro → stacja Otsuka. ~20 min. Karty ICOCA działają tu tak samo jak w Kansai — przykładacie do bramek. | Tokyo Station
+- 10:15 | 🚅 Hokuriku Shinkansen Nagano → Tokio (~1h 20min) | Macie Kagayaki (najszybszy, ~80 min) — i dobrze: jest w 100% rezerwowany, więc w przeddzień Obon macie gwarantowane miejsca. Hakutaka jest wolniejsza (więcej postojów: Karuizawa, Ueda…) i ma wagony bez rezerwacji = ryzyko stania ~1,5h z walizkami. Oba pociągi zatrzymują się w Ueno i Omiya. Bilety kupione wcześniej (eki-net.com). Ekiben w pociągu z widokiem na góry — pożegnanie z Alpami.
+- 11:30 | 🚉 Wysiądźcie w UENO (nie jedźcie do Tokyo Station) | Kagayaki i Hakutaka zatrzymują się w Ueno. Otsuka leży na północnym łuku Yamanote — z Ueno jest bliżej i łatwiej z walizkami. Yamanote (kier. Ikebukuro): Ueno → Otsuka ~14 min, 7 stacji. Do Tokyo Station cofalibyście się przez pół pętli (~20 min, i tak przez Ueno). ICOCA na bramkach. | Ueno Station
 - 12:00 | 🚶 Stacja Otsuka → OMO5 Otsuka (~5 min) | Hotel jest tuż przy stacji. Zostawcie bagaże — check-in może być od 15:00, ale bagażownię mają wcześniej.
 - 12:30 | 🍜 Lunch w okolicy Otsuka | Otsuka to lokalny, nieturystyczny kawałek Tokio — autentyczne ramen-ya, izakaya, mniejsze restauracje. Spróbujcie czegoś na stojąco — to jest Tokio!
 - 13:30 | 🏮 Sugamo Jizō-dōri (~10 min pieszo lub 1 stacja Yamanote) | "Harajuku babć" — ulica handlowa z zupełnie innym klimatem. Tradycyjne słodycze (shio-daifuku!), red underwear shops (na szczęście!), lokalna atmosfera. Mało turystów, dużo autentycznego Tokio. | Sugamo Jizo-dori, Tokyo
@@ -356,7 +356,7 @@ Stare Tokio, które przetrwało wojnę. Yanaka (nostalgiczne uliczki, koty, stre
 - 20:30 | 🏨 OMO5 Otsuka | Spokojniejszy dzień — stare Tokio, koty, park, targ. Idealna przerwa od neonów.
 
 == Dzień 18 | pon 17.08 | Zakupy + odpoczynek | OMO5 Otsuka, Tokio
-Niedziela + koniec Obon = tłumy na plażach i w pociągach. Idealny dzień na spokojne zakupy w Tokio i odpoczynek przed jutrzejszą wycieczką.
+Poniedziałek tuż po Obon (13–16.08) = szczyt fali powrotnej („U-turn rush") — pociągi dalekobieżne i Shinkansen wciąż zatłoczone, plaże się przerzedzają. Idealny dzień, żeby zostać w Tokio: spokojne zakupy i odpoczynek przed jutrzejszą wycieczką do Kamakury.
 - 9:30 | 🍳 Śniadanie | Spokojne wstawanie. Konbini lub kawiarnia.
 - 10:00 | 🧳 Kupno walizki! | Planujesz kupić dużą walizkę na pamiątki. Don Quijote (Ikebukuro, 5 min Yamanote — otwarty 24/7!) ma tanie walizki. Albo Nitori, Bic Camera. Tax-free z paszportem!
 - 11:00 | 🛍️ Zakupy pamiątkowe — Ikebukuro | Co warto: KitKaty w szalonych smakach (matcha, sake), Tokyo Banana, kosmetyki (Matsumoto Kiyoshi), sake/whisky japońska, gadżety z Akihabary, nóż japoński (jeśli nie kupiliście w Kappabashi).
@@ -543,10 +543,10 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px
   <div class="sub" id="subtitle"></div>
 </div>
 <div class="tabs">
-  <div class="tab on" onclick="sw(0)">📋 Rezerwacje</div>
-  <div class="tab" onclick="sw(1)">🗾 Plan</div>
-  <div class="tab" onclick="sw(2)">📊 Dystanse</div>
-  <div class="tab" onclick="sw(3)">ℹ️ Ważne</div>
+  <div class="tab on" onclick="selectTab(0)">📋 Rezerwacje</div>
+  <div class="tab" onclick="selectTab(1)">🗾 Plan</div>
+  <div class="tab" onclick="selectTab(2)">📊 Dystanse</div>
+  <div class="tab" onclick="selectTab(3)">ℹ️ Ważne</div>
 </div>
 <div class="pnl on" id="p0"></div>
 <div class="pnl" id="p1"></div>
@@ -556,7 +556,10 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px
 <div class="ft" id="footer"></div>
 
 <script>
+const TAB_NAMES=['rezerwacje','plan','dystanse','wazne'];
 function sw(i){document.querySelectorAll('.tab').forEach((t,j)=>t.classList.toggle('on',j===i));document.querySelectorAll('.pnl').forEach((p,j)=>p.classList.toggle('on',j===i))}
+function selectTab(i){sw(i);try{history.replaceState(null,'','#'+TAB_NAMES[i])}catch(e){location.hash=TAB_NAMES[i]}}
+function tabFromHash(){const h=decodeURIComponent(location.hash.slice(1));if(h==='plan'||/^d\d+$/.test(h))return 1;if(h==='dystanse')return 2;if(h==='wazne')return 3;return 0}
 function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML}
 function uc(u){const l=u.toLowerCase();if(l==='teraz')return{bl:'bl-r',bdg:'bdg-now',lb:'Teraz'};if(l==='czerwiec')return{bl:'bl-g',bdg:'bdg-soon',lb:'Czerwiec'};if(l==='lipiec')return{bl:'bl-t',bdg:'bdg-july',lb:'Lipiec'};return{bl:'bl-n',bdg:'bdg-none',lb:u}}
 function pc(t){const l=t.toLowerCase();if(l.includes('kioto')||l.includes('osaka')||l.includes('nara'))return'1';if(l.includes('alpy')||l.includes('nagano'))return'2';return'3'}
@@ -739,6 +742,14 @@ DAYS.forEach(d=>{
 h2+=`<tr style="border-top:2px solid var(--border);font-weight:700"><td colspan="2">RAZEM</td><td class="r">${Math.round(totalWalk)} km</td><td class="r">${DAYS.reduce((s,d)=>s+d.metro,0)} min</td><td class="r">${totalCar} km</td><td class="r">${totalTrain} min</td></tr>`;
 h2+='</tbody></table>';
 document.getElementById('p2').innerHTML=h2;
+
+// Restore active tab from URL hash on load (#plan / #dystanse / #wazne / #dN)
+(function(){
+  const idx=tabFromHash();
+  if(idx!==0)sw(idx);
+  const h=location.hash.slice(1);
+  if(/^d\d+$/.test(h)){const el=document.getElementById(h);if(el)requestAnimationFrame(()=>el.scrollIntoView())}
+})();
 </script>
 </body>
 </html>
