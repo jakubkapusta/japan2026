@@ -40,14 +40,14 @@ Telefony alarmowe :: 🚓 Policja | 110 · zadzwoń i powiedz „Police, please�
 Telefony alarmowe :: 🚒 Straż / 🚑 Pogotowie | 119 · pożar i karetka pod tym samym numerem
 Telefony alarmowe :: 📞 Japan Visitor Hotline (JNTO) | 050-3816-2787 · 24/7, po angielsku — pomoc turystyczna i nagłe wypadki
 Telefony alarmowe :: 🇵🇱 Ambasada RP w Tokio | tel. +81 3 5794 7020 · awaryjny kom. +81 80 4610 7020 · 2-13-5 Mita, Meguro-ku, Tokio | Embassy of Poland Tokyo Mita Meguro
-Hotele :: 🏨 KABIN Minamiza, Kioto | 31.07–05.08 (5 nocy) | KABIN Minamiza, Kyoto
-Hotele :: 🏨 WAT Hotel, Takayama | 05–08.08 (3 noce) | WAT Hotel, Takayama
-Hotele :: 🏨 Nagano Home | 08–12.08 (4 noce) | Nagano Home, Nagano
-Hotele :: 🏨 OMO5 Otsuka, Tokio | 12–19.08 (7 nocy) | OMO5 Otsuka, Tokyo
+Hotele :: 🏨 KABIN Minamiza, Kioto | 31.07–05.08 (5 nocy) · [[h_kabin|nr rezerwacji]] | KABIN Minamiza, Kyoto
+Hotele :: 🏨 WAT Hotel, Takayama | 05–08.08 (3 noce) · [[h_wat|nr rezerwacji]] | WAT Hotel, Takayama
+Hotele :: 🏨 Nagano Home | 08–12.08 (4 noce) · [[h_nagano|nr rezerwacji]] | Nagano Home, Nagano
+Hotele :: 🏨 OMO5 Otsuka, Tokio | 12–19.08 (7 nocy) · [[h_omo5|nr rezerwacji]] | OMO5 Otsuka, Tokyo
 Dokumenty i rezerwacje :: 🛂 Paszporty (3) | ważne min. 6 mies. po powrocie; zróbcie skany/zdjęcia w telefonie
 Dokumenty i rezerwacje :: 🚗 IDP + polskie prawo jazdy | wymagane do auta 05–12.08 (Kanazawa → Nagano)
-Dokumenty i rezerwacje :: 🏥 Ubezpieczenie podróżne | nr polisy: (uzupełnij) · tel. assistance: (uzupełnij)
-Dokumenty i rezerwacje :: ✈️ Loty | nr rejsu tam: KRK-AUH EY164 i AUX-KIX EY814 · powrót: NRT-AUH EY801 i AUH-KRK EY163
+Dokumenty i rezerwacje :: 🏥 Ubezpieczenie podróżne | [[ins_policy|nr polisy]] · [[ins_tel|tel. assistance]]
+Dokumenty i rezerwacje :: ✈️ Loty | [[flight_out|nr rejsu tam]] · [[flight_back|nr rejsu powrót]]
 Dokumenty i rezerwacje :: 💴 Gotówka | Takayama / Kamikōchi = miejcie jeny; bankomaty 7-Eleven i JP Post przyjmują karty zagraniczne
 
 ### PLAN
@@ -518,13 +518,17 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px
 .info-card .ix{font-size:.84em;color:var(--muted);line-height:1.5}
 .info-card .ix a{color:var(--indigo)}
 .info-warn{background:#fff7ed;border:1px solid #f3d9b8;border-radius:10px;padding:11px 14px;font-size:.82em;color:#8a5a18;margin-bottom:18px;line-height:1.5}
+.ival{font-weight:700;color:var(--text)}
+.ibtn{font-family:var(--font);background:none;border:1px dashed var(--border);color:var(--muted);cursor:pointer;font-size:.9em;padding:1px 7px;border-radius:6px;transition:.15s;white-space:nowrap}
+.ibtn:hover{border-color:var(--teal);color:var(--teal);background:#f0faf8}
+.ibtn-add{font-weight:600}
 /* Print button */
 .print-btn{font-family:var(--font);background:var(--card);border:1px solid var(--border);color:var(--muted);cursor:pointer;font-size:.82em;font-weight:600;padding:8px 16px;border-radius:8px;transition:.2s}
 .print-btn:hover{border-color:var(--indigo);color:var(--indigo)}
 /* Print / PDF */
 @media print{
   body{padding:0;background:#fff;color:#000;font-size:11pt}
-  .tabs,.day-nav,.noprint,.rc-actions,.link-btn,.link-rm,.chk-wrap,.print-btn{display:none!important}
+  .tabs,.day-nav,.noprint,.rc-actions,.link-btn,.link-rm,.chk-wrap,.print-btn,.ibtn{display:none!important}
   .pnl{display:block!important;max-width:none;margin:0}
   .pnl#p1,.pnl#p2,.pnl#p3{page-break-before:always}
   .dc,.rc,.info-card{break-inside:avoid;box-shadow:none;border:1px solid #ccc}
@@ -623,13 +627,20 @@ function renderAllRes(){
 }
 renderAllRes();
 
-// Render "Ważne" (important info) tab
+// Render "Ważne" (important info) tab — z polami edytowalnymi (localStorage, tylko na tym urządzeniu)
+const INFO_PH={};
+function getInfoState(){try{return JSON.parse(localStorage.getItem('jp26_info')||'{}')}catch(e){return{}}}
+function saveInfoState(s){localStorage.setItem('jp26_info',JSON.stringify(s))}
+function editInfo(k){const s=getInfoState();const v=prompt('Wpisz: '+(INFO_PH[k]||'wartość')+'\n(zapis tylko w tej przeglądarce; wyczyść = puste pole)',s[k]||'');if(v===null)return;const t=v.trim();if(t)s[k]=t;else delete s[k];saveInfoState(s);renderInfo()}
+function fmtField(escHtml){const s=getInfoState();return escHtml.replace(/\[\[([a-z0-9_]+)\|([^\]]+)\]\]/g,(m,k,ph)=>{const v=s[k];return v?`<span class="ival">${esc(v)}</span> <button class="ibtn" title="Edytuj" onclick="editInfo('${k}')">✏️</button>`:`<button class="ibtn ibtn-add" onclick="editInfo('${k}')">✏️ ${ph}</button>`})}
 function renderInfo(){
-  let h3='<div class="info-warn">⚠️ <strong>Bezpieczeństwo:</strong> nie zapisuj tutaj numerów kart płatniczych ani PIN-ów. Skany dokumentów trzymajcie w osobnym, zabezpieczonym miejscu (np. chmura z hasłem).</div>';
+  let h3='<div class="info-warn">⚠️ <strong>Bezpieczeństwo:</strong> pola edytowalne (✏️) zapisują się <strong>tylko w tej przeglądarce</strong> — nie trafiają do repo. Mimo to nie wpisuj numerów kart płatniczych ani PIN-ów. Skany dokumentów trzymaj w osobnym, zabezpieczonym miejscu.</div>';
   let lastGrp='';
   D.info.forEach(it=>{
+    let mm;const rx=/\[\[([a-z0-9_]+)\|([^\]]+)\]\]/g;while((mm=rx.exec(it.dt)))INFO_PH[mm[1]]=mm[2];
     if(it.grp!==lastGrp){lastGrp=it.grp;h3+=`<div class="info-grp">${esc(it.grp)}</div>`}
-    const det=it.mq?esc(it.dt)+` · <a class="mlink" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(it.mq)}" target="_blank" rel="noopener">📍 mapa</a>`:esc(it.dt);
+    let det=fmtField(esc(it.dt));
+    if(it.mq)det+=` · <a class="mlink" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(it.mq)}" target="_blank" rel="noopener">📍 mapa</a>`;
     h3+=`<div class="info-card"><div class="il">${esc(it.lb)}</div><div class="ix">${det}</div></div>`;
   });
   document.getElementById('p3').innerHTML=h3;
