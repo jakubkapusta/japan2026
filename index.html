@@ -738,8 +738,8 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px
   <div class="cd-head" id="cdHead"></div>
 </div>
 <div class="tabs">
-  <div class="tab on" onclick="selectTab(0)">📋 Rezerwacje</div>
-  <div class="tab" onclick="selectTab(1)">🗾 Plan</div>
+  <div class="tab on" onclick="selectTab(0)">🗾 Plan</div>
+  <div class="tab" onclick="selectTab(1)">📋 Rezerwacje</div>
   <div class="tab" onclick="selectTab(2)">📊 Dystanse</div>
   <div class="tab" onclick="selectTab(3)">ℹ️ Ważne</div>
   <div class="tab" onclick="selectTab(4)">🧳 Pakowanie</div>
@@ -747,8 +747,8 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px
   <div class="tab" onclick="selectTab(6)">🗣️ Rozmówki</div>
   <div class="tab" onclick="selectTab(7)">⏳ Terminy</div>
 </div>
-<div class="pnl on" id="p0"></div>
-<div class="pnl" id="p1"></div>
+<div class="pnl on" id="p1"></div>
+<div class="pnl" id="p0"></div>
 <div class="pnl" id="p2"></div>
 <div class="pnl" id="p3"></div>
 <div class="pnl" id="p4"></div>
@@ -759,10 +759,10 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px
 <div class="ft" id="footer"></div>
 
 <script>
-const TAB_NAMES=['rezerwacje','plan','dystanse','wazne','pakowanie','jedzenie','rozmowki','terminy'];
+const TAB_NAMES=['plan','rezerwacje','dystanse','wazne','pakowanie','jedzenie','rozmowki','terminy'];
 function sw(i){document.querySelectorAll('.tab').forEach((t,j)=>t.classList.toggle('on',j===i));document.querySelectorAll('.pnl').forEach((p,j)=>p.classList.toggle('on',j===i))}
 function selectTab(i){sw(i);try{history.replaceState(null,'','#'+TAB_NAMES[i])}catch(e){location.hash=TAB_NAMES[i]}}
-function tabFromHash(){const h=decodeURIComponent(location.hash.slice(1));if(/^d\d+$/.test(h))return 1;const i=TAB_NAMES.indexOf(h);return i>=0?i:0}
+function tabFromHash(){const h=decodeURIComponent(location.hash.slice(1));if(/^d\d+$/.test(h))return 0;const i=TAB_NAMES.indexOf(h);return i>=0?i:0}
 function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML}
 function uc(u){const l=u.toLowerCase();if(l==='teraz')return{bl:'bl-r',bdg:'bdg-now',lb:'Teraz'};if(l==='czerwiec')return{bl:'bl-g',bdg:'bdg-soon',lb:'Czerwiec'};if(l==='lipiec')return{bl:'bl-t',bdg:'bdg-july',lb:'Lipiec'};return{bl:'bl-n',bdg:'bdg-none',lb:u}}
 function pc(t){const l=t.toLowerCase();if(l.includes('kioto')||l.includes('osaka')||l.includes('nara'))return'1';if(l.includes('alpy')||l.includes('nagano'))return'2';return'3'}
