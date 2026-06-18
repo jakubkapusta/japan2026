@@ -758,7 +758,12 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px
   .dc,.rc,.info-card{break-inside:avoid;box-shadow:none;border:1px solid #ccc}
   a{color:#000;text-decoration:none}
   .chart-wrap{height:auto}
-  .tip-d{display:none}
+  .tip-d{display:block;background:transparent;border-left:2px solid #bbb;break-inside:avoid;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .tip-d[open]{background:transparent}
+  .tip-s{color:#000;cursor:default;font-size:9.5pt}
+  .tip-s::before{content:'•';color:#000}
+  .tip-d[open] .tip-s::before{transform:none}
+  .tip-b{color:#222;font-size:9.5pt}
 }
 /* Ciekawostki (collapsible tips in plan) */
 .tip-d{margin:6px 0 2px;border-left:2px dashed var(--gold);border-radius:0 6px 6px 0;background:#fffbf0}
@@ -1043,6 +1048,10 @@ renderCountdown();
   const h=location.hash.slice(1);
   if(/^d\d+$/.test(h)){const el=document.getElementById(h);if(el)requestAnimationFrame(()=>el.scrollIntoView())}
 })();
+
+// Print/PDF: rozwiń wszystkie ciekawostki, żeby trafiły do wydruku, potem przywróć stan na ekranie
+window.addEventListener('beforeprint',()=>{document.querySelectorAll('.tip-d:not([open])').forEach(d=>{d.open=true;d.dataset.printopen='1'})});
+window.addEventListener('afterprint',()=>{document.querySelectorAll('.tip-d[data-printopen]').forEach(d=>{d.open=false;d.removeAttribute('data-printopen')})});
 </script>
 </body>
 </html>
