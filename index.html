@@ -639,7 +639,7 @@ D20 | 14:00 | 💡 | Skyliner — 160 km/h do miasta | Keisei Skyliner to najszy
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px;min-height:100vh}
-.hdr{text-align:center;padding:24px 16px 16px;margin:-20px -20px 22px;background:#f7f1e6;background-image:repeating-radial-gradient(circle at 50% 150%,rgba(184,64,47,.05) 0 15px,transparent 15px 30px);border-bottom:1px solid #ece3d2}
+.hdr{text-align:center;padding:24px 16px 16px;margin:-20px -20px 0;background:#f7f1e6;background-image:repeating-radial-gradient(circle at 50% 150%,rgba(184,64,47,.05) 0 15px,transparent 15px 30px);border-bottom:1px solid #ece3d2}
 .hdr-row{display:flex;align-items:center;justify-content:center;gap:13px}
 .hdr .emblem{width:46px;height:46px;border-radius:12px;overflow:hidden;border:1px solid var(--border);flex:none;line-height:0}
 .hdr-titles{text-align:left}
@@ -648,12 +648,12 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px
 .hdr .jp{font-family:var(--font-jp);font-size:.68em;color:#9a9081;letter-spacing:.4em;margin-top:4px}
 .hdr-rule{height:1px;background:linear-gradient(90deg,transparent,var(--kin),transparent);max-width:280px;margin:14px auto 0}
 .hdr .sub{font-size:.85em;color:var(--muted);margin-top:10px}
-.tabs{max-width:740px;margin:0 auto 20px;display:flex;flex-wrap:wrap;gap:2px;border-bottom:1px solid var(--border)}
+.tabs{max-width:880px;margin:0 auto 20px;display:flex;flex-wrap:wrap;gap:2px;border-bottom:1px solid var(--border)}
 .tab{flex:1 1 auto;display:flex;flex-direction:column;align-items:center;gap:3px;padding:9px 6px;font-weight:600;font-size:.76em;cursor:pointer;color:var(--muted);background:none;border-bottom:2px solid transparent;transition:.18s;user-select:none}
 .tab .tic{width:19px;height:19px;display:block}
 .tab.on{color:var(--p1);border-bottom-color:var(--p1)}
 .tab:hover:not(.on){color:var(--text)}
-.pnl{display:none;max-width:740px;margin:0 auto}
+.pnl{display:none;max-width:880px;margin:0 auto}
 .pnl.on{display:block}
 .sl{font-family:var(--font-jp);font-weight:700;font-size:.8em;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);margin:28px 0 14px;padding-left:2px}
 .sl:first-child{margin-top:0}
@@ -703,7 +703,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px
 .sc .mlink{color:var(--indigo);text-decoration:none;border-bottom:1px dotted var(--indigo)}
 .sc .mlink:hover{color:var(--red);border-bottom-color:var(--red)}
 .ft{text-align:center;margin-top:36px;font-size:.78em;color:var(--muted);font-family:var(--font-jp);line-height:1.6}
-@media(max-width:520px){body{padding:12px}.hdr{margin:-12px -12px 20px}.hdr h1{font-size:1.6em}.tab{flex:1 1 22%;font-size:.72em;padding:9px 3px}.dh{padding:11px 13px}.db,.rc{padding:13px 14px}.sr{grid-template-columns:40px 14px 1fr}.sch::before{left:54px}}
+@media(max-width:520px){body{padding:12px}.hdr{margin:-12px -12px 0}.hdr h1{font-size:1.6em}.tab{flex:1 1 22%;font-size:.72em;padding:9px 3px}.dh{padding:11px 13px}.db,.rc{padding:13px 14px}.sr{grid-template-columns:40px 14px 1fr}.sch::before{left:54px}}
 /* Reservation checkboxes & done state */
 .chk-wrap{display:flex;align-items:center;cursor:pointer;margin-right:8px;flex-shrink:0}
 .chk-wrap input{display:none}
@@ -748,8 +748,8 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px
 .rx-section:first-child{margin-top:4px}
 .rx-item{padding:3px 0 3px 8px;border-left:2px solid var(--border);margin:3px 0 3px 4px;line-height:1.45}
 /* Day navigation (Plan tab) */
-.day-nav{position:sticky;top:0;z-index:10;display:flex;gap:6px;overflow-x:auto;padding:10px 2px;margin:0 0 10px;background:var(--bg);-webkit-overflow-scrolling:touch;scrollbar-width:thin}
-.day-nav a{flex:0 0 auto;font-size:.74em;font-weight:700;text-decoration:none;padding:5px 11px;border-radius:9px;border:1px solid transparent;transition:.15s}
+.day-nav{position:sticky;top:0;z-index:10;display:flex;gap:5px;overflow-x:auto;padding:10px 2px;margin:0 0 10px;background:var(--bg);-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+.day-nav a{flex:0 0 auto;font-size:.72em;font-weight:700;text-decoration:none;padding:4px 9px;border-radius:8px;border:1px solid transparent;transition:.15s}
 .day-nav a:hover{transform:translateY(-1px);filter:brightness(.97)}
 .dn-1{background:#f7e7e3;color:#8f2e20;border-color:#ecd2cb}
 .dn-2{background:#e2f0eb;color:#115c4a;border-color:#cce3da}
@@ -890,7 +890,7 @@ function parse(text){
 
 const D=parse(PLAN_DATA);
 document.getElementById('subtitle').textContent=D.meta.subtitle||'';
-document.getElementById('footer').innerHTML=`日本旅行 2026 · Ostatnia aktualizacja: ${esc(D.meta.updated||'?')}<br><span style="font-size:.9em;opacity:.7">Kursywa = dni do rozpisania</span>`;
+document.getElementById('footer').innerHTML=`日本旅行 2026 · Ostatnia aktualizacja: ${esc(D.meta.updated||'?')}`;
 
 // Render reservations with checkboxes + confirmation links (localStorage)
 function getResState(){try{return JSON.parse(localStorage.getItem('jp26_res')||'{}')}catch(e){return{}}}
