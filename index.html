@@ -826,7 +826,8 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px
 .ph-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:11px 15px;box-shadow:var(--shadow);margin-bottom:9px}
 .ph-pl{font-size:.8em;color:var(--muted);margin-bottom:3px}
 .ph-jp{font-family:var(--font-jp);font-size:1.22em;font-weight:500;color:var(--text);line-height:1.45}
-.ph-pron{display:inline-block;margin-top:6px;font-size:.76em;color:#8a6d1f;background:#fdf6e7;border-radius:20px;padding:2px 11px;letter-spacing:.02em}
+.ph-rom{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:5px;font-size:.85em;color:var(--p3);font-style:italic}
+.ph-pron{display:inline-block;font-size:.76em;color:#8a6d1f;background:#fdf6e7;border-radius:20px;padding:2px 11px;letter-spacing:.02em;font-style:normal}
 .info-warn{background:#fff7ed;border:1px solid #f3d9b8;border-radius:10px;padding:11px 14px;font-size:.82em;color:#8a5a18;margin-bottom:18px;line-height:1.5}
 .ival{font-weight:700;color:var(--text)}
 .ibtn{font-family:var(--font);background:none;border:1px dashed var(--border);color:var(--muted);cursor:pointer;font-size:.9em;padding:1px 7px;border-radius:6px;transition:.15s;white-space:nowrap}
@@ -1187,7 +1188,7 @@ function renderPhrases(){
   let h='',lastGrp='';
   D.phrases.forEach(p=>{
     if(p.grp!==lastGrp){lastGrp=p.grp;const mon=PHRASE_MON[p.grp]||'•';h+=`<div class="ck-grp p-3"><span class="ck-mon">${esc(mon)}</span><span class="ck-gt2">${esc(p.grp)}</span></div>`}
-    h+=`<div class="ph-card"><div class="ph-pl">${esc(p.pl)}</div><div class="ph-jp">${esc(p.jpr)}</div><div class="ph-jp">${esc(p.jp)}</div><span class="ph-pron">${esc(p.pron)}</span></div>`;
+    h+=`<div class="ph-card"><div class="ph-pl">${esc(p.pl)}</div><div class="ph-jp">${esc(p.jp)}</div><div class="ph-rom">${esc(p.jpr)}<span class="ph-pron">${esc(p.pron)}</span></div></div>`;
   });
   document.getElementById('p6').innerHTML=h;
 }
