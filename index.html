@@ -1292,7 +1292,6 @@ function renderBudget(){
   h+=C('Na osobę',fmtN(tot*PLN_RATE)+' zł','indigo',fmtN(tot)+' ¥');
   h+=C('Cała trójka',fmtN(tot*3*PLN_RATE)+' zł','red',fmtN(tot*3)+' ¥');
   h+=C('Dziennie / os',fmtN(perDay*PLN_RATE)+' zł','teal',fmtN(perDay)+' ¥');
-  h+=C('Przyjęty kurs','100 ¥ ≈ 2,6 zł','gold','stały — wahania pomijamy');
   h+='</div>';
   h+='<div class="info-warn">💡 Szacunki wydatków <strong>na miejscu</strong>, na osobę. Hotele, loty i samochód (w tym opcjonalny wynajem na Daikoku) — pominięte. teamLab kupiony — pominięty.</div>';
   h+='<div class="chart-wrap">'+buildBudChart(rows)+'</div>';
