@@ -918,6 +918,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px
 .shop-add-btn{width:100%;padding:9px;border:1.5px dashed var(--border);border-radius:9px;background:none;color:var(--muted);font-family:var(--font);font-weight:700;font-size:.84em;cursor:pointer;transition:.15s}
 .shop-add-btn:hover{border-color:var(--p2);color:var(--p2);background:#f6fbf9}
 .shop-add-form{display:flex;flex-direction:column;gap:7px}
+.shop-add-form[hidden]{display:none}
 .shop-add-in{padding:9px 11px;border:1px solid var(--border);border-radius:8px;font-family:var(--font);font-size:.9em;background:#fffdf8;color:var(--text)}
 .shop-add-in:focus{outline:none;border-color:var(--p2)}
 .shop-add-act{display:flex;gap:8px}
@@ -1413,6 +1414,18 @@ function renderBudget(){
 }
 // Lista zakupów (#shopPane) — co warto kupić / pomyśleć o kupnie, z opisem i miejscem
 const SHOP_MON={'Moda i odzież':['👕','p-1'],'Kosmetyki i pielęgnacja':['💄','p-gold'],'Smakołyki i prezenty':['🍵','p-gold'],'Kuchnia, noże, rzemiosło':['🔪','p-2'],'Dla Michała — anime i gry':['🎮','p-3'],'Papiernia i design':['🖋️','p-gold'],'Alkohol':['🥃','p-2'],'Elektronika i zegarki':['🔌','p-3'],'Tax-free i gdzie kupować':['🛍️','p-gold']};
+function linkify(text){
+  const re=/(https?:\/\/[^\s]+|www\.[^\s]+)/g;let out='',last=0,m;
+  while((m=re.exec(text))){
+    out+=esc(text.slice(last,m.index));
+    let url=m[0],trail='';const tm=url.match(/[).,;!?]+$/);
+    if(tm){trail=url.slice(url.length-tm[0].length);url=url.slice(0,url.length-tm[0].length);}
+    const href=url.startsWith('www.')?'https://'+url:url;
+    out+='<a class="mlink" href="'+esc(href)+'" target="_blank" rel="noopener" onclick="event.stopPropagation()">'+esc(url)+'</a>'+esc(trail);
+    last=m.index+m[0].length;
+  }
+  out+=esc(text.slice(last));return out;
+}
 function getCustom(){try{return JSON.parse(localStorage.getItem('jp26_shop_custom')||'{}')}catch(e){return{}}}
 function saveCustom(c){localStorage.setItem('jp26_shop_custom',JSON.stringify(c))}
 let SHOP_GRP_ORDER=[];
@@ -1445,7 +1458,7 @@ function renderShopping(){
       h+=`<div class="ck-row ${ck?'ck-on':''}" onclick="toggleShop('${key}')"><span class="ck-cb">${ck?'✓':''}</span><span class="ck-tx"><b>${esc(it.lb)}</b><span class="ck-d"> — ${esc(it.dt)}</span>${wh}</span></div>`;
     });
     cust.forEach(it=>{const key='c-'+it.id,ck=!!s[key];
-      h+=`<div class="ck-row ${ck?'ck-on':''}" onclick="toggleShop('${key}')"><span class="ck-cb">${ck?'✓':''}</span><span class="ck-tx"><b>${esc(it.lb)}</b><span class="shop-own">twój wpis</span>${it.dt?'<span class="ck-d"> — '+esc(it.dt)+'</span>':''}</span><button class="shop-del" title="Usuń wpis" onclick="event.stopPropagation();delCustom(${gi},'${it.id}')">×</button></div>`;
+      h+=`<div class="ck-row ${ck?'ck-on':''}" onclick="toggleShop('${key}')"><span class="ck-cb">${ck?'✓':''}</span><span class="ck-tx"><b>${esc(it.lb)}</b><span class="shop-own">twój wpis</span>${it.dt?'<span class="ck-d"> — '+linkify(it.dt)+'</span>':''}</span><button class="shop-del" title="Usuń wpis" onclick="event.stopPropagation();delCustom(${gi},'${it.id}')">×</button></div>`;
     });
     h+=`</div><div class="shop-add"><button class="shop-add-btn" id="addBtn-${gi}" onclick="showAdd(${gi})">＋ Dodaj własny</button><div class="shop-add-form" id="addForm-${gi}" hidden><input id="addLb-${gi}" class="shop-add-in" placeholder="Nazwa (np. Melano CC)" onkeydown="if(event.key==='Enter')addCustom(${gi})"><input id="addDt-${gi}" class="shop-add-in" placeholder="Opis — opcjonalnie" onkeydown="if(event.key==='Enter')addCustom(${gi})"><div class="shop-add-act"><button class="shop-add-save" onclick="addCustom(${gi})">Dodaj</button><button class="shop-add-cancel" onclick="hideAdd(${gi})">Anuluj</button></div></div></div></div>`;
   });
