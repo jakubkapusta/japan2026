@@ -777,6 +777,10 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px
 .c1{color:var(--p1)}.c2{color:var(--p2)}.c3{color:var(--p3)}
 .bg1{background:var(--p1)}.bg2{background:var(--p2)}.bg3{background:var(--p3)}
 .dc{background:var(--card);border-radius:0 14px 14px 0;box-shadow:var(--shadow);margin-bottom:18px;overflow:hidden;border:1px solid var(--border);border-left:4px solid var(--pc,var(--border))}
+.day-collage{display:flex;gap:2px;height:104px;background:#efe9dc;position:relative}
+.day-collage img{flex:1 1 0;min-width:0;height:100%;object-fit:cover;display:block;cursor:zoom-in;transition:filter .15s}
+.day-collage img:hover{filter:brightness(1.06)}
+.day-collage::after{content:'';position:absolute;left:0;right:0;bottom:0;height:34px;background:linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.16));pointer-events:none}
 .dh{display:flex;align-items:center;gap:13px;padding:13px 18px;border-bottom:1px solid #f1ebde}
 .dh .dnum{text-align:center;line-height:1;flex:none;min-width:30px}
 .dh .dnum b{font-family:var(--font-serif);font-size:1.7em;font-weight:700;color:var(--pc,var(--text));display:block}
@@ -801,7 +805,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px
 .sc .mlink{color:var(--indigo);text-decoration:none;border-bottom:1px dotted var(--indigo)}
 .sc .mlink:hover{color:var(--red);border-bottom-color:var(--red)}
 .ft{text-align:center;margin-top:36px;font-size:.78em;color:var(--muted);font-family:var(--font-jp);line-height:1.6}
-@media(max-width:520px){body{padding:12px}.hdr{margin:-12px -12px 0}.hdr h1{font-size:1.6em}.tab{flex:1 1 22%;font-size:.72em;padding:9px 3px}.dh{padding:11px 13px}.db,.rc{padding:13px 14px}.sr{grid-template-columns:40px 14px 1fr}.sch::before{left:54px}}
+@media(max-width:520px){body{padding:12px}.hdr{margin:-12px -12px 0}.hdr h1{font-size:1.6em}.tab{flex:1 1 22%;font-size:.72em;padding:9px 3px}.dh{padding:11px 13px}.day-collage{height:82px}.db,.rc{padding:13px 14px}.sr{grid-template-columns:40px 14px 1fr}.sch::before{left:54px}}
 /* Reservation checkboxes & done state */
 .chk-wrap{display:flex;align-items:center;cursor:pointer;margin-right:8px;flex-shrink:0}
 .chk-wrap input{display:none}
@@ -938,6 +942,13 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px
 .lb-btn{padding:10px 20px;border:none;border-radius:9px;font-family:var(--font);font-weight:700;font-size:.9em;cursor:pointer;background:#fffdf8;color:var(--text)}
 .lb-btn:hover{filter:brightness(.96)}
 .lb-btn.lb-del{background:var(--red);color:#fff}
+.lb-cap{color:#e8e2d6;font-size:.82em;text-align:center;max-width:640px;line-height:1.5}
+.lb-cap a{color:#f0d98a;text-decoration:underline}
+.img-credits{margin:8px 0 4px;font-size:.76em;color:var(--muted)}
+.img-credits summary{cursor:pointer;font-weight:600;padding:6px 2px;list-style:none}
+.img-credits summary::-webkit-details-marker{display:none}
+.img-credits-b{padding:6px 4px 4px;line-height:1.7;color:#9a9081}
+.img-credits-b a{color:var(--indigo);text-decoration:none}
 /* Stats tab */
 .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:24px}
 .stat-card{background:var(--card);border-radius:10px;padding:14px;text-align:center;box-shadow:var(--shadow)}
@@ -1236,6 +1247,45 @@ function routeMapSVG(){return `<div class="route-map"><div class="rm-title">Tras
 `<path d="M420.0,517.8 l-7,12 h14 z" fill="#cdd6e2" stroke="#9fb0c4" stroke-width="0.8"/><path d="M420.0,517.8 l-3,5 l3,-1 l2,2 l3,-3 z" fill="#fff"/><text x="420.0" y="540.8" text-anchor="middle" font-size="9.5" fill="#8a8472" font-family="'Noto Sans JP',sans-serif">富士</text><text x="274.0" y="575.7" text-anchor="end" font-size="9.5" fill="#8a8472">✈ KIX</text><text x="492.8" y="506.1" text-anchor="start" font-size="9.5" fill="#8a8472">✈ NRT</text><circle cx="289.9" cy="559.6" r="3" fill="#b8402f" stroke="#fffdf8" stroke-width="1.4"/><circle cx="300.8" cy="543.4" r="3.6" fill="#b8402f" stroke="#fffdf8" stroke-width="1.4"/><circle cx="303.2" cy="559.6" r="3" fill="#b8402f" stroke="#fffdf8" stroke-width="1.4"/><circle cx="336.6" cy="465.3" r="3" fill="#1a7a6d" stroke="#fffdf8" stroke-width="1.4"/><circle cx="360.4" cy="486.4" r="3" fill="#1a7a6d" stroke="#fffdf8" stroke-width="1.4"/><circle cx="389.4" cy="481.4" r="3" fill="#1a7a6d" stroke="#fffdf8" stroke-width="1.4"/><circle cx="397.8" cy="460.7" r="3.6" fill="#1a7a6d" stroke="#fffdf8" stroke-width="1.4"/><circle cx="458.6" cy="509.6" r="3.6" fill="#3d5a80" stroke="#fffdf8" stroke-width="1.4"/><circle cx="453.0" cy="528.3" r="3" fill="#3d5a80" stroke="#fffdf8" stroke-width="1.4"/><text x="284.9" y="563.6" text-anchor="end" font-size="11" font-weight="500" fill="#2a2723" font-family="'DM Sans',sans-serif">Osaka</text><text x="300.8" y="536.4" text-anchor="middle" font-size="11" font-weight="700" fill="#2a2723" font-family="'DM Sans',sans-serif">Kioto</text><text x="308.2" y="570.6" text-anchor="start" font-size="11" font-weight="500" fill="#2a2723" font-family="'DM Sans',sans-serif">Nara</text><text x="336.6" y="458.3" text-anchor="middle" font-size="11" font-weight="600" fill="#2a2723" font-family="'DM Sans',sans-serif">Kanazawa</text><text x="356.4" y="498.4" text-anchor="end" font-size="11" font-weight="500" fill="#2a2723" font-family="'DM Sans',sans-serif">Takayama</text><text x="394.4" y="493.4" text-anchor="start" font-size="11" font-weight="500" fill="#2a2723" font-family="'DM Sans',sans-serif">Matsumoto</text><text x="397.8" y="453.7" text-anchor="middle" font-size="11" font-weight="700" fill="#2a2723" font-family="'DM Sans',sans-serif">Nagano</text><text x="464.6" y="513.1" text-anchor="start" font-size="11" font-weight="700" fill="#2a2723" font-family="'DM Sans',sans-serif">Tokio</text><text x="457.0" y="540.3" text-anchor="start" font-size="11" font-weight="500" fill="#2a2723" font-family="'DM Sans',sans-serif">Kamakura</text>`+
 `</svg>`+
 `<div class="rm-legend"><span><i style="background:#b8402f"></i>Kioto / Osaka / Nara</span><span><i style="background:#1a7a6d"></i>Alpy / Nagano</span><span><i style="background:#3d5a80"></i>Tokio</span></div></div>`}
+// Zdjęcia dni — kolaż w nagłówku (Wikimedia Commons, licencje w podpisach). {f:plik, t:tytuł, by:autor, lic:licencja, u:link do Commons}
+const DAY_IMG={
+ 1:[
+  {f:'img/day01-1-yasaka-pagoda.jpg',t:'Pagoda Yasaka (Hōkan-ji), Gion',by:'Basile Morin',lic:'CC BY-SA 4.0',u:'https://commons.wikimedia.org/wiki/File:Yasaka-dori_early_morning_with_street_lanterns_and_the_Tower_of_Yasaka_(Hokan-ji_Temple),_Kyoto,_Japan.jpg'},
+  {f:'img/day01-2-hanamikoji.jpg',t:'Gion (Hanamikōji)',by:'Zairon',lic:'CC BY-SA 4.0',u:'https://commons.wikimedia.org/wiki/File:Kyoto_Gion_01.jpg'},
+  {f:'img/day01-3-pontocho.jpg',t:'Zaułek Pontochō',by:'Sergiy Galyonkin',lic:'CC BY-SA 2.0',u:'https://commons.wikimedia.org/wiki/File:Pontocho_Alley,_Kyoto_-_Flickr_-_Sergiy_Galyonkin.jpg'},
+  {f:'img/day01-4-yasaka-shrine.jpg',t:'Chram Yasaka',by:'Jakub Hałun',lic:'CC BY 4.0',u:'https://commons.wikimedia.org/wiki/File:South_Tower_Gate_of_Yasaka_Shrine_in_Kyoto,_20240820_1706_5167.jpg'}
+ ],
+ 2:[
+  {f:'img/day02-1-kiyomizu.jpg',t:'Kiyomizu-dera',by:'Martin Falbisoner',lic:'CC BY-SA 4.0',u:'https://commons.wikimedia.org/wiki/File:Kiyomizu-dera,_Kyoto,_November_2016_-01.jpg'},
+  {f:'img/day02-2-fushimi.jpg',t:'Fushimi Inari — senbon torii',by:'Luka Peternel',lic:'CC BY-SA 4.0',u:'https://commons.wikimedia.org/wiki/File:Fushimi-Inari-Shrine-Senbon-Torii-2018-Luka-Peternel.jpg'},
+  {f:'img/day02-3-sannenzaka.jpg',t:'Sannen-zaka (Higashiyama)',by:'Andrea Schaffer',lic:'CC BY 2.0',u:'https://commons.wikimedia.org/wiki/File:Sannenzaka_street,_Kyoto_(3811257874).jpg'},
+  {f:'img/day02-4-nanzenji.jpg',t:'Akwedukt Nanzen-ji (Suirōkaku)',by:'Tx-re',lic:'CC BY-SA 3.0',u:'https://commons.wikimedia.org/wiki/File:Nanzenji_Suirokaku_Tx-re.jpg'}
+ ],
+ 3:[
+  {f:'img/day03-1-osaka-castle.jpg',t:'Zamek w Osace',by:'Martin Falbisoner',lic:'CC BY-SA 4.0',u:'https://commons.wikimedia.org/wiki/File:Osaka_Castle_Outer_Moat_and_Osaka_Business_Park,_November_2016.jpg'},
+  {f:'img/day03-2-dotonbori.jpg',t:'Dōtonbori nocą',by:'Martin Falbisoner',lic:'CC BY-SA 4.0',u:'https://commons.wikimedia.org/wiki/File:Dotonbori,_Osaka,_at_night,_November_2016.jpg'},
+  {f:'img/day03-3-tsutenkaku.jpg',t:'Tsūtenkaku (Shinsekai)',by:'Guilhem Vellut',lic:'CC BY 2.0',u:'https://commons.wikimedia.org/wiki/File:Tsutenkaku_Tower_@_Shinsekai_@_Osaka_(13382524693).jpg'},
+  {f:'img/day03-4-glico.jpg',t:'Znak Glico, most Ebisubashi',by:'Soramimi (そらみみ)',lic:'CC BY-SA 4.0',u:'https://commons.wikimedia.org/wiki/File:Glico_Man_Neon_Sign_and_Ebisubashi_Bridge_at_night.jpg'}
+ ],
+ 4:[
+  {f:'img/day04-1-bamboo.jpg',t:'Las bambusowy, Arashiyama',by:'Basile Morin',lic:'CC BY-SA 4.0',u:'https://commons.wikimedia.org/wiki/File:Bamboo_Forest,_Arashiyama,_Kyoto,_Japan.jpg'},
+  {f:'img/day04-2-kinkakuji.jpg',t:'Kinkaku-ji (Złoty Pawilon)',by:'Basile Morin',lic:'CC BY-SA 4.0',u:'https://commons.wikimedia.org/wiki/File:Water_reflection_of_Kinkaku-ji_Temple_a_sunny_day,_Kyoto,_Japan.jpg'},
+  {f:'img/day04-3-tenryuji.jpg',t:'Ogród Tenryū-ji',by:'Marco Almbauer',lic:'CC BY-SA 4.0',u:'https://commons.wikimedia.org/wiki/File:Tenry%C5%AB-ji_Garten.jpg'},
+  {f:'img/day04-4-togetsukyo.jpg',t:'Most Togetsukyō',by:'DimiTalen',lic:'CC0',u:'https://commons.wikimedia.org/wiki/File:View_of_the_Katsura_River_and_the_Arashiyama_mountains_from_Togetsukyo_Bridge,_Kyoto,_2016.jpg'}
+ ],
+ 5:[
+  {f:'img/day05-1-byodoin.jpg',t:'Byōdō-in — Pawilon Feniksa',by:'Martin Falbisoner',lic:'CC BY-SA 4.0',u:'https://commons.wikimedia.org/wiki/File:Phoenix_Hall,_Byodo-in,_November_2016_-01.jpg'},
+  {f:'img/day05-2-todaiji.jpg',t:'Tōdai-ji (Daibutsuden)',by:'Ajay Suresh',lic:'CC BY 2.0',u:'https://commons.wikimedia.org/wiki/File:Daibutsuden_at_the_Todaiji_Temple_-_Nara_(41441116434).jpg'},
+  {f:'img/day05-3-nara-deer.jpg',t:'Jelenie w parku Nara',by:'Jakub Hałun',lic:'CC BY 4.0',u:'https://commons.wikimedia.org/wiki/File:Sika_Deer_in_Nara,_Japan,_20240819_1539_4763.jpg'},
+  {f:'img/day05-4-kasuga.jpg',t:'Kasuga Taisha — kamienne latarnie',by:'Cun Cun',lic:'CC BY-SA 4.0',u:'https://commons.wikimedia.org/wiki/File:Kasuga_Taisha_stone_lanterns.jpg'}
+ ]
+};
+function openPhoto(dnum,ix){const im=(DAY_IMG[dnum]||[])[ix];if(!im)return;
+  let ov=document.getElementById('imgLightbox');
+  if(!ov){ov=document.createElement('div');ov.id='imgLightbox';ov.className='lightbox';document.body.appendChild(ov);ov.addEventListener('click',e=>{if(e.target===ov)closeLightbox()});}
+  ov.innerHTML=`<div class="lb-inner"><img src="${im.f}" alt=""><div class="lb-cap">${esc(im.t)} · fot. ${esc(im.by)} — <a href="${im.u}" target="_blank" rel="noopener">${esc(im.lic)}</a> · Wikimedia Commons</div><div class="lb-actions"><button class="lb-btn" onclick="closeLightbox()">Zamknij</button></div></div>`;
+  ov.style.display='flex';
+}
 let h1='',nav='<div class="day-nav">',dayNum=0;
 D.parts.forEach(part=>{
   const c=pc(part.title);
@@ -1252,14 +1302,19 @@ D.parts.forEach(part=>{
     const anchor=isHome?'dhome':'d'+(dnum||'0');
     nav+=`<a class="dn-${c}" href="#${anchor}">${isHome?'↩':(dnum||'0')}</a>`;
     const has=d.sc.length>0,tbd=has?'':'tbd',dtitle=d.ts||d.lb;
-    h1+=`<div class="dc p-${c}" id="${anchor}"><div class="dh"><div class="dnum"><b>${bigNum}</b><i>${subK}</i></div><div class="dsep"></div><div class="dt"><div class="dn">${esc(dtitle)}</div><div class="dd">${esc(d.ds)}</div></div></div><div class="db ${tbd}"><div class="ds">${esc(d.sm)}</div>`;
+    const dimgs=DAY_IMG[+dnum]||null;
+    const collage=dimgs?`<div class="day-collage">${dimgs.map((im,ix)=>`<img src="${im.f}" alt="${esc(im.t)}" title="${esc(im.t)}" loading="lazy" onclick="openPhoto(${+dnum},${ix})">`).join('')}</div>`:'';
+    h1+=`<div class="dc p-${c}" id="${anchor}">${collage}<div class="dh"><div class="dnum"><b>${bigNum}</b><i>${subK}</i></div><div class="dsep"></div><div class="dt"><div class="dn">${esc(dtitle)}</div><div class="dd">${esc(d.ds)}</div></div></div><div class="db ${tbd}"><div class="ds">${esc(d.sm)}</div>`;
     if(has){h1+='<div class="sch">';d.sc.forEach(s=>{const emq=s.mq||(isFood(s.ti)?foodMq(s.ti,dnum):'');const ti=emq?`<a class="mlink" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(emq)}" target="_blank" rel="noopener">${esc(s.ti)}</a>`:esc(s.ti);const stips=tipMap[dnum+'_'+s.tm]||[];let th='';stips.forEach(tip=>{th+=`<details class="tip-d"><summary class="tip-s">${esc(tip.icon)} ${esc(tip.ti)}</summary><div class="tip-b">${esc(tip.dx)}</div></details>`});h1+=`<div class="sr"><div class="st">${esc(s.tm)}</div><div class="sdot"></div><div class="sc"><strong>${ti}</strong>${s.nt?'<br><span class="n">'+fmtNote(s.nt)+'</span>':''}${th}</div></div>`});h1+='</div>'}
     const isFlight=/^lot/i.test(d.ht);
     const htLink=isFlight?esc(d.ht):`<a class="mlink" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(d.ht)}" target="_blank" rel="noopener">${esc(d.ht)}</a>`;
     h1+=`<div class="dht">${isFlight?'✈️':'🏨'} ${htLink}</div></div></div>`;
   });
 });
-document.getElementById('p1').innerHTML=routeMapSVG()+nav+'</div>'+h1;
+let imgCredits='';
+const allImgs=Object.values(DAY_IMG).flat();
+if(allImgs.length){imgCredits='<details class="img-credits"><summary>📷 Źródła zdjęć — Wikimedia Commons</summary><div class="img-credits-b">'+allImgs.map(im=>`${esc(im.t)} — fot. ${esc(im.by)}, <a href="${im.u}" target="_blank" rel="noopener">${esc(im.lic)}</a>`).join('<br>')+'</div></details>';}
+document.getElementById('p1').innerHTML=routeMapSVG()+nav+'</div>'+h1+imgCredits;
 
 // Render stats tab
 const DAYS=[

@@ -1,5 +1,5 @@
 /* Service worker — tryb offline dla planu podróży Japonia 2026 */
-const CACHE = 'japonia2026-v5';
+const CACHE = 'japonia2026-v7';
 const CORE = [
   './',
   './index.html',
@@ -7,7 +7,27 @@ const CORE = [
   './icon.svg',
   './icon-192.png',
   './icon-512.png',
-  './apple-touch-icon.png'
+  './apple-touch-icon.png',
+  './img/day01-1-yasaka-pagoda.jpg',
+  './img/day01-2-hanamikoji.jpg',
+  './img/day01-3-pontocho.jpg',
+  './img/day01-4-yasaka-shrine.jpg',
+  './img/day02-1-kiyomizu.jpg',
+  './img/day02-2-fushimi.jpg',
+  './img/day02-3-sannenzaka.jpg',
+  './img/day02-4-nanzenji.jpg',
+  './img/day03-1-osaka-castle.jpg',
+  './img/day03-2-dotonbori.jpg',
+  './img/day03-3-tsutenkaku.jpg',
+  './img/day03-4-glico.jpg',
+  './img/day04-1-bamboo.jpg',
+  './img/day04-2-kinkakuji.jpg',
+  './img/day04-3-tenryuji.jpg',
+  './img/day04-4-togetsukyo.jpg',
+  './img/day05-1-byodoin.jpg',
+  './img/day05-2-todaiji.jpg',
+  './img/day05-3-nara-deer.jpg',
+  './img/day05-4-kasuga.jpg'
 ];
 
 self.addEventListener('install', e => {
