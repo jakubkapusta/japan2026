@@ -1,5 +1,5 @@
 /* Service worker — tryb offline dla planu podróży Japonia 2026 */
-const CACHE = 'japonia2026-v7';
+const CACHE = 'japonia2026-v8';
 const CORE = [
   './',
   './index.html',
@@ -9,7 +9,7 @@ const CORE = [
   './icon-512.png',
   './apple-touch-icon.png',
   './img/day01-1-yasaka-pagoda.jpg',
-  './img/day01-2-hanamikoji.jpg',
+  './img/day01-2-shirakawa.jpg',
   './img/day01-3-pontocho.jpg',
   './img/day01-4-yasaka-shrine.jpg',
   './img/day02-1-kiyomizu.jpg',
@@ -19,7 +19,7 @@ const CORE = [
   './img/day03-1-osaka-castle.jpg',
   './img/day03-2-dotonbori.jpg',
   './img/day03-3-tsutenkaku.jpg',
-  './img/day03-4-glico.jpg',
+  './img/day03-4-shinsaibashi.jpg',
   './img/day04-1-bamboo.jpg',
   './img/day04-2-kinkakuji.jpg',
   './img/day04-3-tenryuji.jpg',
