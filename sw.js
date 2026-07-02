@@ -1,5 +1,5 @@
 /* Service worker — tryb offline dla planu podróży Japonia 2026 */
-const CACHE = 'japonia2026-v8';
+const CACHE = 'japonia2026-v9';
 const CORE = [
   './',
   './index.html',
@@ -27,7 +27,39 @@ const CORE = [
   './img/day05-1-byodoin.jpg',
   './img/day05-2-todaiji.jpg',
   './img/day05-3-nara-deer.jpg',
-  './img/day05-4-kasuga.jpg'
+  './img/day05-4-kasuga.jpg',
+  './img/day06-1-kenrokuen.jpg',
+  './img/day06-2-shirakawago.jpg',
+  './img/day06-3-takayama.jpg',
+  './img/day06-4-omicho.jpg',
+  './img/day07-1-miyagawa.jpg',
+  './img/day07-2-jinya.jpg',
+  './img/day07-3-setogawa.jpg',
+  './img/day07-4-furukawa.jpg',
+  './img/day08-1-taisho.jpg',
+  './img/day08-2-kappa.jpg',
+  './img/day08-3-myojin.jpg',
+  './img/day08-4-azusa.jpg',
+  './img/day09-1-matsumoto.jpg',
+  './img/day09-2-nawate.jpg',
+  './img/day09-3-wasabi.jpg',
+  './img/day09-4-utsukushigahara.jpg',
+  './img/day10-1-sugi.jpg',
+  './img/day10-2-zuishinmon.jpg',
+  './img/day10-3-chusha.jpg',
+  './img/day10-4-kagamiike.jpg',
+  './img/day11-1-monkey.jpg',
+  './img/day11-2-shigakogen.jpg',
+  './img/day11-3-yokoteyama.jpg',
+  './img/day11-4-obuse.jpg',
+  './img/day12-1-zenkoji.jpg',
+  './img/day12-2-nakamise.jpg',
+  './img/day12-3-matsushiro.jpg',
+  './img/day12-4-sanmon.jpg',
+  './img/day13-1-shinkansen.jpg',
+  './img/day13-2-sugamo.jpg',
+  './img/day13-3-rikugien.jpg',
+  './img/day13-4-ikebukuro.jpg'
 ];
 
 self.addEventListener('install', e => {
