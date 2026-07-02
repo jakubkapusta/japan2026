@@ -1,5 +1,5 @@
 /* Service worker — tryb offline dla planu podróży Japonia 2026 */
-const CACHE = 'japonia2026-v13';
+const CACHE = 'japonia2026-v14';
 const CORE = [
   './',
   './index.html',
@@ -57,7 +57,7 @@ const CORE = [
   './img/day12-3-matsushiro.jpg',
   './img/day12-4-sanmon.jpg',
   './img/day13-1-shinkansen.jpg',
-  './img/day13-2-sugamo.jpg',
+  './img/day13-2-ekiben.jpg',
   './img/day13-3-rikugien.jpg',
   './img/day13-4-ikebukuro.jpg',
   './img/day14-1-sensoji.jpg',
