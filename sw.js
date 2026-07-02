@@ -1,5 +1,5 @@
 /* Service worker — tryb offline dla planu podróży Japonia 2026 */
-const CACHE = 'japonia2026-v9';
+const CACHE = 'japonia2026-v10';
 const CORE = [
   './',
   './index.html',
@@ -35,7 +35,7 @@ const CORE = [
   './img/day07-1-miyagawa.jpg',
   './img/day07-2-jinya.jpg',
   './img/day07-3-setogawa.jpg',
-  './img/day07-4-furukawa.jpg',
+  './img/day07-4-hidabeef.jpg',
   './img/day08-1-taisho.jpg',
   './img/day08-2-kappa.jpg',
   './img/day08-3-myojin.jpg',
@@ -50,7 +50,7 @@ const CORE = [
   './img/day10-4-kagamiike.jpg',
   './img/day11-1-monkey.jpg',
   './img/day11-2-shigakogen.jpg',
-  './img/day11-3-yokoteyama.jpg',
+  './img/day11-3-shibutoge.jpg',
   './img/day11-4-obuse.jpg',
   './img/day12-1-zenkoji.jpg',
   './img/day12-2-nakamise.jpg',
