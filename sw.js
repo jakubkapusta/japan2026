@@ -1,5 +1,5 @@
 /* Service worker — tryb offline dla planu podróży Japonia 2026 */
-const CACHE = 'japonia2026-v10';
+const CACHE = 'japonia2026-v11';
 const CORE = [
   './',
   './index.html',
@@ -59,7 +59,31 @@ const CORE = [
   './img/day13-1-shinkansen.jpg',
   './img/day13-2-sugamo.jpg',
   './img/day13-3-rikugien.jpg',
-  './img/day13-4-ikebukuro.jpg'
+  './img/day13-4-ikebukuro.jpg',
+  './img/day14-1-sensoji.jpg',
+  './img/day14-2-nakamise.jpg',
+  './img/day14-3-skytree.jpg',
+  './img/day14-4-teamlab.jpg',
+  './img/day15-1-akihabara.jpg',
+  './img/day15-2-gundam.jpg',
+  './img/day15-3-daikoku.jpg',
+  './img/day15-4-rainbowbridge.jpg',
+  './img/day16-1-meiji.jpg',
+  './img/day16-2-shibuya-crossing.jpg',
+  './img/day16-3-shibuyasky.jpg',
+  './img/day16-4-sakebarrels.jpg',
+  './img/day17-1-tomioka.jpg',
+  './img/day17-2-yanaka.jpg',
+  './img/day17-3-nezu.jpg',
+  './img/day17-4-ameyoko.jpg',
+  './img/day18-1-godzilla.jpg',
+  './img/day18-2-kabukicho.jpg',
+  './img/day18-3-omoide.jpg',
+  './img/day18-4-fujitv.jpg',
+  './img/day19-1-daibutsu.jpg',
+  './img/day19-2-tsurugaoka.jpg',
+  './img/day19-3-enoden.jpg',
+  './img/day19-4-enoshima.jpg'
 ];
 
 self.addEventListener('install', e => {
