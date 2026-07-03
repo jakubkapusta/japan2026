@@ -1019,9 +1019,10 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px
 .dn-3{background:#e7edf4;color:#2c456b;border-color:#d3dfea}
 .dc{scroll-margin-top:54px}
 /* Per-day kebab menu (kopiuj / podmień) */
-.dmenu-btn{flex:none;background:none;border:none;font-size:1.3em;line-height:1;color:var(--muted);cursor:pointer;padding:4px 10px;border-radius:8px;font-family:var(--font)}
+.dmenu-btn{position:relative;flex:none;background:none;border:none;font-size:1.3em;line-height:1;color:var(--muted);cursor:pointer;padding:4px 10px;border-radius:8px;font-family:var(--font)}
 .dmenu-btn:hover{background:#f1ebe0;color:var(--text)}
 .dmenu-btn.dmenu-mod{color:var(--teal)}
+.dmenu-btn.dmenu-mod::after{content:'';position:absolute;top:2px;right:4px;width:7px;height:7px;border-radius:50%;background:var(--teal);border:1.5px solid var(--card)}
 .dmenu-pop{display:none;position:fixed;z-index:50;background:var(--card);border:1px solid var(--border);border-radius:10px;box-shadow:var(--shadow);overflow:hidden;min-width:150px}
 .dmenu-pop button{display:block;width:100%;text-align:left;background:none;border:none;padding:11px 15px;font-size:.86em;font-family:var(--font);color:var(--text);cursor:pointer;white-space:nowrap}
 .dmenu-pop button:hover{background:#f5f0e6}
@@ -1412,7 +1413,8 @@ function renderPlanTab(){
       const has=od.sc.length>0,tbd=has?'':'tbd',dtitle=od.ts||od.lb;
       const dimgs=DAY_IMG[+dnum]||null;
       const collage=dimgs?`<div class="day-collage${dimgs.length===1?' single':''}">${dimgs.map((im,ix)=>`<img src="${im.f}" alt="${esc(im.t)}" title="${esc(im.t)}" loading="lazy" onclick="openPhoto(${+dnum},${ix})">`).join('')}</div>`:'';
-      const dmenu=`<button class="dmenu-btn noprint${ov?' dmenu-mod':''}" title="Menu dnia" aria-label="Menu dnia" onclick="toggleDayMenu(event,'${key}')">⋮</button>`;
+      const dmenuTitle=ov?'Menu dnia (dzień podmieniony)':'Menu dnia';
+      const dmenu=`<button class="dmenu-btn noprint${ov?' dmenu-mod':''}" title="${dmenuTitle}" aria-label="${dmenuTitle}" onclick="toggleDayMenu(event,'${key}')">⋮</button>`;
       h1+=`<div class="dc p-${c}" id="${anchor}">${collage}<div class="dh"><div class="dnum"><b>${bigNum}</b><i>${subK}</i></div><div class="dsep"></div><div class="dt"><div class="dn">${esc(dtitle)}</div><div class="dd">${esc(od.ds)}</div></div>${dmenu}</div><div class="db ${tbd}"><div class="ds">${esc(od.sm)}</div>`;
       if(has){h1+='<div class="sch">';od.sc.forEach(s=>{const emq=s.mq||(isFood(s.ti)?foodMq(s.ti,dnum):'');const ti=emq?`<a class="mlink" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(emq)}" target="_blank" rel="noopener">${esc(s.ti)}</a>`:esc(s.ti);const stips=tipMap[dnum+'_'+s.tm]||[];let th='';stips.forEach(tip=>{th+=`<details class="tip-d"><summary class="tip-s">${esc(tip.icon)} ${esc(tip.ti)}</summary><div class="tip-b">${esc(tip.dx)}</div></details>`});h1+=`<div class="sr"><div class="st">${esc(s.tm)}</div><div class="sdot"></div><div class="sc"><strong>${ti}</strong>${s.nt?'<br><span class="n">'+fmtNote(s.nt)+'</span>':''}${th}</div></div>`});h1+='</div>'}
       const isFlight=/^lot/i.test(od.ht);
