@@ -55,9 +55,9 @@ Tablica `DAYS` w JS (~linia 1150):
 - `d` — numer dnia
 - `n` — krótka nazwa (wyświetlana w tabeli)
 - `walk` — km pieszo (szacunek)
-- `metro` — km metro/bus
+- `metro` — **minuty** metro/bus (uwaga: NIE km — tabela renderuje to jako „X min")
 - `car` — km autem
-- `train` — km pociągiem
+- `train` — **minuty** pociągiem (uwaga: NIE km — tabela renderuje to jako „X min")
 - `part` — 1/2/3 (część podróży, do kolorowania)
 
 ## Tablica budżetu (zakładka Budżet)
