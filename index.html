@@ -1010,13 +1010,24 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px
 .rx-section:first-child{margin-top:4px}
 .rx-item{padding:3px 0 3px 8px;border-left:2px solid var(--border);margin:3px 0 3px 4px;line-height:1.45}
 /* Day navigation (Plan tab) */
-.day-nav{position:sticky;top:0;z-index:10;display:flex;gap:5px;overflow-x:auto;padding:10px 2px;margin:0 0 10px;background:var(--bg);-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+.day-nav{position:sticky;top:0;z-index:10;display:flex;gap:5px;overflow-x:auto;padding:10px 2px;margin:0 0 10px;background:var(--bg);-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none}
+.day-nav::-webkit-scrollbar{display:none;height:0;width:0}
 .day-nav a{flex:0 0 auto;font-size:.72em;font-weight:700;text-decoration:none;padding:4px 9px;border-radius:8px;border:1px solid transparent;transition:.15s}
 .day-nav a:hover{transform:translateY(-1px);filter:brightness(.97)}
 .dn-1{background:#f7e7e3;color:#8f2e20;border-color:#ecd2cb}
 .dn-2{background:#e2f0eb;color:#115c4a;border-color:#cce3da}
 .dn-3{background:#e7edf4;color:#2c456b;border-color:#d3dfea}
 .dc{scroll-margin-top:54px}
+/* Per-day kebab menu (kopiuj / podmień) */
+.dmenu-btn{flex:none;background:none;border:none;font-size:1.3em;line-height:1;color:var(--muted);cursor:pointer;padding:4px 10px;border-radius:8px;font-family:var(--font)}
+.dmenu-btn:hover{background:#f1ebe0;color:var(--text)}
+.dmenu-btn.dmenu-mod{color:var(--teal)}
+.dmenu-pop{display:none;position:fixed;z-index:50;background:var(--card);border:1px solid var(--border);border-radius:10px;box-shadow:var(--shadow);overflow:hidden;min-width:150px}
+.dmenu-pop button{display:block;width:100%;text-align:left;background:none;border:none;padding:11px 15px;font-size:.86em;font-family:var(--font);color:var(--text);cursor:pointer;white-space:nowrap}
+.dmenu-pop button:hover{background:#f5f0e6}
+.day-edit-ta{width:min(640px,90vw);min-height:280px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.82em;line-height:1.5;padding:12px;border:1px solid var(--border);border-radius:10px;box-sizing:border-box;resize:vertical;background:#fffdf8;color:var(--text)}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(10px);background:#2a2723;color:#fff;padding:10px 18px;border-radius:8px;font-size:.85em;opacity:0;pointer-events:none;transition:.2s;z-index:200}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
 /* Opening-hours inline badge */
 .hrs{color:var(--teal);font-weight:600}
 /* Important info tab */
@@ -1059,7 +1070,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px
 /* Print / PDF */
 @media print{
   body{padding:0;background:#fff;color:#000;font-size:11pt}
-  .tabs,.day-nav,.noprint,.rc-actions,.link-btn,.link-rm,.chk-wrap,.print-btn,.ibtn,.day-collage,.img-credits{display:none!important}
+  .tabs,.day-nav,.noprint,.rc-actions,.link-btn,.link-rm,.chk-wrap,.print-btn,.ibtn,.day-collage,.img-credits,.dmenu-btn,.dmenu-pop,.toast{display:none!important}
   .pnl{display:block!important;max-width:none;margin:0}
   .pnl#p1,.pnl#p2,.pnl#p3{page-break-before:always}
   .dc{box-shadow:none;border:1px solid #ccc;background:transparent}
@@ -1355,35 +1366,149 @@ function openPhoto(dnum,ix){const im=(DAY_IMG[dnum]||[])[ix];if(!im)return;
   ov.innerHTML=`<div class="lb-inner"><img src="${im.f}" alt=""><div class="lb-cap">${esc(im.t)} · fot. ${esc(im.by)} — <a href="${im.u}" target="_blank" rel="noopener">${esc(im.lic)}</a> · Wikimedia Commons</div><div class="lb-actions"><button class="lb-btn" onclick="closeLightbox()">Zamknij</button></div></div>`;
   ov.style.display='flex';
 }
-let h1='',nav='<div class="day-nav">',dayNum=0;
-D.parts.forEach(part=>{
-  const c=pc(part.title);
-  const pm=part.title.match(/^\s*(Część\s*\d+)\s*[:：]\s*(.+)$/i);
-  const pk=(pm?pm[1]:part.title).toUpperCase();
-  const pn=pm?pm[2]:part.title;
-  const kanji={'1':'壱','2':'弐','3':'参'}[c]||'';
-  const region={'1':'関西','2':'信州','3':'東京'}[c]||'';
-  h1+=`<div class="pdiv c${c}"><div class="mon">${kanji}</div><div class="pt"><div class="pk">${esc(pk)}</div><div class="pn">${esc(pn)}</div></div><div class="pj">${region}</div></div>`;
-  part.days.forEach(d=>{
-    const isHome=/powr[oó]t/i.test(d.lb);
-    const mnum=d.lb.match(/\d+/),dnum=mnum?mnum[0]:'';
-    const bigNum=isHome?'↩':(dnum||'0'),subK=isHome?'帰国':(dnum==='0'?'出発':dnum+'日目');
-    const anchor=isHome?'dhome':'d'+(dnum||'0');
-    nav+=`<a class="dn-${c}" href="#${anchor}">${isHome?'↩':(dnum||'0')}</a>`;
-    const has=d.sc.length>0,tbd=has?'':'tbd',dtitle=d.ts||d.lb;
-    const dimgs=DAY_IMG[+dnum]||null;
-    const collage=dimgs?`<div class="day-collage${dimgs.length===1?' single':''}">${dimgs.map((im,ix)=>`<img src="${im.f}" alt="${esc(im.t)}" title="${esc(im.t)}" loading="lazy" onclick="openPhoto(${+dnum},${ix})">`).join('')}</div>`:'';
-    h1+=`<div class="dc p-${c}" id="${anchor}">${collage}<div class="dh"><div class="dnum"><b>${bigNum}</b><i>${subK}</i></div><div class="dsep"></div><div class="dt"><div class="dn">${esc(dtitle)}</div><div class="dd">${esc(d.ds)}</div></div></div><div class="db ${tbd}"><div class="ds">${esc(d.sm)}</div>`;
-    if(has){h1+='<div class="sch">';d.sc.forEach(s=>{const emq=s.mq||(isFood(s.ti)?foodMq(s.ti,dnum):'');const ti=emq?`<a class="mlink" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(emq)}" target="_blank" rel="noopener">${esc(s.ti)}</a>`:esc(s.ti);const stips=tipMap[dnum+'_'+s.tm]||[];let th='';stips.forEach(tip=>{th+=`<details class="tip-d"><summary class="tip-s">${esc(tip.icon)} ${esc(tip.ti)}</summary><div class="tip-b">${esc(tip.dx)}</div></details>`});h1+=`<div class="sr"><div class="st">${esc(s.tm)}</div><div class="sdot"></div><div class="sc"><strong>${ti}</strong>${s.nt?'<br><span class="n">'+fmtNote(s.nt)+'</span>':''}${th}</div></div>`});h1+='</div>'}
-    const isFlight=/^lot/i.test(d.ht);
-    const htLink=isFlight?esc(d.ht):`<a class="mlink" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(d.ht)}" target="_blank" rel="noopener">${esc(d.ht)}</a>`;
-    h1+=`<div class="dht">${isFlight?'✈️':'🏨'} ${htLink}</div></div></div>`;
+// Per-day overrides ("podmień") — stored in localStorage, format identical to PLAN_DATA day blocks
+function parseDayBlock(text){
+  let cd=null;
+  text.split('\n').forEach(raw=>{
+    const t=raw.trim();
+    if(!t||t.startsWith('#'))return;
+    if(t.startsWith('== ')){const p=t.slice(3).split(' | ');cd={lb:p[0]||'',ds:p[1]||'',ts:p[2]||'',ht:p[3]||'',sm:'',sc:[]};return}
+    if(t.startsWith('- ')&&cd){const p=t.slice(2).split(' | ');cd.sc.push({tm:p[0]||'',ti:p[1]||'',nt:p[2]||'',mq:(p[3]||'').trim()});return}
+    if(cd)cd.sm+=(cd.sm?' ':'')+t;
   });
-});
+  return cd;
+}
+function dayText(cd){
+  let t=`== ${cd.lb} | ${cd.ds} | ${cd.ts} | ${cd.ht}\n`;
+  if(cd.sm)t+=cd.sm+'\n';
+  cd.sc.forEach(s=>{let line='- '+s.tm+' | '+s.ti+' | '+s.nt;if(s.mq)line+=' | '+s.mq;t+=line+'\n'});
+  return t.trim();
+}
+function dayOverrides(){try{return JSON.parse(localStorage.getItem('jp26_day_overrides')||'{}')}catch(e){return{}}}
+function saveDayOverrides(o){localStorage.setItem('jp26_day_overrides',JSON.stringify(o))}
+const DAY_BY_KEY={};
 let imgCredits='';
-const allImgs=Object.values(DAY_IMG).flat();
-if(allImgs.length){imgCredits='<details class="img-credits"><summary>📷 Źródła zdjęć — Wikimedia Commons</summary><div class="img-credits-b">'+allImgs.map(im=>`${esc(im.t)} — fot. ${esc(im.by)}, <a href="${im.u}" target="_blank" rel="noopener">${esc(im.lic)}</a>`).join('<br>')+'</div></details>';}
-document.getElementById('p1').innerHTML=routeMapSVG()+nav+'</div>'+h1+imgCredits;
+function renderPlanTab(){
+  const overrides=dayOverrides();
+  let h1='',nav='<div class="day-nav">';
+  D.parts.forEach(part=>{
+    const c=pc(part.title);
+    const pm=part.title.match(/^\s*(Część\s*\d+)\s*[:：]\s*(.+)$/i);
+    const pk=(pm?pm[1]:part.title).toUpperCase();
+    const pn=pm?pm[2]:part.title;
+    const kanji={'1':'壱','2':'弐','3':'参'}[c]||'';
+    const region={'1':'関西','2':'信州','3':'東京'}[c]||'';
+    h1+=`<div class="pdiv c${c}"><div class="mon">${kanji}</div><div class="pt"><div class="pk">${esc(pk)}</div><div class="pn">${esc(pn)}</div></div><div class="pj">${region}</div></div>`;
+    part.days.forEach(d=>{
+      const isHome=/powr[oó]t/i.test(d.lb);
+      const mnum=d.lb.match(/\d+/),dnum=mnum?mnum[0]:'';
+      const key=isHome?'home':(dnum||'0');
+      DAY_BY_KEY[key]=d;
+      const ov=overrides[key];
+      const od=(ov&&parseDayBlock(ov))||d;
+      const bigNum=isHome?'↩':(dnum||'0'),subK=isHome?'帰国':(dnum==='0'?'出発':dnum+'日目');
+      const anchor=isHome?'dhome':'d'+(dnum||'0');
+      nav+=`<a class="dn-${c}" href="#${anchor}">${isHome?'↩':(dnum||'0')}</a>`;
+      const has=od.sc.length>0,tbd=has?'':'tbd',dtitle=od.ts||od.lb;
+      const dimgs=DAY_IMG[+dnum]||null;
+      const collage=dimgs?`<div class="day-collage${dimgs.length===1?' single':''}">${dimgs.map((im,ix)=>`<img src="${im.f}" alt="${esc(im.t)}" title="${esc(im.t)}" loading="lazy" onclick="openPhoto(${+dnum},${ix})">`).join('')}</div>`:'';
+      const dmenu=`<button class="dmenu-btn noprint${ov?' dmenu-mod':''}" title="Menu dnia" aria-label="Menu dnia" onclick="toggleDayMenu(event,'${key}')">⋮</button>`;
+      h1+=`<div class="dc p-${c}" id="${anchor}">${collage}<div class="dh"><div class="dnum"><b>${bigNum}</b><i>${subK}</i></div><div class="dsep"></div><div class="dt"><div class="dn">${esc(dtitle)}</div><div class="dd">${esc(od.ds)}</div></div>${dmenu}</div><div class="db ${tbd}"><div class="ds">${esc(od.sm)}</div>`;
+      if(has){h1+='<div class="sch">';od.sc.forEach(s=>{const emq=s.mq||(isFood(s.ti)?foodMq(s.ti,dnum):'');const ti=emq?`<a class="mlink" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(emq)}" target="_blank" rel="noopener">${esc(s.ti)}</a>`:esc(s.ti);const stips=tipMap[dnum+'_'+s.tm]||[];let th='';stips.forEach(tip=>{th+=`<details class="tip-d"><summary class="tip-s">${esc(tip.icon)} ${esc(tip.ti)}</summary><div class="tip-b">${esc(tip.dx)}</div></details>`});h1+=`<div class="sr"><div class="st">${esc(s.tm)}</div><div class="sdot"></div><div class="sc"><strong>${ti}</strong>${s.nt?'<br><span class="n">'+fmtNote(s.nt)+'</span>':''}${th}</div></div>`});h1+='</div>'}
+      const isFlight=/^lot/i.test(od.ht);
+      const htLink=isFlight?esc(od.ht):`<a class="mlink" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(od.ht)}" target="_blank" rel="noopener">${esc(od.ht)}</a>`;
+      h1+=`<div class="dht">${isFlight?'✈️':'🏨'} ${htLink}</div></div></div>`;
+    });
+  });
+  if(!imgCredits){
+    const allImgs=Object.values(DAY_IMG).flat();
+    if(allImgs.length)imgCredits='<details class="img-credits"><summary>📷 Źródła zdjęć — Wikimedia Commons</summary><div class="img-credits-b">'+allImgs.map(im=>`${esc(im.t)} — fot. ${esc(im.by)}, <a href="${im.u}" target="_blank" rel="noopener">${esc(im.lic)}</a>`).join('<br>')+'</div></details>';
+  }
+  document.getElementById('p1').innerHTML=routeMapSVG()+nav+'</div>'+h1+imgCredits;
+}
+renderPlanTab();
+
+// Kebab menu (kopiuj / podmień) per day
+let dayMenuKey=null;
+function ensureDayMenuPop(){
+  let p=document.getElementById('dayMenuPop');
+  if(!p){
+    p=document.createElement('div');p.id='dayMenuPop';p.className='dmenu-pop';
+    p.innerHTML='<button onclick="copyDayPlan(dayMenuKey)">📋 Kopiuj</button><button onclick="openReplaceModal(dayMenuKey)">✏️ Podmień</button>';
+    document.body.appendChild(p);
+  }
+  return p;
+}
+function toggleDayMenu(e,key){
+  e.stopPropagation();
+  const p=ensureDayMenuPop();
+  const alreadyOpen=p.style.display==='block'&&dayMenuKey===key;
+  p.style.display='none';
+  if(alreadyOpen){dayMenuKey=null;return}
+  dayMenuKey=key;
+  const r=e.currentTarget.getBoundingClientRect();
+  p.style.display='block';
+  const pw=p.offsetWidth;
+  p.style.top=(r.bottom+4)+'px';
+  p.style.left=Math.max(6,Math.min(r.right-pw,window.innerWidth-pw-6))+'px';
+}
+document.addEventListener('click',e=>{
+  const p=document.getElementById('dayMenuPop');
+  if(p&&p.style.display==='block'&&!p.contains(e.target)){p.style.display='none';dayMenuKey=null}
+});
+function toast(msg){
+  let t=document.getElementById('toast');
+  if(!t){t=document.createElement('div');t.id='toast';t.className='toast';document.body.appendChild(t)}
+  t.textContent=msg;t.classList.add('on');
+  clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove('on'),1800);
+}
+function currentDayText(key){
+  const overrides=dayOverrides();
+  if(overrides[key]!==undefined)return overrides[key];
+  const orig=DAY_BY_KEY[key];
+  return orig?dayText(orig):'';
+}
+function fallbackCopy(txt){
+  const ta=document.createElement('textarea');
+  ta.value=txt;ta.style.position='fixed';ta.style.opacity='0';
+  document.body.appendChild(ta);ta.select();
+  try{document.execCommand('copy')}catch(e){}
+  document.body.removeChild(ta);
+}
+function copyDayPlan(key){
+  const p=document.getElementById('dayMenuPop');if(p)p.style.display='none';
+  const txt=currentDayText(key);
+  if(!txt)return;
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(txt).then(()=>toast('Skopiowano dzień do schowka')).catch(()=>{fallbackCopy(txt);toast('Skopiowano dzień do schowka')});
+  }else{fallbackCopy(txt);toast('Skopiowano dzień do schowka')}
+}
+function openReplaceModal(key){
+  const p=document.getElementById('dayMenuPop');if(p)p.style.display='none';
+  let ov=document.getElementById('dayEditModal');
+  if(!ov){
+    ov=document.createElement('div');ov.id='dayEditModal';ov.className='lightbox';
+    document.body.appendChild(ov);
+    ov.addEventListener('click',e=>{if(e.target===ov)closeReplaceModal()});
+  }
+  const overrides=dayOverrides();
+  const hasOverride=overrides[key]!==undefined;
+  const current=currentDayText(key);
+  ov.innerHTML=`<div class="lb-inner"><div class="lb-cap" style="max-width:640px">Wklej pełny opis dnia w formacie z PLAN_DATA (nagłówek <code>==</code>, opis, punkty <code>-</code>).</div><textarea id="dayEditTa" class="day-edit-ta" spellcheck="false">${esc(current)}</textarea><div class="lb-actions"><button class="lb-btn" onclick="saveDayOverride('${key}')">💾 Zapisz</button>${hasOverride?`<button class="lb-btn lb-del" onclick="resetDayOverride('${key}')">↩️ Przywróć oryginał</button>`:''}<button class="lb-btn" onclick="closeReplaceModal()">Anuluj</button></div></div>`;
+  ov.style.display='flex';
+}
+function closeReplaceModal(){const ov=document.getElementById('dayEditModal');if(ov)ov.style.display='none'}
+function saveDayOverride(key){
+  const ta=document.getElementById('dayEditTa');
+  const txt=ta.value.trim();
+  if(!txt||!parseDayBlock(txt)){alert('Nie udało się rozpoznać formatu dnia — sprawdź, czy zaczyna się od linii "== ..."');return}
+  const o=dayOverrides();o[key]=txt;saveDayOverrides(o);
+  closeReplaceModal();renderPlanTab();
+}
+function resetDayOverride(key){
+  const o=dayOverrides();delete o[key];saveDayOverrides(o);
+  closeReplaceModal();renderPlanTab();
+}
 
 // Render stats tab
 const DAYS=[
