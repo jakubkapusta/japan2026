@@ -783,6 +783,8 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px
 .day-collage img{flex:1 1 0;min-width:0;height:100%;object-fit:cover;display:block;cursor:zoom-in;transition:filter .15s}
 .day-collage img:hover{filter:brightness(1.06)}
 .day-collage::after{content:'';position:absolute;left:0;right:0;bottom:0;height:34px;background:linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.16));pointer-events:none}
+.day-collage.single{height:230px}
+.day-collage.single::after{height:60px}
 .dh{display:flex;align-items:center;gap:13px;padding:13px 18px;border-bottom:1px solid #f1ebde}
 .dh .dnum{text-align:center;line-height:1;flex:none;min-width:30px}
 .dh .dnum b{font-family:var(--font-serif);font-size:1.7em;font-weight:700;color:var(--pc,var(--text));display:block}
@@ -807,7 +809,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px
 .sc .mlink{color:var(--indigo);text-decoration:none;border-bottom:1px dotted var(--indigo)}
 .sc .mlink:hover{color:var(--red);border-bottom-color:var(--red)}
 .ft{text-align:center;margin-top:36px;font-size:.78em;color:var(--muted);font-family:var(--font-jp);line-height:1.6}
-@media(max-width:520px){body{padding:12px}.hdr{margin:-12px -12px 0}.hdr h1{font-size:1.6em}.tab{flex:1 1 22%;font-size:.72em;padding:9px 3px}.dh{padding:11px 13px}.day-collage{height:82px}.db,.rc{padding:13px 14px}.sr{grid-template-columns:40px 14px 1fr}.sch::before{left:54px}}
+@media(max-width:520px){body{padding:12px}.hdr{margin:-12px -12px 0}.hdr h1{font-size:1.6em}.tab{flex:1 1 22%;font-size:.72em;padding:9px 3px}.dh{padding:11px 13px}.day-collage{height:82px}.day-collage.single{height:170px}.db,.rc{padding:13px 14px}.sr{grid-template-columns:40px 14px 1fr}.sch::before{left:54px}}
 /* Reservation checkboxes & done state */
 .chk-wrap{display:flex;align-items:center;cursor:pointer;margin-right:8px;flex-shrink:0}
 .chk-wrap input{display:none}
@@ -1259,118 +1261,61 @@ function routeMapSVG(){return `<div class="route-map"><div class="rm-title">Tras
 // Zdjęcia dni — kolaż w nagłówku (Wikimedia Commons, licencje w podpisach). {f:plik, t:tytuł, by:autor, lic:licencja, u:link do Commons}
 const DAY_IMG={
  1:[
-  {f:'img/day01-1-yasaka-pagoda.jpg',t:'Pagoda Yasaka (Hōkan-ji), Gion',by:'Basile Morin',lic:'CC BY-SA 4.0',u:'https://commons.wikimedia.org/wiki/File:Yasaka-dori_early_morning_with_street_lanterns_and_the_Tower_of_Yasaka_(Hokan-ji_Temple),_Kyoto,_Japan.jpg'},
-  {f:'img/day01-2-shirakawa.jpg',t:'Kanał Shirakawa, Gion',by:'MichaelMaggs',lic:'CC BY-SA 2.5',u:'https://commons.wikimedia.org/wiki/File:Shirakara_Canal,_Gion,_Kyoto.jpg'},
-  {f:'img/day01-3-pontocho.jpg',t:'Zaułek Pontochō',by:'Sergiy Galyonkin',lic:'CC BY-SA 2.0',u:'https://commons.wikimedia.org/wiki/File:Pontocho_Alley,_Kyoto_-_Flickr_-_Sergiy_Galyonkin.jpg'},
-  {f:'img/day01-4-yasaka-shrine.jpg',t:'Chram Yasaka',by:'Jakub Hałun',lic:'CC BY 4.0',u:'https://commons.wikimedia.org/wiki/File:South_Tower_Gate_of_Yasaka_Shrine_in_Kyoto,_20240820_1706_5167.jpg'}
+  {f:'img/day01-1-yasaka-pagoda.jpg',t:'Pagoda Yasaka (Hōkan-ji), Gion',by:'Basile Morin',lic:'CC BY-SA 4.0',u:'https://commons.wikimedia.org/wiki/File:Yasaka-dori_early_morning_with_street_lanterns_and_the_Tower_of_Yasaka_(Hokan-ji_Temple),_Kyoto,_Japan.jpg'}
  ],
  2:[
-  {f:'img/day02-1-kiyomizu.jpg',t:'Kiyomizu-dera',by:'Martin Falbisoner',lic:'CC BY-SA 4.0',u:'https://commons.wikimedia.org/wiki/File:Kiyomizu-dera,_Kyoto,_November_2016_-01.jpg'},
-  {f:'img/day02-2-fushimi.jpg',t:'Fushimi Inari — senbon torii',by:'Luka Peternel',lic:'CC BY-SA 4.0',u:'https://commons.wikimedia.org/wiki/File:Fushimi-Inari-Shrine-Senbon-Torii-2018-Luka-Peternel.jpg'},
-  {f:'img/day02-3-sannenzaka.jpg',t:'Sannen-zaka (Higashiyama)',by:'Andrea Schaffer',lic:'CC BY 2.0',u:'https://commons.wikimedia.org/wiki/File:Sannenzaka_street,_Kyoto_(3811257874).jpg'},
-  {f:'img/day02-4-nanzenji.jpg',t:'Akwedukt Nanzen-ji (Suirōkaku)',by:'Tx-re',lic:'CC BY-SA 3.0',u:'https://commons.wikimedia.org/wiki/File:Nanzenji_Suirokaku_Tx-re.jpg'}
+  {f:'img/day02-2-fushimi.jpg',t:'Fushimi Inari — senbon torii',by:'Luka Peternel',lic:'CC BY-SA 4.0',u:'https://commons.wikimedia.org/wiki/File:Fushimi-Inari-Shrine-Senbon-Torii-2018-Luka-Peternel.jpg'}
  ],
  3:[
-  {f:'img/day03-1-osaka-castle.jpg',t:'Zamek w Osace',by:'Martin Falbisoner',lic:'CC BY-SA 4.0',u:'https://commons.wikimedia.org/wiki/File:Osaka_Castle_Outer_Moat_and_Osaka_Business_Park,_November_2016.jpg'},
-  {f:'img/day03-2-dotonbori.jpg',t:'Dōtonbori nocą',by:'Martin Falbisoner',lic:'CC BY-SA 4.0',u:'https://commons.wikimedia.org/wiki/File:Dotonbori,_Osaka,_at_night,_November_2016.jpg'},
-  {f:'img/day03-3-tsutenkaku.jpg',t:'Tsūtenkaku (Shinsekai)',by:'Guilhem Vellut',lic:'CC BY 2.0',u:'https://commons.wikimedia.org/wiki/File:Tsutenkaku_Tower_@_Shinsekai_@_Osaka_(13382524693).jpg'},
-  {f:'img/day03-4-shinsaibashi.jpg',t:'Pasaż handlowy Shinsaibashi',by:'Fabio Achilli',lic:'CC BY 2.0',u:'https://commons.wikimedia.org/wiki/File:2018_Shinsaibashi_Shopping_Arcade,_Shinsaibashi_(43477561214).jpg'}
+  {f:'img/day03-2-dotonbori.jpg',t:'Dōtonbori nocą',by:'Martin Falbisoner',lic:'CC BY-SA 4.0',u:'https://commons.wikimedia.org/wiki/File:Dotonbori,_Osaka,_at_night,_November_2016.jpg'}
  ],
  4:[
-  {f:'img/day04-1-bamboo.jpg',t:'Las bambusowy, Arashiyama',by:'Basile Morin',lic:'CC BY-SA 4.0',u:'https://commons.wikimedia.org/wiki/File:Bamboo_Forest,_Arashiyama,_Kyoto,_Japan.jpg'},
-  {f:'img/day04-2-kinkakuji.jpg',t:'Kinkaku-ji (Złoty Pawilon)',by:'Basile Morin',lic:'CC BY-SA 4.0',u:'https://commons.wikimedia.org/wiki/File:Water_reflection_of_Kinkaku-ji_Temple_a_sunny_day,_Kyoto,_Japan.jpg'},
-  {f:'img/day04-3-tenryuji.jpg',t:'Ogród Tenryū-ji',by:'Marco Almbauer',lic:'CC BY-SA 4.0',u:'https://commons.wikimedia.org/wiki/File:Tenry%C5%AB-ji_Garten.jpg'},
-  {f:'img/day04-4-togetsukyo.jpg',t:'Most Togetsukyō',by:'DimiTalen',lic:'CC0',u:'https://commons.wikimedia.org/wiki/File:View_of_the_Katsura_River_and_the_Arashiyama_mountains_from_Togetsukyo_Bridge,_Kyoto,_2016.jpg'}
+  {f:'img/day04-1-bamboo.jpg',t:'Las bambusowy, Arashiyama',by:'Basile Morin',lic:'CC BY-SA 4.0',u:'https://commons.wikimedia.org/wiki/File:Bamboo_Forest,_Arashiyama,_Kyoto,_Japan.jpg'}
  ],
  5:[
-  {f:'img/day05-1-byodoin.jpg',t:'Byōdō-in — Pawilon Feniksa',by:'Martin Falbisoner',lic:'CC BY-SA 4.0',u:'https://commons.wikimedia.org/wiki/File:Phoenix_Hall,_Byodo-in,_November_2016_-01.jpg'},
-  {f:'img/day05-2-todaiji.jpg',t:'Tōdai-ji (Daibutsuden)',by:'Ajay Suresh',lic:'CC BY 2.0',u:'https://commons.wikimedia.org/wiki/File:Daibutsuden_at_the_Todaiji_Temple_-_Nara_(41441116434).jpg'},
-  {f:'img/day05-3-nara-deer.jpg',t:'Jelenie w parku Nara',by:'Jakub Hałun',lic:'CC BY 4.0',u:'https://commons.wikimedia.org/wiki/File:Sika_Deer_in_Nara,_Japan,_20240819_1539_4763.jpg'},
-  {f:'img/day05-4-kasuga.jpg',t:'Kasuga Taisha — kamienne latarnie',by:'Cun Cun',lic:'CC BY-SA 4.0',u:'https://commons.wikimedia.org/wiki/File:Kasuga_Taisha_stone_lanterns.jpg'}
+  {f:'img/day05-1-byodoin.jpg',t:'Byōdō-in — Pawilon Feniksa',by:'Martin Falbisoner',lic:'CC BY-SA 4.0',u:'https://commons.wikimedia.org/wiki/File:Phoenix_Hall,_Byodo-in,_November_2016_-01.jpg'}
  ],
  6:[
-  {f:'img/day06-1-kenrokuen.jpg',t:'Ogród Kenroku-en (latarnia Kotoji), Kanazawa',by:'KimonBerlin',lic:'CC BY-SA 2.0',u:'https://commons.wikimedia.org/wiki/File:Kotojitoro_(lantern)_in_Kenrokuen_garden,_Kanazawa,_Japan_(2621644979).jpg'},
-  {f:'img/day06-2-shirakawago.jpg',t:'Shirakawa-gō (domy gasshō)',by:'Chainwit.',lic:'CC BY 4.0',u:'https://commons.wikimedia.org/wiki/File:Historic_Village_of_Shirakawa-go_(2016)_-_img_11.jpg'},
-  {f:'img/day06-3-takayama.jpg',t:'Takayama — stare miasto (Kamisannomachi)',by:'lienyuan lee',lic:'CC BY 3.0',u:'https://commons.wikimedia.org/wiki/File:Kamisannomachi,_Takayama_高山上三之町_-_panoramio.jpg'},
-  {f:'img/day06-4-omicho.jpg',t:'Targ Ōmichō, Kanazawa',by:'DimiTalen',lic:'CC0',u:'https://commons.wikimedia.org/wiki/File:Omicho_covered_market_western_entrance,_Kanazawa,_2016.jpg'}
+  {f:'img/day06-2-shirakawago.jpg',t:'Shirakawa-gō (domy gasshō)',by:'Chainwit.',lic:'CC BY 4.0',u:'https://commons.wikimedia.org/wiki/File:Historic_Village_of_Shirakawa-go_(2016)_-_img_11.jpg'}
  ],
  7:[
-  {f:'img/day07-1-miyagawa.jpg',t:'Poranny targ Miyagawa, Takayama',by:'bryan…',lic:'CC BY-SA 2.0',u:'https://commons.wikimedia.org/wiki/File:Hida-Takayama_Miyagawa_Morning_Market_(15668520238).jpg'},
-  {f:'img/day07-2-jinya.jpg',t:'Takayama Jinya',by:'Alexkom000',lic:'CC BY 4.0',u:'https://commons.wikimedia.org/wiki/File:2024-10-27_Takayama_Jinya.jpg'},
-  {f:'img/day07-3-setogawa.jpg',t:'Kanał Seto, Hida-Furukawa',by:'Asturio Cantabrio',lic:'CC BY-SA 4.0',u:'https://commons.wikimedia.org/wiki/File:Hida_Furukawa_Seto_river_ac.jpg'},
-  {f:'img/day07-4-hidabeef.jpg',t:'Sushi z wołowiną Hida',by:'Miyuki Meinaka',lic:'CC BY-SA 4.0',u:'https://commons.wikimedia.org/wiki/File:Sushi,_Hida_Beef.jpg'}
+  {f:'img/day07-3-setogawa.jpg',t:'Kanał Seto, Hida-Furukawa',by:'Asturio Cantabrio',lic:'CC BY-SA 4.0',u:'https://commons.wikimedia.org/wiki/File:Hida_Furukawa_Seto_river_ac.jpg'}
  ],
  8:[
-  {f:'img/day08-1-taisho.jpg',t:'Staw Taishō, Kamikōchi',by:'663highland',lic:'CC BY 2.5',u:'https://commons.wikimedia.org/wiki/File:150920_Taisho-ike_Kamikochi_Japan05n.jpg'},
-  {f:'img/day08-2-kappa.jpg',t:'Most Kappa-bashi, Kamikōchi',by:'663highland',lic:'CC BY 2.5',u:'https://commons.wikimedia.org/wiki/File:150920_Kappa-bashi_Kamikochi_Japan01n.jpg'},
-  {f:'img/day08-3-myojin.jpg',t:'Staw Myōjin, Kamikōchi',by:'663highland',lic:'CC BY 2.5',u:'https://commons.wikimedia.org/wiki/File:150920_Myojin-ike_Kamikochi_Japan06n.jpg'},
-  {f:'img/day08-4-azusa.jpg',t:'Dolina rzeki Azusa, Kamikōchi',by:'skyseeker',lic:'CC BY 2.0',u:'https://commons.wikimedia.org/wiki/File:Kamikōchi,_Hida_Mountains_range,_Nagano_Prefecture;_September_2007_(01).jpg'}
+  {f:'img/day08-2-kappa.jpg',t:'Most Kappa-bashi, Kamikōchi',by:'663highland',lic:'CC BY 2.5',u:'https://commons.wikimedia.org/wiki/File:150920_Kappa-bashi_Kamikochi_Japan01n.jpg'}
  ],
  9:[
-  {f:'img/day09-1-matsumoto.jpg',t:'Zamek Matsumoto',by:'663highland',lic:'CC BY 2.5',u:'https://commons.wikimedia.org/wiki/File:Matsumoto_Castle05s5s4592.jpg'},
-  {f:'img/day09-2-nawate.jpg',t:'Nawate-dōri, Matsumoto',by:'663highland',lic:'CC BY-SA 4.0',u:'https://commons.wikimedia.org/wiki/File:130608_Nawate_shop_street_Matsumoto_Nagano_pref_Japan02n.jpg'},
-  {f:'img/day09-3-wasabi.jpg',t:'Farma wasabi Daiō, Azumino',by:'lienyuan lee',lic:'CC BY 3.0',u:'https://commons.wikimedia.org/wiki/File:大王山葵農場_Daio_Wasabi_Farm_-_panoramio_(3).jpg'},
-  {f:'img/day09-4-utsukushigahara.jpg',t:'Płaskowyż Utsukushigahara (Venus Line)',by:'長野県',lic:'CC BY-SA 3.0',u:'https://commons.wikimedia.org/wiki/File:武石峰より思い出の丘を望む_2013-07-14.jpg'}
+  {f:'img/day09-1-matsumoto.jpg',t:'Zamek Matsumoto',by:'663highland',lic:'CC BY 2.5',u:'https://commons.wikimedia.org/wiki/File:Matsumoto_Castle05s5s4592.jpg'}
  ],
  10:[
-  {f:'img/day10-1-sugi.jpg',t:'Aleja cedrowa do Okusha, Togakushi',by:'Koda6029',lic:'CC BY-SA 4.0',u:'https://commons.wikimedia.org/wiki/File:戸隠神社奥社へと続く杉並木.jpg'},
-  {f:'img/day10-2-zuishinmon.jpg',t:'Brama Zuishinmon, Togakushi',by:'Big Ben in Japan',lic:'CC BY-SA 2.0',u:'https://commons.wikimedia.org/wiki/File:Zuishinmon_Gate,_Togakushi_Shrine;_September_2019.jpg'},
-  {f:'img/day10-3-chusha.jpg',t:'Togakushi — Chūsha',by:'663highland',lic:'CC BY 2.5',u:'https://commons.wikimedia.org/wiki/File:160430_Togakushi-jinja_Chusha_Nagano_Japan02n.jpg'},
-  {f:'img/day10-4-kagamiike.jpg',t:'Staw Kagami-ike, Togakushi',by:'koichi_hayakawa',lic:'CC BY 4.0',u:'https://commons.wikimedia.org/wiki/File:Nagano-Togakushi_Kagamiike_Autumn_leaves-xl.jpg'}
+  {f:'img/day10-2-zuishinmon.jpg',t:'Brama Zuishinmon, Togakushi',by:'Big Ben in Japan',lic:'CC BY-SA 2.0',u:'https://commons.wikimedia.org/wiki/File:Zuishinmon_Gate,_Togakushi_Shrine;_September_2019.jpg'}
  ],
  11:[
-  {f:'img/day11-1-monkey.jpg',t:'Makak japoński, Jigokudani',by:'Daisuke tashiro',lic:'CC BY-SA 2.0',u:'https://commons.wikimedia.org/wiki/File:Macaca_fuscata_meditation.jpg'},
-  {f:'img/day11-2-shigakogen.jpg',t:'Shiga Kōgen',by:'姐夫 吳',lic:'CC BY 2.0',u:'https://commons.wikimedia.org/wiki/File:Shiga_Kogen_(30610822195).jpg'},
-  {f:'img/day11-3-shibutoge.jpg',t:'Shibu-tōge — najwyższy punkt drogi krajowej (2172 m)',by:'690 Noda',lic:'CC BY 3.0',u:'https://commons.wikimedia.org/wiki/File:渋峠_国道最高地点_20130708_-_panoramio.jpg'},
-  {f:'img/day11-4-obuse.jpg',t:'Obuse (muzeum Hokusai)',by:'Suikotei',lic:'CC BY 4.0',u:'https://commons.wikimedia.org/wiki/File:Obuse_Town_Hokusai_Hall.jpg'}
+  {f:'img/day11-1-monkey.jpg',t:'Makak japoński, Jigokudani',by:'Daisuke tashiro',lic:'CC BY-SA 2.0',u:'https://commons.wikimedia.org/wiki/File:Macaca_fuscata_meditation.jpg'}
  ],
  12:[
-  {f:'img/day12-1-zenkoji.jpg',t:'Zenkō-ji — hala główna',by:'Christophe95',lic:'CC BY-SA 4.0',u:'https://commons.wikimedia.org/wiki/File:Main_Hall_of_Zenkō-ji_1.jpg'},
-  {f:'img/day12-2-nakamise.jpg',t:'Zenkō-ji — dojście (Nakamise)',by:'663highland',lic:'CC BY 2.5',u:'https://commons.wikimedia.org/wiki/File:160501_Zenkoji_Nagano_Japan03n.jpg'},
-  {f:'img/day12-3-matsushiro.jpg',t:'Zamek Matsushiro',by:'baku13',lic:'CC BY-SA 2.1 jp',u:'https://commons.wikimedia.org/wiki/File:Matsushiro_Castle_20100919-02.jpg'},
-  {f:'img/day12-4-sanmon.jpg',t:'Zenkō-ji — brama Sanmon',by:'Motokoka',lic:'CC BY-SA 4.0',u:'https://commons.wikimedia.org/wiki/File:Zenkoji_temple_7.jpg'}
+  {f:'img/day12-1-zenkoji.jpg',t:'Zenkō-ji — hala główna',by:'Christophe95',lic:'CC BY-SA 4.0',u:'https://commons.wikimedia.org/wiki/File:Main_Hall_of_Zenkō-ji_1.jpg'}
  ],
  13:[
-  {f:'img/day13-1-shinkansen.jpg',t:'Shinkansen E7 (Hokuriku)',by:'MaedaAkihiko',lic:'CC BY-SA 4.0',u:'https://commons.wikimedia.org/wiki/File:SeriesE7-F19.jpg'},
-  {f:'img/day13-2-ekiben.jpg',t:'Ekiben (bento kolejowe)',by:'masataka muto',lic:'CC BY-SA 2.0',u:'https://commons.wikimedia.org/wiki/File:Ekiben_(16942832905).jpg'},
-  {f:'img/day13-3-rikugien.jpg',t:'Ogród Rikugi-en',by:'Guilhem Vellut',lic:'CC BY 2.0',u:'https://commons.wikimedia.org/wiki/File:Pond_@_Rikugien_Garden_@_Komagome_(11165843426).jpg'},
-  {f:'img/day13-4-ikebukuro.jpg',t:'Sunshine City, Ikebukuro',by:'Kakidai',lic:'CC BY-SA 3.0',u:'https://commons.wikimedia.org/wiki/File:Sunshine_City_2012.JPG'}
+  {f:'img/day13-1-shinkansen.jpg',t:'Shinkansen E7 (Hokuriku)',by:'MaedaAkihiko',lic:'CC BY-SA 4.0',u:'https://commons.wikimedia.org/wiki/File:SeriesE7-F19.jpg'}
  ],
  14:[
-  {f:'img/day14-1-sensoji.jpg',t:'Sensō-ji — Kaminarimon, Asakusa',by:'Kakidai',lic:'CC BY-SA 3.0',u:'https://commons.wikimedia.org/wiki/File:Asakusa_Sensoji_Kaminarimon_2012.JPG'},
-  {f:'img/day14-2-nakamise.jpg',t:'Nakamise-dōri, Asakusa',by:'Andrea Schaffer',lic:'CC BY 2.0',u:'https://commons.wikimedia.org/wiki/File:Nakamise-Dori_(3800868893).jpg'},
-  {f:'img/day14-3-skytree.jpg',t:'Tokyo Skytree',by:'Basile Morin',lic:'CC BY-SA 4.0',u:'https://commons.wikimedia.org/wiki/File:Worm%27s-eye_view_of_Tokyo_Skytree_with_vertical_symmetry_impression,_a_sunny_day,_in_Japan.jpg'},
-  {f:'img/day14-4-teamlab.jpg',t:'teamLab Planets',by:'Sasa0403',lic:'CC BY-SA 4.0',u:'https://commons.wikimedia.org/wiki/File:Photos_at_teamlab_planets_tokyo.jpg'}
+  {f:'img/day14-3-skytree.jpg',t:'Tokyo Skytree',by:'Basile Morin',lic:'CC BY-SA 4.0',u:'https://commons.wikimedia.org/wiki/File:Worm%27s-eye_view_of_Tokyo_Skytree_with_vertical_symmetry_impression,_a_sunny_day,_in_Japan.jpg'}
  ],
  15:[
-  {f:'img/day15-1-akihabara.jpg',t:'Akihabara — Electric Town',by:'Hyppolyte de Saint-Rambert',lic:'CC BY-SA 4.0',u:'https://commons.wikimedia.org/wiki/File:Akihabara_Electric_Town_9999_326.jpg'},
-  {f:'img/day15-2-gundam.jpg',t:'Unicorn Gundam, Odaiba',by:'Pelpinosas R. Justin James',lic:'CC0',u:'https://commons.wikimedia.org/wiki/File:Life-Sized_Unicorn_Gundam_Statue.jpg'},
-  {f:'img/day15-3-daikoku.jpg',t:'Daikoku PA (Shuto Expressway)',by:'Nyao148',lic:'CC BY 3.0',u:'https://commons.wikimedia.org/wiki/File:Daikoku-PA.JPG'},
   {f:'img/day15-4-rainbowbridge.jpg',t:'Rainbow Bridge',by:'Suicasmo',lic:'CC BY-SA 4.0',u:'https://commons.wikimedia.org/wiki/File:Rainbow_Bridge,_Tokyo_20201112.jpg'}
  ],
  16:[
-  {f:'img/day16-1-meiji.jpg',t:'Meiji Jingū — torii',by:'Ray in Manila',lic:'CC BY 2.0',u:'https://commons.wikimedia.org/wiki/File:Torii_Gate_at_Meiji_Jingu_Shrine,_Tokyo_(50125273602).jpg'},
-  {f:'img/day16-2-shibuya-crossing.jpg',t:'Skrzyżowanie Shibuya',by:'Dick Thomas Johnson',lic:'CC BY 2.0',u:'https://commons.wikimedia.org/wiki/File:Shibuya_Crossing_(53333799585).jpg'},
-  {f:'img/day16-3-shibuyasky.jpg',t:'Widok z Shibuya Sky',by:'Stephen Kelly',lic:'CC BY 2.0',u:'https://commons.wikimedia.org/wiki/File:Tokyo_Tower_and_Skyscrapers_from_Shibuya_Sky_Observation_Deck_(53416648661).jpg'},
-  {f:'img/day16-4-sakebarrels.jpg',t:'Meiji Jingū — beczki sake',by:'MediaByPanda',lic:'CC BY-SA 4.0',u:'https://commons.wikimedia.org/wiki/File:Meiji_Jingu_Sake_Barrel_Wall_Tokyo_Japan.jpg'}
+  {f:'img/day16-3-shibuyasky.jpg',t:'Widok z Shibuya Sky',by:'Stephen Kelly',lic:'CC BY 2.0',u:'https://commons.wikimedia.org/wiki/File:Tokyo_Tower_and_Skyscrapers_from_Shibuya_Sky_Observation_Deck_(53416648661).jpg'}
  ],
  17:[
-  {f:'img/day17-1-tomioka.jpg',t:'Tomioka Hachimangū (Fukagawa)',by:'Suikotei',lic:'CC BY-SA 4.0',u:'https://commons.wikimedia.org/wiki/File:Tomioka-hachimangu_2019.jpg'},
-  {f:'img/day17-2-yanaka.jpg',t:'Yanaka Ginza',by:'Yoshikazu TAKADA',lic:'CC BY 2.0',u:'https://commons.wikimedia.org/wiki/File:Yanaka_Ginza_shopping_street_(4041690725).jpg'},
-  {f:'img/day17-3-nezu.jpg',t:'Chram Nezu — tunel torii',by:'Charlie fong',lic:'CC BY-SA 4.0',u:'https://commons.wikimedia.org/wiki/File:Entrance_to_The_Path_of_Torii_in_Nezu_Shrine_Tokyo.jpg'},
-  {f:'img/day17-4-ameyoko.jpg',t:'Ameyoko, Ueno',by:'Maarten Heerlien',lic:'CC BY 2.0',u:'https://commons.wikimedia.org/wiki/File:Vibrant_Ameyoko_street_Market,_アメ横_(6156024678).jpg'}
+  {f:'img/day17-3-nezu.jpg',t:'Chram Nezu — tunel torii',by:'Charlie fong',lic:'CC BY-SA 4.0',u:'https://commons.wikimedia.org/wiki/File:Entrance_to_The_Path_of_Torii_in_Nezu_Shrine_Tokyo.jpg'}
  ],
  18:[
-  {f:'img/day18-1-godzilla.jpg',t:'Godzilla nad kinem Toho, Kabukichō',by:'落ち穂拾いする人',lic:'CC BY-SA 3.0',u:'https://commons.wikimedia.org/wiki/File:Shinjuku_toho_building_kabukicho_2015.jpg'},
-  {f:'img/day18-2-kabukicho.jpg',t:'Kabukichō nocą',by:'Basile Morin',lic:'CC BY-SA 4.0',u:'https://commons.wikimedia.org/wiki/File:Colorful_neon_street_signs_in_Kabukichō,_Shinjuku,_Tokyo.jpg'},
-  {f:'img/day18-3-omoide.jpg',t:'Omoide Yokochō, Shinjuku',by:'MaedaAkihiko',lic:'CC BY-SA 4.0',u:'https://commons.wikimedia.org/wiki/File:Shinjuku-West_Omoide-Yokocho.jpg'},
-  {f:'img/day18-4-fujitv.jpg',t:'Fuji TV, Odaiba',by:'Balon Greyjoy',lic:'CC0',u:'https://commons.wikimedia.org/wiki/File:20190322_Odaiba_Fuji_Television_Network_building.jpg'}
+  {f:'img/day18-2-kabukicho.jpg',t:'Kabukichō nocą',by:'Basile Morin',lic:'CC BY-SA 4.0',u:'https://commons.wikimedia.org/wiki/File:Colorful_neon_street_signs_in_Kabukichō,_Shinjuku,_Tokyo.jpg'}
  ],
  19:[
-  {f:'img/day19-1-daibutsu.jpg',t:'Wielki Budda, Kamakura',by:'Jean-Pierre Dalbéra',lic:'CC BY 2.0',u:'https://commons.wikimedia.org/wiki/File:Le_Grand_Bouddha_du_Kotoku-in_(Kamakura,_Japon)_(42096289494).jpg'},
-  {f:'img/day19-2-tsurugaoka.jpg',t:'Tsurugaoka Hachimangū',by:'Ocdp',lic:'CC0',u:'https://commons.wikimedia.org/wiki/File:Tsurugaoka_Hachimangu_001.jpg'},
-  {f:'img/day19-3-enoden.jpg',t:'Enoden — przejazd Kamakurakōkō-mae',by:'サイエンス',lic:'CC BY-SA 4.0',u:'https://commons.wikimedia.org/wiki/File:鎌倉高校前1号踏切.jpg'},
-  {f:'img/day19-4-enoshima.jpg',t:'Enoshima — Sea Candle',by:'Maksym Grinenko',lic:'CC BY-SA 4.0',u:'https://commons.wikimedia.org/wiki/File:EnoshimaSeaCandle.jpg'}
+  {f:'img/day19-1-daibutsu.jpg',t:'Wielki Budda, Kamakura',by:'Jean-Pierre Dalbéra',lic:'CC BY 2.0',u:'https://commons.wikimedia.org/wiki/File:Le_Grand_Bouddha_du_Kotoku-in_(Kamakura,_Japon)_(42096289494).jpg'}
  ]
 };
 function openPhoto(dnum,ix){const im=(DAY_IMG[dnum]||[])[ix];if(!im)return;
@@ -1396,7 +1341,7 @@ D.parts.forEach(part=>{
     nav+=`<a class="dn-${c}" href="#${anchor}">${isHome?'↩':(dnum||'0')}</a>`;
     const has=d.sc.length>0,tbd=has?'':'tbd',dtitle=d.ts||d.lb;
     const dimgs=DAY_IMG[+dnum]||null;
-    const collage=dimgs?`<div class="day-collage">${dimgs.map((im,ix)=>`<img src="${im.f}" alt="${esc(im.t)}" title="${esc(im.t)}" loading="lazy" onclick="openPhoto(${+dnum},${ix})">`).join('')}</div>`:'';
+    const collage=dimgs?`<div class="day-collage${dimgs.length===1?' single':''}">${dimgs.map((im,ix)=>`<img src="${im.f}" alt="${esc(im.t)}" title="${esc(im.t)}" loading="lazy" onclick="openPhoto(${+dnum},${ix})">`).join('')}</div>`:'';
     h1+=`<div class="dc p-${c}" id="${anchor}">${collage}<div class="dh"><div class="dnum"><b>${bigNum}</b><i>${subK}</i></div><div class="dsep"></div><div class="dt"><div class="dn">${esc(dtitle)}</div><div class="dd">${esc(d.ds)}</div></div></div><div class="db ${tbd}"><div class="ds">${esc(d.sm)}</div>`;
     if(has){h1+='<div class="sch">';d.sc.forEach(s=>{const emq=s.mq||(isFood(s.ti)?foodMq(s.ti,dnum):'');const ti=emq?`<a class="mlink" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(emq)}" target="_blank" rel="noopener">${esc(s.ti)}</a>`:esc(s.ti);const stips=tipMap[dnum+'_'+s.tm]||[];let th='';stips.forEach(tip=>{th+=`<details class="tip-d"><summary class="tip-s">${esc(tip.icon)} ${esc(tip.ti)}</summary><div class="tip-b">${esc(tip.dx)}</div></details>`});h1+=`<div class="sr"><div class="st">${esc(s.tm)}</div><div class="sdot"></div><div class="sc"><strong>${ti}</strong>${s.nt?'<br><span class="n">'+fmtNote(s.nt)+'</span>':''}${th}</div></div>`});h1+='</div>'}
     const isFlight=/^lot/i.test(d.ht);
