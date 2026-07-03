@@ -78,6 +78,21 @@ Tablica `BUDGET` w JS (~linia 1256):
 
 Komentarz nad tablicą: `// Budżet — szacunki wydatków na miejscu, per dzień, na osobę (bez hoteli/lotów/auta)`
 
+## Service worker (`sw.js`) — cache offline
+
+`sw.js` cache'uje statyczne pliki do trybu offline. Tablica `CORE` musi zawierać dokładnie te pliki, które istnieją — `cache.addAll()` w evencie `install` failuje w całości, jeśli choćby jeden URL zwróci 404 (czyli service worker przestaje się instalować dla nowych/odwiedzających klientów).
+
+**Zawsze gdy dodajesz/usuwasz/zmieniasz nazwę pliku w `img/` (albo innego pliku z `CORE`):**
+1. Zaktualizuj listę `CORE` w `sw.js` tak, żeby 1:1 zgadzała się z plikami faktycznie obecnymi w repo i referencjami w `DAY_IMG` w `index.html`.
+2. Podbij wersję `CACHE` (np. `japonia2026-v14` → `v15`) — inaczej przeglądarki z już zainstalowanym service workerem nie zobaczą zmiany i będą serwować starą, potencjalnie martwą listę z cache.
+
+Szybka weryfikacja przed commitem:
+```bash
+grep -oP "img/day\d+-[^']*\.jpg" sw.js | sort -u
+ls img/ | sed 's|^|img/|' | sort
+# obie listy powinny być identyczne
+```
+
 ## Checklist po zmianie planu dnia
 
 1. Zaktualizuj harmonogram dnia (punkty `- CZAS | ...`)
