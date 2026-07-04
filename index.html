@@ -1152,20 +1152,61 @@ function esc(s){const d=document.createElement('div');d.textContent=s;return d.i
 function uc(u){const l=u.toLowerCase();if(l==='teraz')return{bl:'bl-r',bdg:'bdg-now',lb:'Teraz'};if(l==='czerwiec')return{bl:'bl-g',bdg:'bdg-soon',lb:'Czerwiec'};if(l==='lipiec')return{bl:'bl-t',bdg:'bdg-july',lb:'Lipiec'};return{bl:'bl-n',bdg:'bdg-none',lb:u}}
 function pc(t){const l=t.toLowerCase();if(l.includes('kioto')||l.includes('osaka')||l.includes('nara'))return'1';if(l.includes('alpy')||l.includes('nagano'))return'2';return'3'}
 
+// Rezerwacje (sekcja REZERWACJE) i odliczanie (sekcja ODLICZANIE) trafiają do jednego
+// modelu danych (D.items, pole kind:'res'|'evt') — 'res' ma checkbox + rozwijane szczegóły,
+// 'evt' to samo wydarzenie na osi czasu. RES_META musi być zdefiniowane przed parse(),
+// bo rezerwacje nie mają własnej daty w tekście — dostają ją stąd (dopasowanie po tytule).
+const RES_META=[
+ ['Wynajem samochodu','2026-06-20','do końca czerwca'],
+ ['prawo jazdy','2026-06-20','wyrób zawczasu'],
+ ['Aplikacje','2026-06-25','przed wylotem'],
+ ['pałeczek','2026-06-25','rezerwacja na Klook'],
+ ['Kioto → Kanazawa','2026-07-05','sprzedaż od 5.07'],
+ ['Zamek Matsumoto','2026-07-05','bilet online z datownikiem'],
+ ['Tokyo Skytree','2026-07-05','bilet slotowy online'],
+ ['Shibuya Sky','2026-07-05','kupić jak najwcześniej'],
+ ['Samurai Ninja Museum','2026-07-05','rezerwacja mai-ko.com'],
+ ['Nagano → Tokio','2026-07-12','sprzedaż od 12.07'],
+ ['Daikoku','2026-07-25','rezerwuj ~3 tyg. wcześniej'],
+ ['Kolacja Hida','2026-07-25','rezerwacja restauracji'],
+ ['Okonomiyaki','2026-07-25','rezerwacja na Tabelog (opcjonalnie)'],
+ ['Haruka','2026-07-31','online lub na miejscu'],
+ ['ICOCA','2026-07-31','na lotnisku KIX'],
+ ['Kaiyukan','2026-07-03','e-bilet z godziną wchodzi w sprzedaż dokładnie 30 dni przed wizytą (2.08). Kupcie od razu na konkretny slot — niedziela w sierpniu (Obon) = szczyt frekwencji'],
+ ['Kamikōchi','2026-08-07','bez rezerwacji'],
+ ['teamLab','2026-08-13','kupione'],
+ ['Zakupy pod matsuri','2026-08-15','Don Quijote przed paradą'],
+ ['Skyliner','2026-08-19','na miejscu']
+];
+const RES_MONTHS={'2026-06':'Czerwiec 2026','2026-07':'Lipiec 2026','2026-08':'Sierpień 2026 — w trakcie podróży'};
+const PL_M=['','stycznia','lutego','marca','kwietnia','maja','czerwca','lipca','sierpnia','września','października','listopada','grudnia'];
+function resMeta(ti){for(const m of RES_META){if(ti.indexOf(m[0])>=0)return{sd:m[1],dl:m[2]}}return{sd:'2026-12-31',dl:''}}
+function fmtPlDate(sd){const p=sd.split('-');return (+p[2])+' '+PL_M[+p[1]]}
+
 function parse(text){
-  const lines=text.split('\n'),meta={},res=[],parts=[],info=[],pack=[],food=[],shop=[],phrases=[],milestones=[],tips=[];
-  let sec='',cp=null,cd=null;
+  const lines=text.split('\n'),meta={},items=[],parts=[],info=[],pack=[],food=[],shop=[],phrases=[],tips=[];
+  let sec='',cp=null,cd=null,resCount=0;
   for(const raw of lines){
     const t=raw.trim();
     if(t.startsWith('### ')){sec=t.slice(4).trim();continue}
     if(sec==='META'){const m=t.match(/^(\w+):\s*(.+)$/);if(m)meta[m[1]]=m[2];continue}
-    if(sec==='REZERWACJE'){if(!t||t.startsWith('#'))continue;const p=t.split(' | ');if(p.length>=4)res.push({ti:p[0].trim(),ur:p[1].trim(),dt:p[2].trim(),dx:p[3].trim()});continue}
+    if(sec==='REZERWACJE'){
+      if(!t||t.startsWith('#'))continue;
+      const p=t.split(' | ');
+      if(p.length>=4){const ti=p[0].trim(),rm=resMeta(ti);items.push({kind:'res',i:resCount++,ti,sd:rm.sd,dl:rm.dl,sub:p[2].trim(),dx:p[3].trim()})}
+      continue;
+    }
     if(sec==='WAZNE'){if(!t||t.startsWith('#'))continue;const g=t.split(' :: ');if(g.length>=2){const p=g[1].split(' | ');info.push({grp:g[0].trim(),lb:(p[0]||'').trim(),dt:(p[1]||'').trim(),mq:(p[2]||'').trim()})}continue}
     if(sec==='PAKOWANIE'){if(!t||t.startsWith('#'))continue;const g=t.split(' :: ');if(g.length>=2)pack.push({grp:g[0].trim(),it:g[1].trim()});continue}
     if(sec==='JEDZENIE'){if(!t||t.startsWith('#'))continue;const g=t.split(' :: ');if(g.length>=2){const p=g[1].split(' | ');food.push({grp:g[0].trim(),lb:(p[0]||'').trim(),dt:(p[1]||'').trim()})}continue}
     if(sec==='ZAKUPY'){if(!t||t.startsWith('#'))continue;const g=t.split(' :: ');if(g.length>=2){const p=g[1].split(' | ');shop.push({grp:g[0].trim(),lb:(p[0]||'').trim(),dt:(p[1]||'').trim(),wh:(p[2]||'').trim(),mq:(p[3]||'').trim()})}continue}
     if(sec==='ROZMOWKI'){if(!t||t.startsWith('#'))continue;const g=t.split(' :: ');if(g.length>=2){const p=g[1].split(' | ');phrases.push({grp:g[0].trim(),pl:(p[0]||'').trim(),jp:(p[1]||'').trim(),jpr:(p[2]||'').trim(),pron:(p[3]||'').trim()})}continue}
-    if(sec==='ODLICZANIE'){if(!t||t.startsWith('#'))continue;const p=t.split(' | ');if(p.length>=2)milestones.push({date:p[0].trim(),lb:(p[1]||'').trim(),dt:(p[2]||'').trim()});continue}
+    if(sec==='ODLICZANIE'){
+      if(!t||t.startsWith('#'))continue;
+      const p=t.split(' | ');
+      if(p.length>=2){const lb=(p[1]||'').trim();if(!/teamLab|Otwarcie rezerwacji/i.test(lb))items.push({kind:'evt',ti:lb,sd:p[0].trim(),sub:(p[2]||'').trim()})}
+      continue;
+    }
     if(sec==='CIEKAWOSTKI'){if(!t||t.startsWith('#'))continue;const p=t.split(' | ');if(p.length>=5){const dm=p[0].trim().match(/^D(\d+)$/);if(dm)tips.push({day:+dm[1],tm:p[1].trim(),icon:p[2].trim(),ti:p[3].trim(),dx:p.slice(4).join(' | ').trim()})}continue}
     if(sec==='PLAN'){
       if(t.startsWith('# ')){cp={title:t.slice(2).trim(),days:[]};parts.push(cp);cd=null;continue}
@@ -1174,7 +1215,7 @@ function parse(text){
       if(t&&cd&&!t.startsWith('#')&&!t.startsWith('==')){cd.sm+=(cd.sm?' ':'')+t;continue}
     }
   }
-  return{meta,res,parts,info,pack,food,shop,phrases,milestones,tips}
+  return{meta,items,parts,info,pack,food,shop,phrases,tips}
 }
 
 const D=parse(PLAN_DATA);
@@ -1203,38 +1244,9 @@ function fmtRx(s){
   return t;
 }
 
-const RES_META=[
- ['Wynajem samochodu','2026-06-20','do końca czerwca'],
- ['prawo jazdy','2026-06-20','wyrób zawczasu'],
- ['Aplikacje','2026-06-25','przed wylotem'],
- ['pałeczek','2026-06-25','rezerwacja na Klook'],
- ['Kioto → Kanazawa','2026-07-05','sprzedaż od 5.07'],
- ['Zamek Matsumoto','2026-07-05','bilet online z datownikiem'],
- ['Tokyo Skytree','2026-07-05','bilet slotowy online'],
- ['Shibuya Sky','2026-07-05','kupić jak najwcześniej'],
- ['Samurai Ninja Museum','2026-07-05','rezerwacja mai-ko.com'],
- ['Nagano → Tokio','2026-07-12','sprzedaż od 12.07'],
- ['Daikoku','2026-07-25','rezerwuj ~3 tyg. wcześniej'],
- ['Kolacja Hida','2026-07-25','rezerwacja restauracji'],
- ['Okonomiyaki','2026-07-25','rezerwacja na Tabelog (opcjonalnie)'],
- ['Haruka','2026-07-31','online lub na miejscu'],
- ['ICOCA','2026-07-31','na lotnisku KIX'],
- ['Kaiyukan','2026-07-03','e-bilet z godziną wchodzi w sprzedaż dokładnie 30 dni przed wizytą (2.08). Kupcie od razu na konkretny slot — niedziela w sierpniu (Obon) = szczyt frekwencji'],
- ['Kamikōchi','2026-08-07','bez rezerwacji'],
- ['teamLab','2026-08-13','kupione'],
- ['Zakupy pod matsuri','2026-08-15','Don Quijote przed paradą'],
- ['Skyliner','2026-08-19','na miejscu']
-];
-const RES_MONTHS={'2026-06':'Czerwiec 2026','2026-07':'Lipiec 2026','2026-08':'Sierpień 2026 — w trakcie podróży'};
-const PL_M=['','stycznia','lutego','marca','kwietnia','maja','czerwca','lipca','sierpnia','września','października','listopada','grudnia'];
-function resMeta(ti){for(const m of RES_META){if(ti.indexOf(m[0])>=0)return{sd:m[1],dl:m[2]}}return{sd:'2026-12-31',dl:''}}
-function fmtPlDate(sd){const p=sd.split('-');return (+p[2])+' '+PL_M[+p[1]]}
 function renderAllRes(){
   const s=getResState();
-  const list=[];
-  D.res.forEach((r,i)=>{const m=resMeta(r.ti);list.push({kind:'res',i,sd:m.sd,dl:m.dl,ti:r.ti,sub:r.dt,dx:r.dx})});
-  D.milestones.forEach(ms=>{if(/teamLab|Otwarcie rezerwacji/i.test(ms.lb))return;list.push({kind:'evt',sd:ms.date,ti:ms.lb,sub:ms.dt})});
-  list.sort((a,b)=>a.sd<b.sd?-1:a.sd>b.sd?1:0);
+  const list=D.items.slice().sort((a,b)=>a.sd<b.sd?-1:a.sd>b.sd?1:0);
   let h0='',lastM='';
   if(D.meta.start){const diff=daysUntil(D.meta.start);let big;if(diff>0)big=diff+'<span class="cd-unit"> dni</span>';else if(diff===0)big='dziś! 🎌';else big=(diff>=-21?'Podróż trwa! 🎌':'Po podróży');h0+=`<div class="cd-hero"><div class="cd-big">${big}</div><div class="cd-sub">✈️ do startu podróży (${esc(D.meta.start)})</div></div>`}
   list.forEach(it=>{
