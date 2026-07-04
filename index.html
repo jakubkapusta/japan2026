@@ -1017,6 +1017,8 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px
 .day-nav::-webkit-scrollbar{display:none;height:0;width:0}
 .day-nav a{flex:0 0 auto;font-size:.72em;font-weight:700;text-decoration:none;padding:4px 9px;border-radius:8px;border:1px solid transparent;transition:.15s}
 .day-nav a:hover{transform:translateY(-1px);filter:brightness(.97)}
+.dn-top{flex:0 0 auto;position:sticky;left:0;z-index:2;font-size:.78em;font-weight:700;padding:4px 10px;border-radius:8px;border:1px solid var(--border);background:var(--card);color:var(--muted);cursor:pointer;font-family:var(--font);transition:.15s;box-shadow:2px 0 6px rgba(0,0,0,.06)}
+.dn-top:hover{color:var(--text);filter:brightness(.97)}
 .dn-1{background:#f7e7e3;color:#8f2e20;border-color:#ecd2cb}
 .dn-2{background:#e2f0eb;color:#115c4a;border-color:#cce3da}
 .dn-3{background:#e7edf4;color:#2c456b;border-color:#d3dfea}
@@ -1394,7 +1396,7 @@ const DAY_BY_KEY={};
 let imgCredits='';
 function renderPlanTab(){
   const overrides=dayOverrides();
-  let h1='',nav='<div class="day-nav">';
+  let h1='',nav='<div class="day-nav"><button class="dn-top noprint" onclick="scrollToTop()" title="Przewiń na górę" aria-label="Przewiń na górę">↑</button>';
   D.parts.forEach(part=>{
     const c=pc(part.title);
     const pm=part.title.match(/^\s*(Część\s*\d+)\s*[:：]\s*(.+)$/i);
@@ -1461,6 +1463,7 @@ document.addEventListener('click',e=>{
   const p=document.getElementById('dayMenuPop');
   if(p&&p.style.display==='block'&&!p.contains(e.target)){p.style.display='none';dayMenuKey=null}
 });
+function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'})}
 function toast(msg){
   let t=document.getElementById('toast');
   if(!t){t=document.createElement('div');t.id='toast';t.className='toast';document.body.appendChild(t)}
