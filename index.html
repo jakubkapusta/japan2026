@@ -1052,7 +1052,10 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px
 .ibtn:hover{border-color:var(--teal);color:var(--teal);background:#f0faf8}
 .ibtn-add{font-weight:600}
 /* Nowe zakładki: checklisty, rozmówki, terminy */
-.cd-head{font-size:.9em;color:var(--teal);font-weight:700;margin-top:6px}
+.hdr-info-row{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:10px;margin-top:6px}
+.cd-head{font-size:.9em;color:var(--teal);font-weight:700}
+.tz-clock{font-size:.8em;font-weight:700;color:var(--muted);background:var(--card);border:1px solid var(--border);border-radius:20px;padding:3px 11px;letter-spacing:.02em}
+.tz-clock:empty{display:none}
 .chk-row{display:flex;align-items:flex-start;gap:10px;background:var(--card);border-radius:9px;padding:10px 13px;box-shadow:var(--shadow);margin-bottom:7px;cursor:pointer;transition:transform .12s}
 .chk-row:hover{transform:translateX(2px)}
 .chk-box2{flex:0 0 auto;width:20px;height:20px;border:2px solid var(--border);border-radius:5px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:700;margin-top:1px}
@@ -1074,7 +1077,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px
 /* Print / PDF */
 @media print{
   body{padding:0;background:#fff;color:#000;font-size:11pt}
-  .tabs,.day-nav,.noprint,.rc-actions,.link-btn,.link-rm,.chk-wrap,.print-btn,.ibtn,.day-collage,.img-credits,.dmenu-btn,.dmenu-pop,.toast{display:none!important}
+  .tabs,.day-nav,.noprint,.rc-actions,.link-btn,.link-rm,.chk-wrap,.print-btn,.ibtn,.day-collage,.img-credits,.dmenu-btn,.dmenu-pop,.toast,.tz-clock{display:none!important}
   .pnl{display:block!important;max-width:none;margin:0}
   .pnl#p1,.pnl#p2,.pnl#p3{page-break-before:always}
   .dc{box-shadow:none;border:1px solid #ccc;background:transparent}
@@ -1114,7 +1117,10 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px
   </div>
   <div class="hdr-rule"></div>
   <div class="sub" id="subtitle"></div>
-  <div class="cd-head" id="cdHead"></div>
+  <div class="hdr-info-row">
+    <div class="cd-head" id="cdHead"></div>
+    <div class="tz-clock" id="tzClock"></div>
+  </div>
 </div>
 <div class="tabs">
   <div class="tab on" onclick="selectTab(0)"><svg class="tic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2Z"/><path d="M9 4v14M15 6v14"/></svg>Plan</div>
@@ -1805,6 +1811,24 @@ renderPhrases();
 function daysUntil(dateStr){const d=new Date(dateStr+'T00:00:00'),t=new Date();t.setHours(0,0,0,0);return Math.round((d-t)/86400000)}
 function relText(diff){if(diff>1)return{t:'za '+diff+' dni',c:''};if(diff===1)return{t:'jutro',c:'cd-soon'};if(diff===0)return{t:'dziś',c:'cd-soon'};return{t:'minęło '+(-diff)+' dni',c:'cd-past'}}
 (function(){const el=document.getElementById('cdHead');if(!el||!D.meta.start)return;const diff=daysUntil(D.meta.start);if(diff>0)el.textContent='✈️ Do wylotu: '+diff+(diff===1?' dzień':' dni');else if(diff===0)el.textContent='✈️ Dziś start podróży! 🎌';else if(diff>=-21)el.textContent='🎌 Podróż trwa — miłego zwiedzania!';else el.style.display='none';})();
+
+// Zegar: pokazuje czas w Tokio (dla urządzeń spoza Japonii) albo w Polsce (dla urządzeń w japońskiej strefie)
+function renderTzClock(){
+  const el=document.getElementById('tzClock');
+  if(!el)return;
+  const now=new Date();
+  const localTz=Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const isJapanDevice=localTz==='Asia/Tokyo'||(-now.getTimezoneOffset())===540;
+  const targetTz=isJapanDevice?'Europe/Warsaw':'Asia/Tokyo';
+  const flag=isJapanDevice?'🇵🇱':'🇯🇵';
+  const time=new Intl.DateTimeFormat('pl-PL',{timeZone:targetTz,hour:'2-digit',minute:'2-digit',hour12:false}).format(now);
+  const targetDate=new Intl.DateTimeFormat('pl-PL',{timeZone:targetTz,day:'2-digit',month:'2-digit'}).format(now);
+  const localDate=new Intl.DateTimeFormat('pl-PL',{day:'2-digit',month:'2-digit'}).format(now);
+  el.textContent=flag+' '+time+(targetDate===localDate?'':' · '+targetDate);
+  el.title=(isJapanDevice?'Aktualny czas w Polsce':'Aktualny czas w Tokio')+(targetDate===localDate?'':' (inny dzień niż lokalnie)');
+}
+renderTzClock();
+setInterval(renderTzClock,30000);
 
 // Restore active tab from URL hash on load (#plan / #dystanse / #wazne / #dN)
 (function(){
