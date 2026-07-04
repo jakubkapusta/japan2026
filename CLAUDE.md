@@ -5,7 +5,29 @@ Treść planu to blok tekstowy parsowany przez JS na sekcje, dni i punkty harmon
 
 ## Struktura sekcji
 
-Sekcje rozdzielone nagłówkami `###` (META, REZERWACJE, WAZNE, PAKOWANIE, JEDZENIE, ROZMOWKI, ODLICZANIE, PLAN, CIEKAWOSTKI). Renderowane jako zakładki w UI.
+Sekcje rozdzielone nagłówkami `###` (META, TERMINY, WAZNE, PAKOWANIE, JEDZENIE, ZAKUPY, ROZMOWKI, PLAN, CIEKAWOSTKI). Renderowane jako zakładki w UI.
+
+## Terminy (sekcja TERMINY, zakładka Terminy)
+
+Jedna lista łącząca rezerwacje (z checkboxem) i zwykłe wydarzenia/przypomnienia (bez checkboxa) — dopasowanie na jednym wspólnym modelu danych (`D.items`, pole `kind:'res'|'evt'`), posortowana po dacie przy renderze.
+
+```
+DATA | TYTUŁ | KRÓTKI_KONTEKST | OPCJONALNE_SZCZEGÓŁY
+```
+
+- `DATA` — ISO `YYYY-MM-DD`, decyduje o pozycji na liście i o etykiecie czasu ("za X dni" itd.)
+- `TYTUŁ` — z emoji na początku
+- `KRÓTKI_KONTEKST` — krótka linijka pod tytułem (np. termin wizyty/dnia planu)
+- `OPCJONALNE_SZCZEGÓŁY` (4. pole) — **jeśli obecne**, wpis renderuje się jako rezerwacja: checkbox do odhaczenia + rozwijane „Szczegóły i link potwierdzenia" z tą treścią. **Jeśli nieobecne** (tylko 3 pola), wpis to zwykłe wydarzenie na osi czasu, bez checkboxa.
+
+Przykład (rezerwacja z checkboxem):
+```
+2026-07-05 | 🏯 Zamek Matsumoto — bilet online | Wizyta sob 8.08 ~10:00 | Bilet z datownikiem online 1 200 ¥...
+```
+Przykład (wydarzenie bez checkboxa):
+```
+2026-07-30 | ✈️ Start podróży — wylot z Polski | Początek przygody! Wylot z Krakowa 11:20...
+```
 
 ### Części i dni (sekcja PLAN)
 
