@@ -1177,20 +1177,13 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px
 .say-btn.saying{border-color:var(--teal);background:rgba(26,122,109,.1)}
 /* ── Easter egg: pies (3× klik w zegar) ── */
 .tz-clock{cursor:pointer}
-.dog-egg{position:fixed;right:max(10px,env(safe-area-inset-right));bottom:0;z-index:300;width:min(46vw,340px);pointer-events:none;transform:translateY(112%) rotate(2deg);transition:transform .1s}
+.dog-egg{position:fixed;right:max(6px,env(safe-area-inset-right));bottom:0;z-index:300;width:min(64vw,460px);pointer-events:none;transform:translateY(112%) rotate(2deg);transition:transform .1s}
 .dog-egg.in{animation:dogIn .8s cubic-bezier(.34,1.56,.64,1) forwards}
 .dog-egg.out{animation:dogOut .5s ease-in forwards}
 @keyframes dogIn{0%{transform:translateY(112%) rotate(2deg)}70%{transform:translateY(-4%) rotate(-2deg)}100%{transform:translateY(6%) rotate(0)}}
 @keyframes dogOut{0%{transform:translateY(6%) rotate(0)}100%{transform:translateY(112%) rotate(3deg)}}
 .dog-egg img{width:100%;height:auto;display:block;filter:drop-shadow(-6px 8px 14px rgba(0,0,0,.32));animation:dogWag 1.6s ease-in-out .8s infinite}
 @keyframes dogWag{0%,100%{transform:rotate(0)}25%{transform:rotate(-1.2deg)}75%{transform:rotate(1.2deg)}}
-.dog-bubble{position:absolute;top:-8px;left:-14px;transform:translateX(-100%) scale(0);transform-origin:bottom right;background:var(--card);border:1px solid var(--border);border-radius:14px 14px 2px 14px;box-shadow:0 8px 22px rgba(0,0,0,.2);padding:11px 15px;width:max-content;max-width:210px;text-align:center;opacity:0}
-.dog-egg.in .dog-bubble{animation:bubblePop .4s cubic-bezier(.34,1.56,.64,1) .75s forwards}
-@keyframes bubblePop{0%{transform:translateX(-100%) scale(0);opacity:0}100%{transform:translateX(-100%) scale(1);opacity:1}}
-.dog-bubble::after{content:'';position:absolute;right:-7px;bottom:0;width:0;height:0;border:8px solid transparent;border-right-color:var(--card);border-bottom:0;filter:drop-shadow(1px 0 0 var(--border))}
-.dog-bubble .db-jp{font-family:var(--font-jp);font-weight:700;font-size:1.15em;color:var(--red);line-height:1.15}
-.dog-bubble .db-rom{font-size:.72em;color:var(--muted);font-style:italic;margin-top:2px}
-.dog-bubble .db-pl{font-size:.78em;color:var(--text);margin-top:4px;line-height:1.35}
 html.dark .dog-egg img{filter:drop-shadow(-6px 8px 16px rgba(0,0,0,.55))}
 @media print{.dog-egg{display:none!important}}
 /* ── Ściąga monet (Zakupy → Monety) ── */
@@ -2102,7 +2095,7 @@ setInterval(renderTzClock,30000);
     let d=document.getElementById('dogEgg');
     if(!d){
       d=document.createElement('div');d.id='dogEgg';d.className='dog-egg';
-      d.innerHTML='<div class="dog-bubble"><div class="db-jp">いってらっしゃい！</div><div class="db-rom">itterasshai!</div><div class="db-pl">Udanej podróży — wracajcie cali! 🐾</div></div><img src="img/dog.png" alt="Nasz pies" draggable="false">';
+      d.innerHTML='<img src="img/dog.png" alt="Nasz pies" draggable="false">';
       d.addEventListener('click',hideDog);
       document.body.appendChild(d);
     }
