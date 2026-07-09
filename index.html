@@ -15,6 +15,8 @@
 <meta name="apple-mobile-web-app-title" content="Japonia 2026">
 </head>
 <body>
+<script>/* Tryb ciemny: klasa na <html> zanim wczytają się style — bez błysku bieli */
+try{if(localStorage.getItem('jp26_theme')==='dark')document.documentElement.classList.add('dark')}catch(e){}</script>
 <script>
 // ╔══════════════════════════════════════════════════════════════════╗
 // ║  DANE PLANU — EDYTUJ TYLKO TĘ SEKCJĘ                          ║
@@ -255,14 +257,19 @@ Restauracja :: Woda poproszę | お水お願いします | O-mizu onegai shimasu
 Restauracja :: Na wynos | 持ち帰り | Mochikaeri | moćikaeri
 Restauracja :: Smacznego (przed jedzeniem) | いただきます | Itadakimasu | itadakimas
 Restauracja :: Dziękuję za posiłek | ごちそうさまでした | Gochisōsama deshita | goćisoosama deśta
+Restauracja :: Czy możemy smażyć sami? (okonomiyaki, Dzień 3) | 自分で焼けますか？ | Jibun de yakemasu ka? | dźibun de jakemas ka
+Restauracja :: Poproszę bocchi mori (soba w Togakushi, Dzień 10) | ぼっち盛りをください | Botchi-mori o kudasai | boćći-mori o kudasaj
+Restauracja :: „Rezerwacja online" — ten przycisk na Tabelogu | ネット予約 | Netto yoyaku | netto jojaku
 Zakupy :: Ile to kosztuje? | いくらですか？ | Ikura desu ka? | ikura des ka
 Zakupy :: Czy mogę płacić kartą? | カードでいいですか？ | Kādo de ii desu ka? | kaado de ii des ka
 Zakupy :: Poproszę paragon | レシートをください | Reshīto o kudasai | reśiito o kudasaj
 Zakupy :: Czy jest tax-free? | 免税できますか？ | Menzei dekimasu ka? | menzei dekimas ka
+Zakupy :: Kartą ICOCA, resztę gotówką (zerowanie salda, Dzień 20) | イコカで、残りは現金で | ICOCA de, nokori wa genkin de | ikoka de, nokori ła genkin de
 Orientacja i transport :: Gdzie jest…? | 〜はどこですか？ | … wa doko desu ka? | … ła doko des ka
 Orientacja i transport :: Gdzie jest toaleta? | トイレはどこですか？ | Toire wa doko desu ka? | tojre ła doko des ka
 Orientacja i transport :: Gdzie jest stacja? | 駅はどこですか？ | Eki wa doko desu ka? | eki ła doko des ka
 Orientacja i transport :: Czy ten pociąg jedzie do…? | この電車は〜に行きますか？ | Kono densha wa … ni ikimasu ka? | kono denśa ła … ni ikimas ka
+Orientacja i transport :: Bezołowiowa, do pełna (stacja paliw — Dni 12 i 15) | レギュラー、満タンでお願いします | Regyurā, mantan de onegai shimasu | regjuraa, mantan de onegai śimas
 Awaryjne :: Pomocy! | 助けて！ | Tasukete! | taskete
 Awaryjne :: Proszę wezwać policję | 警察を呼んでください | Keisatsu o yonde kudasai | keesacu o jonde kudasaj
 Awaryjne :: Proszę wezwać karetkę | 救急車を呼んでください | Kyūkyūsha o yonde kudasai | kjuukjuuśa o jonde kudasaj
@@ -1142,6 +1149,73 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px
 .tip-s::after{content:'';margin-left:auto;flex:none;width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:5px solid var(--kin);transition:transform .2s}
 .tip-d[open] .tip-s::after{transform:rotate(180deg)}
 .tip-b{padding:3px 11px 9px 11px;font-size:.9em;color:var(--muted);line-height:1.6}
+/* ── Tryb „TERAZ" — bieżący dzień i punkt planu ── */
+.today-pill{display:inline-block;font-size:.62em;font-weight:700;background:var(--red);color:#fff;border-radius:12px;padding:2px 9px;margin-left:8px;vertical-align:middle;letter-spacing:.09em}
+.sr-past{opacity:.5}
+.sr-now{background:linear-gradient(90deg,rgba(184,64,47,.08),transparent 70%);border-radius:10px}
+.sr-now .sdot::before{background:var(--red);animation:nowPulse 2.2s ease-in-out infinite}
+@keyframes nowPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.3)}}
+.now-pill{position:fixed;right:14px;bottom:14px;z-index:60;display:none;align-items:center;gap:10px;max-width:min(80vw,420px);background:var(--card);border:1px solid var(--border);border-left:4px solid var(--red);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.18);padding:9px 14px;cursor:pointer;font-family:var(--font)}
+.now-pill:hover{filter:brightness(1.03)}
+.now-pill .np-k{font-size:.6em;font-weight:700;color:var(--red);letter-spacing:.1em;white-space:nowrap;flex:none}
+.now-pill .np-body{display:flex;flex-direction:column;min-width:0}
+.now-pill .np-t{font-size:.8em;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.now-pill .np-n{font-size:.68em;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* ── Pogoda + słońce w nagłówku dnia ── */
+.dwx{font-size:.72em;color:var(--muted);margin-top:3px;letter-spacing:.01em}
+/* ── Portfel: zdjęcie/QR na rezerwacji ── */
+.res-mid{display:flex;align-items:center;gap:10px}
+.res-mid-t{flex:1;min-width:0}
+.res-thumb{flex:none;width:54px;height:54px;border:1px solid var(--border);border-radius:9px;background-size:cover;background-position:center;background-color:#fff;cursor:pointer;padding:0}
+.res-thumb:hover{border-color:var(--teal)}
+.lightbox.bright{background:#fff}
+.lightbox.bright img{box-shadow:0 4px 18px rgba(0,0,0,.15);max-height:80vh}
+.lightbox.bright .lb-cap{color:#7d756a}
+/* ── Głosowe rozmówki ── */
+.say-btn{background:none;border:1px solid var(--border);border-radius:8px;cursor:pointer;font-size:.62em;padding:3px 10px;vertical-align:middle;margin-left:9px;transition:.15s;line-height:1.5}
+.say-btn:hover{border-color:var(--indigo);background:rgba(61,90,128,.08)}
+.say-btn.saying{border-color:var(--teal);background:rgba(26,122,109,.1)}
+/* ── Przełącznik motywu ── */
+.theme-btn{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:3px 11px;cursor:pointer;font-size:.8em;line-height:1.5;transition:.15s}
+.theme-btn:hover{border-color:var(--kin)}
+/* ── Tryb ciemny — „izakaya nocą" ── */
+html.dark{color-scheme:dark;--bg:#141217;--card:#1f1c24;--red:#e07856;--gold:#d4ad5e;--kin:#c9a355;--teal:#4cb39e;--indigo:#93aed1;--text:#eae3d4;--muted:#a2988a;--border:#353039;--shadow:0 6px 20px rgba(0,0,0,.4);--p1:#e07856;--p2:#4cb39e;--p3:#93aed1}
+html.dark .hdr{background:#191720;background-image:repeating-radial-gradient(circle at 50% 150%,rgba(224,120,86,.07) 0 15px,transparent 15px 30px);border-bottom-color:#28242e}
+html.dark .hdr .jp{color:#6b6559}
+html.dark .pdiv .pj{color:#5c574d}
+html.dark .day-collage{background:#26222c}
+html.dark .day-collage img{filter:brightness(.82)}
+html.dark .dh{border-bottom-color:#2a2630}
+html.dark .ck-gh{border-bottom-color:#2a2630}
+html.dark .dh .dsep{background:#332f3b}
+html.dark .dh .dnum i{color:#78705f}
+html.dark .sch::before,html.dark .res-it::before{background:#332f3b}
+html.dark .bdg-none{background:#332f3b;color:var(--muted)}
+html.dark .bl-n{border-left-color:#48434f}
+html.dark .tip-d{background:#282218;border-left-color:#8a6d33}
+html.dark .tip-d[open]{background:#2d261a}
+html.dark .tip-s{color:#d4ad5e}
+html.dark .res-evt .res-card{background:#242028}
+html.dark .ck-gc,html.dark .ck-gc2,html.dark .res-left,html.dark .cd-pill{background:#332f3b;color:#a2988a}
+html.dark .res-left.cd-soon{background:#3c3320;color:#d4ad5e}
+html.dark .res-left.cd-past,html.dark .cd-pill.cd-past{background:#2b2831;color:#78705f}
+html.dark .res-left.dl-done{background:#1c352e;color:#7fd0b8}
+html.dark .ck-row:hover{background:#282430}
+html.dark .ck-bar,html.dark .bud-track{background:#332f3b}
+html.dark .subtabs{background:#282430}
+html.dark .dmenu-btn:hover,html.dark .dmenu-pop button:hover,html.dark .link-rm:hover,html.dark .shop-cam:hover{background:#2e2a37}
+html.dark .bud-conv input,html.dark .shop-add-in,html.dark .day-edit-ta{background:#17151b;border-color:#3a3542}
+html.dark .info-warn{background:#2f2718;border-color:#584722;color:#d9b878}
+html.dark .ph-pron{background:#332d20;color:#cba653}
+html.dark .link-btn:hover,html.dark .ibtn:hover{background:#1d2a27}
+html.dark .shop-own{background:#332c1e;color:#c9a355}
+html.dark .dn-1{background:#3a2521;color:#eba28c;border-color:#4d2f28}
+html.dark .dn-2{background:#1d332c;color:#8fd3c0;border-color:#28453d}
+html.dark .dn-3{background:#232e3c;color:#a5c0e2;border-color:#2f3d50}
+html.dark .route-map svg{filter:brightness(.82) saturate(.85);border-radius:8px}
+html.dark .toast{background:#3a3542}
+html.dark .now-pill{box-shadow:0 8px 24px rgba(0,0,0,.55)}
+html.dark .hrs{color:#5cc0ab}
 </style>
 
 <div class="hdr">
@@ -1157,6 +1231,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px
   <div class="hdr-info-row">
     <div class="cd-head" id="cdHead"></div>
     <div class="tz-clock" id="tzClock"></div>
+    <button class="theme-btn noprint" id="themeBtn" onclick="toggleTheme()" title="Przełącz tryb jasny/ciemny" aria-label="Przełącz motyw">🌙</button>
   </div>
 </div>
 <div class="tabs">
@@ -1182,7 +1257,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px
 
 <script>
 const TAB_NAMES=['plan','terminy','dystanse','zakupy','wazne','pakowanie','jedzenie','rozmowki'];
-function sw(i){document.querySelectorAll('.tab').forEach((t,j)=>t.classList.toggle('on',j===i));document.querySelectorAll('.pnl').forEach((p,j)=>p.classList.toggle('on',j===i))}
+function sw(i){document.querySelectorAll('.tab').forEach((t,j)=>t.classList.toggle('on',j===i));document.querySelectorAll('.pnl').forEach((p,j)=>p.classList.toggle('on',j===i));const np=document.getElementById('nowPill');if(np)np.style.display=(i===0&&np.dataset.has==='1')?'flex':'none'}
 function selectTab(i){sw(i);try{history.replaceState(null,'','#'+TAB_NAMES[i])}catch(e){location.hash=TAB_NAMES[i]}}
 function tabFromHash(){const h=decodeURIComponent(location.hash.slice(1));if(/^d\d+$/.test(h))return 0;const i=TAB_NAMES.indexOf(h);return i>=0?i:0}
 function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML}
@@ -1228,6 +1303,8 @@ function parse(text){
 }
 
 const D=parse(PLAN_DATA);
+// Cache zdjęć (IndexedDB → object URL); używany przez Zakupy ORAZ portfel QR w Terminach
+let IMG_DB=null,IMG_URLS={};
 document.getElementById('subtitle').textContent=D.meta.subtitle||'';
 document.getElementById('footer').innerHTML=`日本旅行 2026 · Ostatnia aktualizacja: ${esc(D.meta.updated||'?')}`;
 
@@ -1269,12 +1346,16 @@ function renderAllRes(){
     h0+=`<div class="res-it ${tier} ${done?'res-done':''} ${isEvt?'res-evt':''}"><div class="res-dot"></div><div class="res-card">`;
     h0+=`<div class="res-top"><span class="res-date">${esc(dateTxt)}</span><span class="res-left ${done?'dl-done':rel.c}">${done?'✓ gotowe':esc(rel.t)}</span>`;
     if(!isEvt)h0+=`<label class="chk-wrap" title="Odhacz"><input type="checkbox" ${done?'checked':''} onchange="toggleRes(${it.i})"><span class="chk-box"></span></label>`;
-    h0+=`</div><div class="res-title">${esc(it.ti)}</div>`;
+    const pkey='res-'+slug(it.ti),purl=(!isEvt&&IMG_URLS[pkey])||'';
+    h0+=`</div><div class="res-mid"><div class="res-mid-t"><div class="res-title">${esc(it.ti)}</div>`;
     if(it.sub)h0+=`<div class="res-sub">${esc(it.sub)}</div>`;
+    h0+=`</div>`;
+    if(purl)h0+=`<button class="res-thumb" style="background-image:url('${purl}')" onclick="openResLightbox('${pkey}')" title="Pokaż bilet / QR na pełnym ekranie"></button>`;
+    h0+=`</div>`;
     if(!isEvt){
-      h0+=`<details class="res-det"><summary>Szczegóły i link potwierdzenia</summary><div class="res-detb">${fmtRx(it.dx)}`;
+      h0+=`<details class="res-det"><summary>Szczegóły, link i zdjęcie potwierdzenia</summary><div class="res-detb">${fmtRx(it.dx)}`;
       if(link)h0+=`<div class="rc-link"><a href="${esc(link)}" target="_blank" rel="noopener">📎 Potwierdzenie</a> <button class="link-rm" onclick="removeLink(${it.i})">✕</button></div>`;
-      h0+=`<div class="rc-actions"><button class="link-btn" onclick="addLink(${it.i})">${link?'🔄 Zmień link':'📎 Dodaj link potwierdzenia'}</button></div>`;
+      h0+=`<div class="rc-actions"><button class="link-btn" onclick="addLink(${it.i})">${link?'🔄 Zmień link':'📎 Dodaj link potwierdzenia'}</button> <button class="link-btn" onclick="pickResPhoto('${pkey}')">${purl?'🖼️ Zmień zdjęcie/QR':'🖼️ Dodaj zdjęcie / QR'}</button></div>`;
       h0+=`</div></details>`;
     }
     h0+=`</div></div>`;
@@ -1394,6 +1475,7 @@ const DAY_IMG={
 function openPhoto(dnum,ix){const im=(DAY_IMG[dnum]||[])[ix];if(!im)return;
   let ov=document.getElementById('imgLightbox');
   if(!ov){ov=document.createElement('div');ov.id='imgLightbox';ov.className='lightbox';document.body.appendChild(ov);ov.addEventListener('click',e=>{if(e.target===ov)closeLightbox()});}
+  ov.classList.remove('bright');
   ov.innerHTML=`<div class="lb-inner"><img src="${im.f}" alt=""><div class="lb-cap">${esc(im.t)} · fot. ${esc(im.by)} — <a href="${im.u}" target="_blank" rel="noopener">${esc(im.lic)}</a> · Wikimedia Commons</div><div class="lb-actions"><button class="lb-btn" onclick="closeLightbox()">Zamknij</button></div></div>`;
   ov.style.display='flex';
 }
@@ -1419,6 +1501,39 @@ function dayOverrides(){try{return JSON.parse(localStorage.getItem('jp26_day_ove
 function saveDayOverrides(o){localStorage.setItem('jp26_day_overrides',JSON.stringify(o))}
 const DAY_BY_KEY={};
 let imgCredits='';
+// ── Pogoda + wschód/zachód słońca per dzień ──
+// Współrzędne bazy każdego dnia (dzień 0 i „Powrót" = lot, bez prognozy)
+const DAY_GEO={1:[35.01,135.77],2:[35.01,135.77],3:[34.69,135.50],4:[35.01,135.77],5:[34.69,135.80],6:[36.15,137.25],7:[36.15,137.25],8:[36.25,137.64],9:[36.24,137.97],10:[36.76,138.08],11:[36.74,138.41],12:[36.65,138.19],13:[35.73,139.73],14:[35.73,139.73],15:[35.73,139.73],16:[35.73,139.73],17:[35.73,139.73],18:[35.73,139.73],19:[35.32,139.55],20:[35.73,139.73]};
+function nowDate(){return window.__testNow?new Date(window.__testNow):new Date()}
+function tzParts(tz){const s=new Intl.DateTimeFormat('en-CA',{timeZone:tz,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hour12:false}).format(nowDate());const m=s.match(/(\d{4})-(\d{2})-(\d{2}),?\s*(\d{2}):(\d{2})/);return m?{d:m[1]+'-'+m[2]+'-'+m[3],min:+m[4]*60+ +m[5]}:null}
+function dayDate(n){const st=D.meta.start;if(!st)return'';const p=st.split('-');return new Date(Date.UTC(+p[0],+p[1]-1,+p[2]+n)).toISOString().slice(0,10)}
+// Wschód/zachód słońca — liczone lokalnie (równanie wschodu słońca, NOAA), działa offline dla każdej daty
+function sunTimes(ds,lat,lon){
+  const rad=Math.PI/180,deg=180/Math.PI;
+  const Jdate=new Date(ds+'T00:00:00Z').getTime()/86400000+2440587.5;
+  const n=Math.round(Jdate-2451545.0+0.0008+lon/360);
+  const Jstar=n-lon/360;
+  const M=((357.5291+0.98560028*Jstar)%360+360)%360;
+  const C=1.9148*Math.sin(M*rad)+0.02*Math.sin(2*M*rad)+0.0003*Math.sin(3*M*rad);
+  const L=((M+C+180+102.9372)%360+360)%360;
+  const Jtransit=2451545.0+Jstar+0.0053*Math.sin(M*rad)-0.0069*Math.sin(2*L*rad);
+  const sinD=Math.sin(L*rad)*Math.sin(23.4397*rad),cosD=Math.cos(Math.asin(sinD));
+  const cosW=(Math.sin(-0.833*rad)-Math.sin(lat*rad)*sinD)/(Math.cos(lat*rad)*cosD);
+  if(cosW<-1||cosW>1)return null;
+  const w=Math.acos(cosW)*deg;
+  const f=j=>new Intl.DateTimeFormat('pl-PL',{timeZone:'Asia/Tokyo',hour:'numeric',minute:'2-digit'}).format(new Date((j-2440587.5)*86400000));
+  return{rise:f(Jtransit-w/360),set:f(Jtransit+w/360)};
+}
+function getWxCache(){try{return JSON.parse(localStorage.getItem('jp26_wx')||'{}')}catch(e){return{}}}
+function dayMetaLine(dnum){
+  const n=+dnum;const g=DAY_GEO[n];if(!g||!dnum)return'';
+  const ds=dayDate(n);if(!ds)return'';
+  const sun=sunTimes(ds,g[0],g[1]);
+  let h=sun?`🌅 ${sun.rise} · 🌇 ${sun.set}`:'';
+  const wx=(getWxCache().d||{})[n];
+  if(wx&&wx.tx!=null)h+=`${h?' &nbsp;·&nbsp; ':''}🌡️ ${Math.round(wx.tx)}°/${Math.round(wx.tn)}°${wx.pp!=null?' · ☔ '+Math.round(wx.pp)+'%':''}`;
+  return h?`<div class="dwx" title="Wschód i zachód słońca (obliczane) · prognoza: Open-Meteo, odświeżana gdy jest internet">${h}</div>`:'';
+}
 function renderPlanTab(){
   const overrides=dayOverrides();
   let h1='',nav='<div class="day-nav"><button class="dn-top noprint" onclick="scrollToTop()" title="Przewiń na górę" aria-label="Przewiń na górę">↑</button>';
@@ -1445,8 +1560,8 @@ function renderPlanTab(){
       const collage=dimgs?`<div class="day-collage${dimgs.length===1?' single':''}">${dimgs.map((im,ix)=>`<img src="${im.f}" alt="${esc(im.t)}" title="${esc(im.t)}" loading="lazy" onclick="openPhoto(${+dnum},${ix})">`).join('')}</div>`:'';
       const dmenuTitle=ov?'Menu dnia (dzień podmieniony)':'Menu dnia';
       const dmenu=`<button class="dmenu-btn noprint${ov?' dmenu-mod':''}" title="${dmenuTitle}" aria-label="${dmenuTitle}" onclick="toggleDayMenu(event,'${key}')">⋮</button>`;
-      h1+=`<div class="dc p-${c}" id="${anchor}">${collage}<div class="dh"><div class="dnum"><b>${bigNum}</b><i>${subK}</i></div><div class="dsep"></div><div class="dt"><div class="dn">${esc(dtitle)}</div><div class="dd">${esc(od.ds)}</div></div>${dmenu}</div><div class="db ${tbd}"><div class="ds">${esc(od.sm)}</div>`;
-      if(has){h1+='<div class="sch">';od.sc.forEach(s=>{const emq=s.mq||(isFood(s.ti)?foodMq(s.ti,dnum):'');const ti=emq?`<a class="mlink" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(emq)}" target="_blank" rel="noopener">${esc(s.ti)}</a>`:esc(s.ti);const stips=tipMap[dnum+'_'+s.tm]||[];let th='';stips.forEach(tip=>{th+=`<details class="tip-d"><summary class="tip-s">${esc(tip.icon)} ${esc(tip.ti)}</summary><div class="tip-b">${esc(tip.dx)}</div></details>`});h1+=`<div class="sr"><div class="st">${esc(s.tm)}</div><div class="sdot"></div><div class="sc"><strong>${ti}</strong>${s.nt?'<br><span class="n">'+fmtNote(s.nt)+'</span>':''}${th}</div></div>`});h1+='</div>'}
+      h1+=`<div class="dc p-${c}" id="${anchor}">${collage}<div class="dh"><div class="dnum"><b>${bigNum}</b><i>${subK}</i></div><div class="dsep"></div><div class="dt"><div class="dn">${esc(dtitle)}</div><div class="dd">${esc(od.ds)}</div>${dayMetaLine(dnum)}</div>${dmenu}</div><div class="db ${tbd}"><div class="ds">${esc(od.sm)}</div>`;
+      if(has){h1+='<div class="sch">';od.sc.forEach(s=>{const emq=s.mq||(isFood(s.ti)?foodMq(s.ti,dnum):'');const ti=emq?`<a class="mlink" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(emq)}" target="_blank" rel="noopener">${esc(s.ti)}</a>`:esc(s.ti);const stips=tipMap[dnum+'_'+s.tm]||[];let th='';stips.forEach(tip=>{th+=`<details class="tip-d"><summary class="tip-s">${esc(tip.icon)} ${esc(tip.ti)}</summary><div class="tip-b">${esc(tip.dx)}</div></details>`});h1+=`<div class="sr" data-tm="${esc(s.tm)}"><div class="st">${esc(s.tm)}</div><div class="sdot"></div><div class="sc"><strong>${ti}</strong>${s.nt?'<br><span class="n">'+fmtNote(s.nt)+'</span>':''}${th}</div></div>`});h1+='</div>'}
       const isFlight=/^lot/i.test(od.ht);
       const htLink=isFlight?esc(od.ht):`<a class="mlink" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(od.ht)}" target="_blank" rel="noopener">${esc(od.ht)}</a>`;
       h1+=`<div class="dht">${isFlight?'✈️':'🏨'} ${htLink}</div></div></div>`;
@@ -1457,6 +1572,7 @@ function renderPlanTab(){
     if(allImgs.length)imgCredits='<details class="img-credits"><summary>📷 Źródła zdjęć — Wikimedia Commons</summary><div class="img-credits-b">'+allImgs.map(im=>`${esc(im.t)} — fot. ${esc(im.by)}, <a href="${im.u}" target="_blank" rel="noopener">${esc(im.lic)}</a>`).join('<br>')+'</div></details>';
   }
   document.getElementById('p1').innerHTML=routeMapSVG()+nav+'</div>'+h1+imgCredits;
+  updateNowMode();
 }
 renderPlanTab();
 
@@ -1731,8 +1847,7 @@ function hideAdd(gi){const f=document.getElementById('addForm-'+gi);if(!f)return
 function addCustom(gi){const grp=SHOP_GRP_ORDER[gi];if(!grp)return;const li=document.getElementById('addLb-'+gi),lb=(li.value||'').trim();if(!lb){li.focus();return}const dt=(document.getElementById('addDt-'+gi).value||'').trim();const c=getCustom();if(!c[grp])c[grp]=[];c[grp].push({id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),lb:lb,dt:dt});saveCustom(c);renderShopping()}
 function delCustom(gi,id){const grp=SHOP_GRP_ORDER[gi];if(!grp)return;const c=getCustom();if(c[grp]){c[grp]=c[grp].filter(x=>x.id!==id);if(!c[grp].length)delete c[grp];saveCustom(c)}const s=getChk('jp26_shop');delete s['c-'+id];saveChk('jp26_shop',s);renderShopping()}
 // Zdjęcia do wpisów — lokalnie, bez uploadu. Oryginalny plik (Blob) w IndexedDB,
-// wyświetlany przez object URL. IMG_URLS to cache URL-i dla synchronicznego renderu.
-let IMG_DB=null,IMG_URLS={};
+// wyświetlany przez object URL. IMG_URLS (zadeklarowane na górze) to cache URL-i dla synchronicznego renderu.
 function idbOpen(){return new Promise((res,rej)=>{if(IMG_DB)return res(IMG_DB);
   const r=indexedDB.open('jp26_shop',1);
   r.onupgradeneeded=()=>{const db=r.result;if(!db.objectStoreNames.contains('img'))db.createObjectStore('img')};
@@ -1772,10 +1887,29 @@ function photoCtrl(key){const url=IMG_URLS[key];
 function openLightbox(key){const url=IMG_URLS[key];if(!url)return;
   let ov=document.getElementById('imgLightbox');
   if(!ov){ov=document.createElement('div');ov.id='imgLightbox';ov.className='lightbox';document.body.appendChild(ov);ov.addEventListener('click',e=>{if(e.target===ov)closeLightbox()});}
+  ov.classList.remove('bright');
   ov.innerHTML=`<div class="lb-inner"><img src="${url}" alt=""><div class="lb-actions"><button class="lb-btn" onclick="pickPhoto('${key}')">Zmień</button><button class="lb-btn lb-del" onclick="delPhoto('${key}')">Usuń</button><button class="lb-btn" onclick="closeLightbox()">Zamknij</button></div></div>`;
   ov.style.display='flex';
 }
-function closeLightbox(){const ov=document.getElementById('imgLightbox');if(ov)ov.style.display='none';}
+function closeLightbox(){const ov=document.getElementById('imgLightbox');if(ov){ov.style.display='none';ov.classList.remove('bright')}}
+// ── Portfel QR: zdjęcia potwierdzeń/biletów na rezerwacjach (Terminy) ──
+function pickResPhoto(key){
+  const inp=document.createElement('input');inp.type='file';inp.accept='image/*';
+  inp.onchange=()=>{const f=inp.files&&inp.files[0];if(!f)return;
+    readImageBlob(f,blob=>{if(!blob){alert('Nie udało się przetworzyć zdjęcia.');return}
+      idbPut(key,blob).then(()=>{if(IMG_URLS[key])URL.revokeObjectURL(IMG_URLS[key]);IMG_URLS[key]=URL.createObjectURL(blob);closeLightbox();renderAllRes();toast('Zdjęcie zapisane (offline, w tej przeglądarce)')})
+      .catch(()=>alert('Nie udało się zapisać zdjęcia.'));
+    });
+  };inp.click();
+}
+function delResPhoto(key){idbDel(key).then(()=>{if(IMG_URLS[key]){URL.revokeObjectURL(IMG_URLS[key]);delete IMG_URLS[key]}closeLightbox();renderAllRes();}).catch(()=>{});}
+function openResLightbox(key){const url=IMG_URLS[key];if(!url)return;
+  let ov=document.getElementById('imgLightbox');
+  if(!ov){ov=document.createElement('div');ov.id='imgLightbox';ov.className='lightbox';document.body.appendChild(ov);ov.addEventListener('click',e=>{if(e.target===ov)closeLightbox()});}
+  ov.classList.add('bright');
+  ov.innerHTML=`<div class="lb-inner"><img src="${url}" alt=""><div class="lb-cap">Białe tło pod skan — przy bramce podkręć jasność ekranu na maksimum</div><div class="lb-actions"><button class="lb-btn" onclick="pickResPhoto('${key}')">Zmień</button><button class="lb-btn lb-del" onclick="delResPhoto('${key}')">Usuń</button><button class="lb-btn" onclick="closeLightbox()">Zamknij</button></div></div>`;
+  ov.style.display='flex';
+}
 function renderShopping(){
   const s=getChk('jp26_shop'),custom=getCustom(),items=D.shop;
   const groups=[],map={};
@@ -1816,19 +1950,38 @@ function buildZakupy(){
 }
 buildZakupy();
 // Wczytaj zdjęcia z IndexedDB i pokaż miniatury (render był synchroniczny, bez URL-i)
-initImgs().then(()=>{if(document.getElementById('shopPane'))renderShopping()});
+initImgs().then(()=>{if(document.getElementById('shopPane'))renderShopping();renderAllRes()});
 
-// Rozmówki (#p6)
+// Rozmówki (#p6) — z odtwarzaniem po japońsku (syntezator systemowy, głos ja-JP)
 const PHRASE_MON={'Podstawy':'基','Restauracja':'食','Zakupy':'買','Orientacja i transport':'道','Awaryjne':'急','Liczby':'数'};
+const PHRASE_JP=[];
 function renderPhrases(){
+  PHRASE_JP.length=0;
+  const tts=('speechSynthesis' in window);
   let h='',lastGrp='';
   D.phrases.forEach(p=>{
     if(p.grp!==lastGrp){lastGrp=p.grp;const mon=PHRASE_MON[p.grp]||'•';h+=`<div class="ck-grp p-3"><span class="ck-mon">${esc(mon)}</span><span class="ck-gt2">${esc(p.grp)}</span></div>`}
-    h+=`<div class="ph-card"><div class="ph-pl">${esc(p.pl)}</div><div class="ph-jp">${esc(p.jp)}</div><div class="ph-rom">${esc(p.jpr)}<span class="ph-pron">${esc(p.pron)}</span></div></div>`;
+    const say=tts?`<button class="say-btn noprint" title="Odtwórz po japońsku" aria-label="Odtwórz po japońsku" onclick="sayJp(${PHRASE_JP.push(p.jp)-1},this)">🔊</button>`:'';
+    h+=`<div class="ph-card"><div class="ph-pl">${esc(p.pl)}</div><div class="ph-jp">${esc(p.jp)}${say}</div><div class="ph-rom">${esc(p.jpr)}<span class="ph-pron">${esc(p.pron)}</span></div></div>`;
   });
   document.getElementById('p6').innerHTML=h;
 }
 renderPhrases();
+let JP_VOICE=null;
+function pickJpVoice(){try{const vs=speechSynthesis.getVoices();JP_VOICE=vs.find(v=>/^ja/i.test(v.lang))||null}catch(e){}}
+if('speechSynthesis' in window){pickJpVoice();speechSynthesis.onvoiceschanged=pickJpVoice}
+function sayJp(i,btn){
+  const txt=PHRASE_JP[i];if(!txt)return;
+  if(!('speechSynthesis' in window)){toast('Ta przeglądarka nie ma syntezy mowy');return}
+  if(!JP_VOICE)pickJpVoice();
+  speechSynthesis.cancel();
+  document.querySelectorAll('.say-btn.saying').forEach(b=>b.classList.remove('saying'));
+  const u=new SpeechSynthesisUtterance(txt);
+  u.lang='ja-JP';if(JP_VOICE)u.voice=JP_VOICE;u.rate=0.85;
+  if(btn){btn.classList.add('saying');u.onend=u.onerror=()=>btn.classList.remove('saying')}
+  speechSynthesis.speak(u);
+  if(!JP_VOICE)toast('Uwaga: brak japońskiego głosu w systemie — wymowa może być kiepska');
+}
 
 // Licznik w nagłówku (terminy są w scalonej zakładce #p0)
 function daysUntil(dateStr){const d=new Date(dateStr+'T00:00:00'),t=new Date();t.setHours(0,0,0,0);return Math.round((d-t)/86400000)}
@@ -1864,6 +2017,105 @@ setInterval(renderTzClock,30000);
 // Print/PDF: rozwiń wszystkie ciekawostki, żeby trafiły do wydruku, potem przywróć stan na ekranie
 window.addEventListener('beforeprint',()=>{document.querySelectorAll('.tip-d:not([open])').forEach(d=>{d.open=true;d.dataset.printopen='1'})});
 window.addEventListener('afterprint',()=>{document.querySelectorAll('.tip-d[data-printopen]').forEach(d=>{d.open=false;d.removeAttribute('data-printopen')})});
+
+// ── Przełącznik motywu (jasny/ciemny, zapamiętany w localStorage) ──
+function applyTheme(t){
+  document.documentElement.classList.toggle('dark',t==='dark');
+  const m=document.querySelector('meta[name="theme-color"]');if(m)m.content=t==='dark'?'#141217':'#c0392b';
+  const b=document.getElementById('themeBtn');if(b)b.textContent=t==='dark'?'☀️':'🌙';
+}
+function toggleTheme(){const t=document.documentElement.classList.contains('dark')?'light':'dark';try{localStorage.setItem('jp26_theme',t)}catch(e){}applyTheme(t)}
+applyTheme(document.documentElement.classList.contains('dark')?'dark':'light');
+
+// ── Tryb „TERAZ": podświetlenie dzisiejszego dnia i bieżącego punktu planu ──
+// Dzień N podróży = start (D.meta.start, dzień 0) + N dni; daty liczone wg strefy Japonii.
+// Dzień 0 (wylot z PL) i „Powrót" mają godziny polskie — dla nich zegar liczy się wg Warszawy.
+function tripDayNum(){
+  if(!D.meta.start)return null;
+  const jp=tzParts('Asia/Tokyo');if(!jp)return null;
+  const n=Math.round((new Date(jp.d+'T00:00:00Z')-new Date(dayDate(0)+'T00:00:00Z'))/86400000);
+  return(n>=0&&n<=21)?n:null;
+}
+function ensureNowPill(){
+  let p=document.getElementById('nowPill');
+  if(!p){
+    p=document.createElement('div');p.id='nowPill';p.className='now-pill noprint';
+    p.innerHTML='<span class="np-k">▶ TERAZ</span><span class="np-body"><span class="np-t"></span><span class="np-n"></span></span>';
+    p.onclick=()=>{if(p._target){p._target.scrollIntoView({block:'center',behavior:'smooth'})}};
+    document.body.appendChild(p);
+  }
+  return p;
+}
+function updateNowMode(){
+  document.querySelectorAll('.sr-now,.sr-past').forEach(el=>el.classList.remove('sr-now','sr-past'));
+  document.querySelectorAll('.today-pill').forEach(el=>el.remove());
+  const pill=ensureNowPill();
+  const n=tripDayNum();
+  const off=()=>{pill.dataset.has='0';pill.style.display='none'};
+  if(n===null){off();return}
+  const dc=document.getElementById(n===21?'dhome':'d'+n);
+  if(!dc){off();return}
+  const dn=dc.querySelector('.dh .dn');
+  if(dn){const sp=document.createElement('span');sp.className='today-pill';sp.textContent='DZIŚ';dn.appendChild(sp)}
+  const cur=tzParts((n===0||n===21)?'Europe/Warsaw':'Asia/Tokyo');
+  if(!cur){off();return}
+  const rows=[...dc.querySelectorAll('.sr')].map(el=>{const m=(el.dataset.tm||'').match(/^(\d{1,2}):(\d{2})/);return m?{el,min:+m[1]*60+ +m[2]}:null}).filter(Boolean);
+  let curRow=null,nextRow=null;
+  rows.forEach(r=>{if(r.min<=cur.min)curRow=r;else if(!nextRow)nextRow=r});
+  rows.forEach(r=>{if(curRow&&r.min<curRow.min)r.el.classList.add('sr-past')});
+  if(curRow)curRow.el.classList.add('sr-now');
+  const titleOf=r=>{const s=r.el.querySelector('.sc strong');return s?s.textContent.trim():''};
+  pill.querySelector('.np-t').textContent=curRow?(curRow.el.dataset.tm+' · '+titleOf(curRow)):('Dzień '+(n===21?'powrotu':n)+' — plan startuje o '+(rows[0]?rows[0].el.dataset.tm:'?'));
+  let nt='';
+  if(nextRow){const df=nextRow.min-cur.min,hh=Math.floor(df/60),mm=df%60;nt='za '+(hh?hh+' h ':'')+(mm||!hh?mm+' min':'')+' → '+titleOf(nextRow)}
+  const npn=pill.querySelector('.np-n');npn.textContent=nt;npn.style.display=nt?'':'none';
+  pill._target=curRow?curRow.el:dc;
+  pill.dataset.has='1';
+  pill.style.display=document.getElementById('p1').classList.contains('on')?'flex':'none';
+}
+setInterval(updateNowMode,60000);
+// Auto-przewinięcie do dzisiejszego dnia przy starcie (tylko w trakcie podróży, bez własnej kotwicy w URL)
+(function(){
+  const n=tripDayNum();if(n===null)return;
+  const h=location.hash;if(h&&h!=='#plan')return;
+  const el=document.getElementById(n===21?'dhome':'d'+n);
+  if(el)setTimeout(()=>el.scrollIntoView({block:'start'}),200);
+})();
+
+// ── Pogoda: Open-Meteo (bez klucza), jedno zapytanie o wszystkie lokalizacje, cache 3h ──
+function fetchWx(){
+  if(!navigator.onLine)return;
+  const c=getWxCache();
+  if(c.ts&&Date.now()-c.ts<3*3600*1000)return;
+  if(!D.meta.start)return;
+  const jp=tzParts('Asia/Tokyo');if(!jp)return;
+  const addD=(ds,k)=>{const t=new Date(ds+'T00:00:00Z');t.setUTCDate(t.getUTCDate()+k);return t.toISOString().slice(0,10)};
+  const start=dayDate(1)>jp.d?dayDate(1):jp.d;
+  const horizon=addD(jp.d,15);
+  const end=dayDate(20)<horizon?dayDate(20):horizon;
+  if(start>end)return; // poza 16-dniowym horyzontem prognozy albo po podróży
+  const coords=[],idx={};
+  for(let n=1;n<=20;n++){const g=DAY_GEO[n];if(!g)continue;const k=g.join(',');if(!(k in idx)){idx[k]=coords.length;coords.push(g)}}
+  const url='https://api.open-meteo.com/v1/forecast?latitude='+coords.map(c=>c[0]).join(',')+'&longitude='+coords.map(c=>c[1]).join(',')+'&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Asia%2FTokyo&start_date='+start+'&end_date='+end;
+  fetch(url).then(r=>r.json()).then(j=>{
+    const arr=Array.isArray(j)?j:[j];
+    const byDay={};
+    for(let n=1;n<=20;n++){
+      const g=DAY_GEO[n];if(!g)continue;
+      const loc=arr[idx[g.join(',')]];
+      if(!loc||!loc.daily||!loc.daily.time)continue;
+      const di=loc.daily.time.indexOf(dayDate(n));
+      if(di<0)continue;
+      byDay[n]={tx:loc.daily.temperature_2m_max[di],tn:loc.daily.temperature_2m_min[di],pp:loc.daily.precipitation_probability_max[di]};
+    }
+    if(Object.keys(byDay).length){
+      try{localStorage.setItem('jp26_wx',JSON.stringify({ts:Date.now(),d:byDay}))}catch(e){}
+      renderPlanTab();
+    }
+  }).catch(()=>{});
+}
+fetchWx();
+setInterval(fetchWx,30*60*1000);
 
 // PWA: rejestracja service workera (tryb offline + instalacja na telefonie)
 if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('./sw.js').catch(()=>{})})}
