@@ -1,5 +1,5 @@
 /* Service worker — tryb offline dla planu podróży Japonia 2026 */
-const CACHE = 'japonia2026-v17';
+const CACHE = 'japonia2026-v18';
 const CORE = [
   './',
   './index.html',
@@ -26,7 +26,8 @@ const CORE = [
   './img/day16-3-shibuyasky.jpg',
   './img/day17-3-nezu.jpg',
   './img/day18-2-kabukicho.jpg',
-  './img/day19-1-daibutsu.jpg'
+  './img/day19-1-daibutsu.jpg',
+  './img/dog.png'
 ];
 
 self.addEventListener('install', e => {
