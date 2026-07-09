@@ -1175,6 +1175,19 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px
 .say-btn{background:none;border:1px solid var(--border);border-radius:8px;cursor:pointer;font-size:.62em;padding:3px 10px;vertical-align:middle;margin-left:9px;transition:.15s;line-height:1.5}
 .say-btn:hover{border-color:var(--indigo);background:rgba(61,90,128,.08)}
 .say-btn.saying{border-color:var(--teal);background:rgba(26,122,109,.1)}
+/* ── Ściąga monet (Zakupy → Monety) ── */
+.coin-tip{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--kin);border-radius:0 12px 12px 0;box-shadow:var(--shadow);padding:12px 16px;margin-bottom:14px;font-size:.85em;line-height:1.6}
+.coin-tip b{color:var(--text)}
+.coin-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:10px;margin-bottom:8px}
+.coin-card{display:flex;gap:14px;align-items:center;background:var(--card);border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow);padding:12px 14px}
+.coin-card svg{flex:none;filter:drop-shadow(0 2px 3px rgba(0,0,0,.18))}
+.coin-body{min-width:0}
+.coin-name{font-weight:700;font-size:1.02em}
+.coin-name .coin-jp{font-family:var(--font-jp);color:var(--muted);font-weight:500;font-size:.8em;margin-left:7px}
+.coin-desc{font-size:.8em;color:var(--muted);line-height:1.5;margin-top:3px}
+.coin-desc b{color:var(--text)}
+.note-row{display:flex;gap:13px;align-items:center;background:var(--card);border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow);padding:11px 14px;margin-bottom:9px}
+.note-chip{flex:none;width:76px;height:36px;border-radius:5px;border:1px solid rgba(0,0,0,.18);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.78em;color:rgba(0,0,0,.55);letter-spacing:.02em}
 /* ── Przełącznik motywu ── */
 .theme-btn{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:3px 11px;cursor:pointer;font-size:.8em;line-height:1.5;transition:.15s}
 .theme-btn:hover{border-color:var(--kin)}
@@ -1944,11 +1957,62 @@ function selSub(i){document.querySelectorAll('#pbud .subtab').forEach((b,j)=>b.c
 function buildZakupy(){
   document.getElementById('pbud').innerHTML=
     '<div class="bud-conv"><span class="bud-conv-l">Przelicznik</span><input id="convJpy" type="number" inputmode="numeric" min="0" value="1000" oninput="convCalc()"><span class="bud-conv-eq">¥ =</span><span id="convPln" class="bud-conv-out">'+fmtN(1000*PLN_RATE)+' zł</span></div>'+
-    '<div class="subtabs"><button class="subtab on" onclick="selSub(0)">🛍️ Co kupić</button><button class="subtab" onclick="selSub(1)">💴 Budżet</button></div>'+
-    '<div id="shopPane" class="subpane on"></div><div id="budPane" class="subpane"></div>';
-  renderShopping();renderBudget();
+    '<div class="subtabs"><button class="subtab on" onclick="selSub(0)">🛍️ Co kupić</button><button class="subtab" onclick="selSub(1)">💴 Budżet</button><button class="subtab" onclick="selSub(2)">🪙 Monety</button></div>'+
+    '<div id="shopPane" class="subpane on"></div><div id="budPane" class="subpane"></div><div id="coinPane" class="subpane"></div>';
+  renderShopping();renderBudget();renderCoins();
 }
 buildZakupy();
+
+// ── Ściąga monet i banknotów (Zakupy → Monety) — w całości offline ──
+function coinSVG(o){
+  const s=80,c=40;
+  let t=`<svg viewBox="0 0 ${s} ${s}" width="72" height="72" aria-hidden="true"><defs><radialGradient id="cg-${o.id}" cx="35%" cy="28%" r="80%"><stop offset="0%" stop-color="${o.f1}"/><stop offset="100%" stop-color="${o.f2}"/></radialGradient>${o.r1?`<radialGradient id="ci-${o.id}" cx="35%" cy="28%" r="80%"><stop offset="0%" stop-color="${o.r1}"/><stop offset="100%" stop-color="${o.r2}"/></radialGradient>`:''}</defs>`;
+  t+=`<circle cx="${c}" cy="${c}" r="${o.r}" fill="url(#cg-${o.id})" stroke="${o.st}" stroke-width="1.6"/>`;
+  if(o.r1)t+=`<circle cx="${c}" cy="${c}" r="${o.r-8}" fill="url(#ci-${o.id})" stroke="${o.st}" stroke-width=".7"/>`;
+  if(o.hole)t+=`<circle cx="${c}" cy="${c}" r="7.5" fill="var(--card)" stroke="${o.st}" stroke-width="1.4"/>`;
+  t+=o.txt+'</svg>';
+  return t;
+}
+function renderCoins(){
+  const coins=[
+    {id:1,r:27,f1:'#eef0f2',f2:'#c6cad0',st:'#aeb3ba',hole:false,
+     txt:`<text x="40" y="49" text-anchor="middle" font-size="26" font-weight="700" fill="#8b9098" font-family="'DM Sans',sans-serif">1</text>`,
+     nm:'1 ¥',jp:'一円 · ichi-en',
+     ds:'<b>Aluminiowa, lekka jak piórko</b> (1 g — jedyna moneta świata, która pływa na wodzie). Zbiera się na dnie portfela — wydawajcie na bieżąco, w konbini nikt się nie skrzywi.'},
+    {id:5,r:29,f1:'#e6c463',f2:'#b38d38',st:'#9c7c2e',hole:true,
+     txt:`<text x="40" y="26" text-anchor="middle" font-size="12" font-weight="700" fill="#7c6120" font-family="'Noto Sans JP',sans-serif">五円</text><text x="40" y="63" text-anchor="middle" font-size="8" fill="#7c6120" font-family="'Noto Sans JP',sans-serif">日本国</text>`,
+     nm:'5 ¥',jp:'五円 · go-en',
+     ds:'<b>Złota z dziurką — i JEDYNA bez cyfry arabskiej</b> (tylko 五円), przez co turyści mylą ją najczęściej. Bonus: „go-en" brzmi jak 御縁 (dobry los) — to <b>ta</b> moneta do skrzynki ofiarnej w Yasaka czy Zenkō-ji.'},
+    {id:10,r:30,f1:'#d29a63',f2:'#9c6337',st:'#84532e',hole:false,
+     txt:`<text x="40" y="49" text-anchor="middle" font-size="24" font-weight="700" fill="#6b4426" font-family="'DM Sans',sans-serif">10</text>`,
+     nm:'10 ¥',jp:'十円 · jū-en',
+     ds:'<b>Brązowa.</b> Na rewersie Pawilon Feniksa z Byōdō-in — zobaczycie go na żywo w Uji (Dzień 5); przyłóżcie monetę do oryginału, klasyczne zdjęcie.'},
+    {id:50,r:28,f1:'#eceef0',f2:'#c3c7cd',st:'#a9aeb5',hole:true,
+     txt:`<text x="40" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="#7f858d" font-family="'DM Sans',sans-serif">50</text><text x="40" y="64" text-anchor="middle" font-size="8" fill="#7f858d" font-family="'Noto Sans JP',sans-serif">五十円</text>`,
+     nm:'50 ¥',jp:'五十円 · gojū-en',
+     ds:'<b>Srebrna z dziurką</b> — dziurka odróżnia ją od 100 ¥. Wzór: chryzantemy.'},
+    {id:100,r:30,f1:'#eef0f2',f2:'#c6cad0',st:'#aeb3ba',hole:false,
+     txt:`<text x="40" y="49" text-anchor="middle" font-size="21" font-weight="700" fill="#828992" font-family="'DM Sans',sans-serif">100</text>`,
+     nm:'100 ¥',jp:'百円 · hyaku-en',
+     ds:'<b>Srebrna, z kwiatami wiśni.</b> Koń roboczy Japonii: automaty z napojami, lockery, pralnie — a kapsułki gacha dla Michała łykają je po 3–5 na raz.'},
+    {id:500,r:35,f1:'#dcc476',f2:'#b1954a',st:'#96803c',hole:false,r1:'#e9ebee',r2:'#c9cdd3',
+     txt:`<text x="40" y="48" text-anchor="middle" font-size="18" font-weight="700" fill="#7f858d" font-family="'DM Sans',sans-serif">500</text>`,
+     nm:'500 ¥',jp:'五百円 · gohyaku-en',
+     ds:'<b>Największa, dwukolorowa</b> (bikolor od 2021) i warta ~13 zł — jedna z najcenniejszych monet obiegowych świata. Nie traktujcie jak „drobnych"! Starsze automaty czasem nie łykają nowej wersji — wtedy płaćcie starą lub banknotem.'}
+  ];
+  let h='<div class="coin-tip">🔍 <b>Szybkie rozpoznawanie:</b> ma dziurkę? złota = <b>5 ¥</b>, srebrna = <b>50 ¥</b>. Bez dziurki: brązowa = <b>10 ¥</b>, malutka i lekka = <b>1 ¥</b>, srebrna = <b>100 ¥</b>, duża dwukolorowa = <b>500 ¥</b>.<br>💡 Przy kasie pieniądze kładzie się na <b>tackę</b> (nie do ręki) — resztę też dostaniecie na tackę. Górę drobnych zrzucajcie w automatach: przyjmują 10 / 50 / 100 / 500 ¥.</div>';
+  h+='<div class="sl">Monety</div><div class="coin-grid">';
+  coins.forEach(cn=>{h+=`<div class="coin-card">${coinSVG(cn)}<div class="coin-body"><div class="coin-name">${cn.nm}<span class="coin-jp">${cn.jp}</span></div><div class="coin-desc">${cn.ds}</div></div></div>`});
+  h+='</div><div class="sl">Banknoty — nowa seria 2024 (stare wciąż ważne)</div>';
+  const notes=[
+    {c1:'#c9d8ec',c2:'#a8bfdd',nm:'1 000 ¥',ds:'Niebieski · Kitasato Shibasaburō (mikrobiolog). Najczęstszy banknot — bankomaty 7-Eleven wydają głównie 10-tysięczne, rozmieniajcie w konbini.'},
+    {c1:'#e2d4e8',c2:'#c9b3d4',nm:'5 000 ¥',ds:'Fioletowy · Tsuda Umeko (pionierka edukacji kobiet).'},
+    {c1:'#e8dcc8',c2:'#d0bc9a',nm:'10 000 ¥',ds:'Brązowy · Shibusawa Eiichi („ojciec japońskiego kapitalizmu"). Płacenie nim za 200-jenowe onigiri jest OK — kasjerzy są przyzwyczajeni.'}
+  ];
+  notes.forEach(n=>{h+=`<div class="note-row"><span class="note-chip" style="background:linear-gradient(120deg,${n.c1},${n.c2})">${n.nm}</span><div class="coin-body"><div class="coin-desc">${n.ds}</div></div></div>`});
+  h+='<div class="coin-tip">🪙 Banknot <b>2 000 ¥</b> istnieje, ale prawie nie występuje (głównie na Okinawie) — jak go dostaniecie, to ciekawostka na pamiątkę. 💴 Monet nie da się wymienić w kantorze w Polsce — końcówkę wydajcie na lotnisku albo do skrzynki ofiarnej.</div>';
+  document.getElementById('coinPane').innerHTML=h;
+}
 // Wczytaj zdjęcia z IndexedDB i pokaż miniatury (render był synchroniczny, bez URL-i)
 initImgs().then(()=>{if(document.getElementById('shopPane'))renderShopping();renderAllRes()});
 
