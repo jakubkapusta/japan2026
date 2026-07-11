@@ -1,5 +1,5 @@
 /* Service worker — tryb offline dla planu podróży Japonia 2026 */
-const CACHE = 'japonia2026-v19';
+const CACHE = 'japonia2026-v20';
 const CORE = [
   './',
   './index.html',
