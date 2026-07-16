@@ -1109,14 +1109,24 @@ a.tel-inline{color:var(--red);font-weight:600;text-decoration:none;white-space:n
 .mchip svg{flex:none}
 .info-note{display:flex;gap:13px;align-items:flex-start;border-top:1px solid var(--text);border-bottom:1px solid var(--text);padding:11px 4px;margin-bottom:20px;font-size:.82em;color:var(--muted);line-height:1.55}
 .info-note .nseal{font-family:var(--font-serif);font-weight:700;font-size:.95em;color:var(--red);border:1.5px solid var(--red);border-radius:2px;padding:2px 8px;letter-spacing:.15em;flex:none;margin-top:1px}
-#p3 .ck-gt2{flex:0 1 auto;min-width:0}
-#p3 .ck-grp::after{content:'';flex:1;min-width:20px;height:1px;background:var(--border)}
+#p3 .ck-gt2,#p4 .ck-gt2,#p5 .ck-gt2,#p6 .ck-gt2{flex:0 1 auto;min-width:0}
+#p3 .ck-grp::after,#p4 .ck-grp::after,#p5 .ck-grp::after,#p6 .ck-grp::after{content:'';flex:1;min-width:20px;height:1px;background:var(--border)}
 #p3 .ck-grp.mon-fill .ck-mon{background:var(--pc,var(--red));border-color:var(--pc,var(--red));color:var(--card)}
-.ph-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:11px 15px;box-shadow:var(--shadow);margin-bottom:9px}
+/* Pakowanie + Jedzenie: arkusze zamiast kart, keisen między wierszami, kwadratowe checkboxy */
+#p4 .ck-gc2,#p5 .ck-gc2{order:1;background:none;border-radius:0;padding:0}
+#p4 .ck-card,#p5 .ck-card{border-radius:2px;box-shadow:none;margin-bottom:6px}
+#p4 .ck-items,#p5 .ck-items{padding:0}
+#p4 .ck-row,#p5 .ck-row{border-radius:0;padding:10px 16px}
+#p4 .ck-row+.ck-row,#p5 .ck-row+.ck-row{border-top:1px solid var(--border)}
+#p4 .ck-cb,#p5 .ck-cb{border-radius:2px;border-width:1.5px;width:18px;height:18px;font-size:12px}
+#p4 .ck-bar,#p5 .ck-bar,#p4 .ck-bar-f,#p5 .ck-bar-f{border-radius:2px}
+.ph-row{display:flex;align-items:center;gap:14px;padding:11px 16px}
+.ph-row+.ph-row{border-top:1px solid var(--border)}
+.ph-m{flex:1;min-width:0}
 .ph-pl{font-size:.8em;color:var(--muted);margin-bottom:3px}
 .ph-jp{font-family:var(--font-jp);font-size:1.22em;font-weight:500;color:var(--text);line-height:1.45}
 .ph-rom{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:5px;font-size:.85em;color:var(--p3);font-style:italic}
-.ph-pron{display:inline-block;font-size:.76em;color:#8a6d1f;background:#fdf6e7;border-radius:20px;padding:2px 11px;letter-spacing:.02em;font-style:normal}
+.ph-pron{display:inline-block;font-size:.76em;color:#8a6d1f;background:#fdf6e7;border-radius:2px;padding:2px 9px;letter-spacing:.02em;font-style:normal}
 .info-warn{background:#fff7ed;border:1px solid #f3d9b8;border-radius:10px;padding:11px 14px;font-size:.82em;color:#8a5a18;margin-bottom:18px;line-height:1.5}
 .ival{font-weight:700;color:var(--text)}
 .ibtn{font-family:var(--font);background:none;border:1px dashed var(--kin);color:var(--kin);cursor:pointer;font-size:.9em;padding:1px 7px;border-radius:2px;transition:.15s;white-space:nowrap}
@@ -1201,9 +1211,9 @@ a.tel-inline{color:var(--red);font-weight:600;text-decoration:none;white-space:n
 .lightbox.bright img{box-shadow:0 4px 18px rgba(0,0,0,.15);max-height:80vh}
 .lightbox.bright .lb-cap{color:#7d756a}
 /* ── Głosowe rozmówki ── */
-.say-btn{background:none;border:1px solid var(--border);border-radius:8px;cursor:pointer;font-size:.62em;padding:3px 10px;vertical-align:middle;margin-left:9px;transition:.15s;line-height:1.5}
-.say-btn:hover{border-color:var(--indigo);background:rgba(61,90,128,.08)}
-.say-btn.saying{border-color:var(--teal);background:rgba(26,122,109,.1)}
+.say-btn{background:none;border:1px solid var(--border);border-radius:2px;cursor:pointer;width:34px;height:34px;display:flex;align-items:center;justify-content:center;color:var(--muted);flex:none;padding:0;transition:.15s}
+.say-btn:hover{border-color:var(--indigo);color:var(--indigo);background:rgba(61,90,128,.08)}
+.say-btn.saying{border-color:var(--teal);color:var(--teal);background:rgba(26,122,109,.1)}
 /* ── Easter egg: pies (3× klik w zegar) ── */
 .tz-clock{cursor:pointer}
 .dog-egg{position:fixed;right:max(6px,env(safe-area-inset-right));bottom:0;z-index:300;width:min(64vw,460px);pointer-events:none;transform:translateY(112%) rotate(2deg);transition:transform .1s}
@@ -1216,13 +1226,7 @@ a.tel-inline{color:var(--red);font-weight:600;text-decoration:none;white-space:n
 html.dark .dog-egg img{filter:drop-shadow(-6px 8px 16px rgba(0,0,0,.55))}
 @media print{.dog-egg{display:none!important}}
 /* ── Jedzenie: polecane lokale (chipy z linkiem do mapy) ── */
-.food-recs{display:block;margin-top:7px}
-.fr-label{display:block;font-size:.68em;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px}
-.food-rec{display:inline-block;font-size:.8em;background:#f0faf8;border:1px solid #cfe9e3;color:var(--teal);border-radius:14px;padding:3px 11px;margin:0 5px 5px 0;text-decoration:none;font-weight:600}
-.food-rec::before{content:'📍 '}
-.food-rec:hover{background:var(--teal);color:#fff;border-color:var(--teal)}
-html.dark .food-rec{background:#1d2a27;border-color:#2f4a44;color:#5cc0ab}
-html.dark .food-rec:hover{background:var(--teal);color:#15201d}
+.food-recs{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
 /* ── Ściąga monet (Zakupy → Monety) ── */
 .coin-tip{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--kin);border-radius:0 12px 12px 0;box-shadow:var(--shadow);padding:12px 16px;margin-bottom:14px;font-size:.85em;line-height:1.6}
 .coin-tip b{color:var(--text)}
@@ -1433,7 +1437,7 @@ function editInfo(k){const s=getInfoState();const v=prompt('Wpisz: '+(INFO_PH[k]
 function fmtField(escHtml){const s=getInfoState();return escHtml.replace(/\[\[([a-z0-9_]+)\|([^\]]+)\]\]/g,(m,k,ph)=>{const v=s[k];return v?`<span class="ival">${esc(v)}</span> <button class="ibtn" title="Edytuj" onclick="editInfo('${k}')">✏️</button>`:`<button class="ibtn ibtn-add" onclick="editInfo('${k}')">✏️ ${ph}</button>`})}
 const INFO_MON={'Telefony alarmowe':['緊','p-1',1],'Hotele':['宿','p-2'],'Dokumenty i rezerwacje':['書','p-3'],'Na wszelki wypadek (spokojnie — to tylko checklist)':['安','p-gold']};
 const PIN_SVG='<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.1-7-11a7 7 0 0 1 14 0c0 4.9-7 11-7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>';
-function mapChip(mq){return `<a class="mchip" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mq)}" target="_blank" rel="noopener">${PIN_SVG}mapa</a>`}
+function mapChip(mq,label){return `<a class="mchip" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mq)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${PIN_SVG}${label||'mapa'}</a>`}
 function stripEmo(s){const t=s.replace(/[\p{Extended_Pictographic}\u{FE0F}\u{200D}]|\p{Regional_Indicator}/gu,'').replace(/\s{2,}/g,' ').trim();return t||s}
 function telHref(s){const d=s.replace(/[^\d+]/g,'');return d.length>=3?'tel:'+d:null}
 function linkTels(html){return html.replace(/\+81[\d\s-]*\d/g,m=>`<a class="tel-inline" href="${telHref(m)}">${m}</a>`)}
@@ -1817,7 +1821,7 @@ function getChk(store){try{return JSON.parse(localStorage.getItem(store)||'{}')}
 function saveChk(store,s){localStorage.setItem(store,JSON.stringify(s))}
 function slug(s){return s.toLowerCase().replace(/[^a-z0-9ąćęłńóśźż]+/g,'-').replace(/^-|-$/g,'').slice(0,48)}
 function toggleCheck(store,key){const s=getChk(store);s[key]=!s[key];saveChk(store,s);store==='jp26_pack'?renderPack():renderFood()}
-const PACK_MON={'Dokumenty i pieniądze':['📄','p-gold'],'Elektronika':['🔌','p-gold'],'Apteczka':['💊','p-gold'],'Ubrania (upał)':['👕','p-gold'],'Ubrania (góry/wieczory)':['🧥','p-gold'],'Onsen i higiena':['♨️','p-gold'],'Kup na miejscu (nie pakuj)':['🛒','p-gold']};
+const PACK_MON={'Dokumenty i pieniądze':['財','p-gold'],'Elektronika':['電','p-gold'],'Apteczka':['薬','p-gold'],'Ubrania (upał)':['夏','p-gold'],'Ubrania (góry/wieczory)':['山','p-gold'],'Onsen i higiena':['湯','p-gold'],'Kup na miejscu (nie pakuj)':['買','p-gold']};
 const FOOD_MON={'Kioto / Osaka':['京阪','p-1'],'Nara / Uji':['奈良','p-1'],'Kanazawa':['金沢','p-2'],'Takayama':['飛騨','p-2'],'Togakushi / Nagano':['信州','p-2'],'Tokio':['東京','p-3'],'Automaty (jihanki)':['自販','p-gold'],'Konbini':['店','p-gold'],'Sieci — miski ryżu (gyūdon/curry)':['牛丼','p-gold'],'Sieci — sushi taśmowe (kaiten)':['回転','p-gold'],'Sieci — ramen i udon':['麺類','p-gold'],'Sieci — teishoku i katsu':['定食','p-gold'],'Sieci — restauracje rodzinne (famiresu)':['家族','p-gold'],'Sieci — kawiarnie i wieczór':['喫茶','p-gold']};
 function renderChecklist(items,store,panelId,withDesc,monMap){
   const s=getChk(store);
@@ -1834,8 +1838,8 @@ function renderChecklist(items,store,panelId,withDesc,monMap){
     g.items.forEach(it=>{const label=it.lb||it.it,key=slug(label),ck=!!s[key];
       let txt=esc(label);
       if(withDesc){txt='<b>'+esc(label)+'</b>'+(it.dt?'<span class="ck-d"> — '+esc(it.dt)+'</span>':'');
-        if(it.mq)txt+=` <a class="mlink" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(it.mq)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">📍 mapa</a>`;
-        if(it.recs&&it.recs.length)txt+='<span class="food-recs"><span class="fr-label">🍽️ Gdzie zjeść w pobliżu</span>'+it.recs.map(r=>`<a class="food-rec" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(r.mq)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${esc(r.nm)}</a>`).join('')+'</span>'}
+        if(it.mq)txt+=' '+mapChip(it.mq);
+        if(it.recs&&it.recs.length)txt+='<span class="food-recs">'+it.recs.map(r=>mapChip(r.mq,esc(r.nm))).join('')+'</span>'}
       h+=`<div class="ck-row ${ck?'ck-on':''}" onclick="toggleCheck('${store}','${key}')"><span class="ck-cb">${ck?'✓':''}</span><span class="ck-tx">${txt}</span></div>`;
     });
     h+=`</div></div>`;
@@ -2087,15 +2091,17 @@ initImgs().then(()=>{if(document.getElementById('shopPane'))renderShopping();ren
 // Rozmówki (#p6) — z odtwarzaniem po japońsku (syntezator systemowy, głos ja-JP)
 const PHRASE_MON={'Podstawy':'基','Restauracja':'食','Zakupy':'買','Orientacja i transport':'道','Awaryjne':'急','Liczby':'数'};
 const PHRASE_JP=[];
+const SPK_SVG='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>';
 function renderPhrases(){
   PHRASE_JP.length=0;
   const tts=('speechSynthesis' in window);
   let h='',lastGrp='';
   D.phrases.forEach(p=>{
-    if(p.grp!==lastGrp){lastGrp=p.grp;const mon=PHRASE_MON[p.grp]||'•';h+=`<div class="ck-grp p-3"><span class="ck-mon">${esc(mon)}</span><span class="ck-gt2">${esc(p.grp)}</span></div>`}
-    const say=tts?`<button class="say-btn noprint" title="Odtwórz po japońsku" aria-label="Odtwórz po japońsku" onclick="sayJp(${PHRASE_JP.push(p.jp)-1},this)">🔊</button>`:'';
-    h+=`<div class="ph-card"><div class="ph-pl">${esc(p.pl)}</div><div class="ph-jp">${esc(p.jp)}${say}</div><div class="ph-rom">${esc(p.jpr)}<span class="ph-pron">${esc(p.pron)}</span></div></div>`;
+    if(p.grp!==lastGrp){if(lastGrp)h+='</div>';lastGrp=p.grp;const mon=PHRASE_MON[p.grp]||'•';h+=`<div class="ck-grp p-3"><span class="ck-mon">${esc(mon)}</span><span class="ck-gt2">${esc(p.grp)}</span></div><div class="info-sheet">`}
+    const say=tts?`<button class="say-btn noprint" title="Odtwórz po japońsku" aria-label="Odtwórz po japońsku" onclick="sayJp(${PHRASE_JP.push(p.jp)-1},this)">${SPK_SVG}</button>`:'';
+    h+=`<div class="ph-row"><div class="ph-m"><div class="ph-pl">${esc(p.pl)}</div><div class="ph-jp">${esc(p.jp)}</div><div class="ph-rom">${esc(p.jpr)}<span class="ph-pron">${esc(p.pron)}</span></div></div>${say}</div>`;
   });
+  if(lastGrp)h+='</div>';
   document.getElementById('p6').innerHTML=h;
 }
 renderPhrases();
