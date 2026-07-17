@@ -896,7 +896,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px
 /* Reservation checkboxes & done state */
 .chk-wrap{display:flex;align-items:center;cursor:pointer;margin-right:8px;flex-shrink:0}
 .chk-wrap input{display:none}
-.chk-box{width:20px;height:20px;border:2px solid var(--border);border-radius:5px;display:flex;align-items:center;justify-content:center;transition:.2s;flex-shrink:0}
+.chk-box{width:18px;height:18px;border:1.5px solid var(--border);border-radius:2px;display:flex;align-items:center;justify-content:center;transition:.2s;flex-shrink:0}
 .chk-wrap input:checked+.chk-box{background:var(--teal);border-color:var(--teal)}
 .chk-wrap input:checked+.chk-box::after{content:'✓';color:#fff;font-size:13px;font-weight:700}
 .rc-done{opacity:.55;border-left-color:var(--teal)!important}
@@ -908,21 +908,22 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px
 .link-rm{background:none;border:none;color:var(--muted);cursor:pointer;font-size:.9em;padding:2px 4px;border-radius:3px}
 .link-rm:hover{background:#e8e5de;color:var(--red)}
 .rc-actions{margin-top:6px}
-.link-btn{background:none;border:1px dashed var(--border);color:var(--muted);cursor:pointer;font-size:.78em;padding:4px 10px;border-radius:6px;transition:.2s}
+.link-btn{background:none;border:1px dashed var(--border);color:var(--muted);cursor:pointer;font-size:.78em;padding:4px 10px;border-radius:2px;transition:.2s}
 .link-btn:hover{border-color:var(--teal);color:var(--teal);background:#f0faf8}
 /* Rezerwacje — timeline */
-.res-mh{font-family:var(--font-serif);font-weight:700;font-size:1.05em;color:var(--text);margin:24px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+.res-mh{display:flex;align-items:center;gap:12px;font-family:var(--font-serif);font-weight:700;font-size:1.05em;color:var(--text);margin:24px 0 12px}
+.res-mh::after{content:'';flex:1;height:1px;background:var(--border)}
 .res-mh:first-child{margin-top:2px}
-.res-it{position:relative;display:grid;grid-template-columns:16px 1fr;gap:13px;padding-bottom:14px}
+.res-it{position:relative;display:grid;grid-template-columns:16px minmax(0,1fr);gap:13px;padding-bottom:14px}
 .res-it::before{content:'';position:absolute;left:7px;top:16px;bottom:-2px;width:2px;background:#e9e1d2}
 .res-it:last-child::before{display:none}
-.res-dot{width:14px;height:14px;border-radius:50%;border:3px solid var(--card);background:var(--rtc,#bbb);box-shadow:0 0 0 1px var(--rtc,#bbb);margin-top:4px;position:relative;z-index:1}
+.res-dot{width:9px;height:9px;border-radius:50%;background:var(--rtc,#bbb);box-shadow:0 0 0 3px var(--bg);margin:7px 0 0 3.5px;position:relative;z-index:1}
 .rt-now{--rtc:#c0392b}.rt-soon{--rtc:#c8a24a}.rt-trip{--rtc:#1a7a6d}
-.res-card{background:var(--card);border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow);padding:12px 15px}
+.res-card{background:var(--card);border:1px solid var(--border);border-radius:2px;padding:12px 15px}
 .res-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:2px}
 .res-date{font-size:.72em;font-weight:700;color:var(--rtc,#888)}
 .res-title{font-weight:700;font-size:.97em;color:var(--text)}
-.res-sub{font-size:.82em;color:var(--muted);margin-top:2px;line-height:1.4}
+.res-sub{font-size:.82em;color:var(--muted);margin-top:2px;line-height:1.4;overflow-wrap:anywhere}
 .res-det{margin-top:9px}
 .res-det>summary{cursor:pointer;font-size:.78em;color:var(--indigo);font-weight:600;list-style:none;display:inline-flex;align-items:center;gap:5px;user-select:none}
 .res-det>summary::-webkit-details-marker{display:none}
@@ -931,13 +932,13 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px
 .res-detb{font-size:.82em;color:var(--muted);line-height:1.55;margin-top:8px}
 .res-done{opacity:.55}
 .res-done .res-title{text-decoration:line-through}
-.res-done .res-dot{background:var(--teal);box-shadow:0 0 0 1px var(--teal)}
+.res-done .res-dot{background:var(--teal);box-shadow:0 0 0 3px var(--bg)}
 .res-date{flex:1}
-.res-left{flex:none;font-size:.68em;font-weight:700;padding:2px 9px;border-radius:20px;background:#efe9dc;color:#8a8175;white-space:nowrap}
-.res-left.cd-soon{background:#f6ecd2;color:#9a7a25}
-.res-left.cd-past{background:#ece8e1;color:#b0a89c}
-.res-left.dl-done{background:#e2f0eb;color:#115c4a}
-.res-evt .res-dot{background:var(--card);box-shadow:0 0 0 2px var(--rtc,#bbb)}
+.res-left{flex:none;font-size:.68em;font-weight:700;padding:1px 8px;border-radius:2px;border:1px solid var(--border);background:none;color:#8a8175;white-space:nowrap}
+.res-left.cd-soon{border-color:#d8c791;color:#9a7a25}
+.res-left.cd-past{border-color:#e3ddd2;color:#b0a89c}
+.res-left.dl-done{border-color:#9ecdbd;color:#115c4a}
+.res-evt .res-dot{background:var(--bg);box-shadow:inset 0 0 0 2px var(--rtc,#bbb),0 0 0 3px var(--bg)}
 .res-evt .res-card{background:#fbf7ee}
 /* Pakowanie / Jedzenie — karty grup */
 .ck-top{display:flex;align-items:center;gap:12px;margin:2px 0 18px}
@@ -1140,14 +1141,14 @@ a.tel-inline{color:var(--red);font-weight:600;text-decoration:none;white-space:n
 .tz-clock:empty{display:none}
 .chk-row{display:flex;align-items:flex-start;gap:10px;background:var(--card);border-radius:9px;padding:10px 13px;box-shadow:var(--shadow);margin-bottom:7px;cursor:pointer;transition:transform .12s}
 .chk-row:hover{transform:translateX(2px)}
-.chk-box2{flex:0 0 auto;width:20px;height:20px;border:2px solid var(--border);border-radius:5px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:700;margin-top:1px}
+.chk-box2{flex:0 0 auto;width:18px;height:18px;border:1.5px solid var(--border);border-radius:2px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:700;margin-top:1px}
 .chk-on .chk-box2{background:var(--teal);border-color:var(--teal)}
 .chk-on{opacity:.6}
 .chk-on .chk-txt strong{text-decoration:line-through}
 .chk-txt{font-size:.9em;line-height:1.45}
 .pron{color:var(--teal);font-weight:700}
-.cd-hero{background:var(--card);border-radius:0 13px 13px 0;box-shadow:var(--shadow);padding:20px;text-align:center;margin-bottom:10px;border-left:4px solid var(--red)}
-.cd-big{font-family:var(--font-jp);font-size:2.4em;font-weight:700;color:var(--red);line-height:1.1}
+.cd-hero{background:var(--card);border:1px solid var(--border);border-top:2px solid var(--red);border-radius:2px;padding:20px;text-align:center;margin-bottom:10px}
+.cd-big{font-family:var(--font-serif);font-size:2.4em;font-weight:700;color:var(--red);line-height:1.1}
 .cd-unit{font-size:.4em;color:var(--muted);font-weight:500}
 .cd-sub{font-size:.85em;color:var(--muted);margin-top:4px}
 .cd-pill{display:inline-block;font-size:.7em;font-weight:700;padding:2px 8px;border-radius:12px;background:#e8e5de;color:var(--muted);vertical-align:middle}
@@ -1206,7 +1207,7 @@ a.tel-inline{color:var(--red);font-weight:600;text-decoration:none;white-space:n
 /* ── Portfel: zdjęcie/QR na rezerwacji ── */
 .res-mid{display:flex;align-items:center;gap:10px}
 .res-mid-t{flex:1;min-width:0}
-.res-thumb{flex:none;width:54px;height:54px;border:1px solid var(--border);border-radius:9px;background-size:cover;background-position:center;background-color:#fff;cursor:pointer;padding:0}
+.res-thumb{flex:none;width:54px;height:54px;border:1px solid var(--border);border-radius:2px;background-size:cover;background-position:center;background-color:#fff;cursor:pointer;padding:0}
 .res-thumb:hover{border-color:var(--teal)}
 .lightbox.bright{background:#fff}
 .lightbox.bright img{box-shadow:0 4px 18px rgba(0,0,0,.15);max-height:80vh}
@@ -1262,10 +1263,11 @@ html.dark .tip-d{background:#282218;border-left-color:#8a6d33}
 html.dark .tip-d[open]{background:#2d261a}
 html.dark .tip-s{color:#d4ad5e}
 html.dark .res-evt .res-card{background:#242028}
-html.dark .ck-gc,html.dark .ck-gc2,html.dark .res-left,html.dark .cd-pill{background:#332f3b;color:#a2988a}
-html.dark .res-left.cd-soon{background:#3c3320;color:#d4ad5e}
-html.dark .res-left.cd-past,html.dark .cd-pill.cd-past{background:#2b2831;color:#78705f}
-html.dark .res-left.dl-done{background:#1c352e;color:#7fd0b8}
+html.dark .ck-gc,html.dark .cd-pill{background:#332f3b;color:#a2988a}
+html.dark .res-left{background:none;border-color:#3a3542;color:#a2988a}
+html.dark .res-left.cd-soon{border-color:#6b5a2e;color:#d4ad5e}
+html.dark .res-left.cd-past,html.dark .cd-pill.cd-past{border-color:#332f3b;color:#78705f}
+html.dark .res-left.dl-done{border-color:#2e5a4c;color:#7fd0b8}
 html.dark .ck-row:hover{background:#282430}
 html.dark .ck-bar,html.dark .bud-track{background:#332f3b}
 html.dark .dmenu-btn:hover,html.dark .dmenu-pop button:hover,html.dark .link-rm:hover,html.dark .shop-cam:hover{background:#2e2a37}
@@ -1395,11 +1397,12 @@ function fmtRx(s){
   return t;
 }
 
+const PLANE_SVG='<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px"><path d="M16 10h4a2 2 0 0 1 0 4h-4l-4 7h-3l2 -7h-4l-2 2h-3l2 -4l-2 -4h3l2 2h4l-2 -7h3z"/></svg>';
 function renderAllRes(){
   const s=getResState();
   const list=D.items.slice().sort((a,b)=>a.sd<b.sd?-1:a.sd>b.sd?1:0);
   let h0='',lastM='';
-  if(D.meta.start){const diff=daysUntil(D.meta.start);let big;if(diff>0)big=diff+'<span class="cd-unit"> dni</span>';else if(diff===0)big='dziś! 🎌';else big=(diff>=-21?'Podróż trwa! 🎌':'Po podróży');h0+=`<div class="cd-hero"><div class="cd-big">${big}</div><div class="cd-sub">✈️ do startu podróży (${esc(D.meta.start)})</div></div>`}
+  if(D.meta.start){const diff=daysUntil(D.meta.start);let big;if(diff>0)big=diff+'<span class="cd-unit"> dni</span>';else if(diff===0)big='dziś! 🎌';else big=(diff>=-21?'Podróż trwa! 🎌':'Po podróży');h0+=`<div class="cd-hero"><div class="cd-big">${big}</div><div class="cd-sub">${PLANE_SVG} do startu podróży (${esc(D.meta.start)})</div></div>`}
   list.forEach(it=>{
     const isEvt=it.kind==='evt';
     const st=isEvt?{}:(s[it.i]||{}),done=st.done,link=st.link;
@@ -2124,7 +2127,7 @@ function sayJp(i,btn){
 // Licznik w nagłówku (terminy są w scalonej zakładce #p0)
 function daysUntil(dateStr){const d=new Date(dateStr+'T00:00:00'),t=new Date();t.setHours(0,0,0,0);return Math.round((d-t)/86400000)}
 function relText(diff){if(diff>1)return{t:'za '+diff+' dni',c:''};if(diff===1)return{t:'jutro',c:'cd-soon'};if(diff===0)return{t:'dziś',c:'cd-soon'};return{t:'minęło '+(-diff)+' dni',c:'cd-past'}}
-(function(){const el=document.getElementById('cdHead');if(!el||!D.meta.start)return;const diff=daysUntil(D.meta.start);if(diff>0)el.textContent='✈️ Do wylotu: '+diff+(diff===1?' dzień':' dni');else if(diff===0)el.textContent='✈️ Dziś start podróży! 🎌';else if(diff>=-21)el.textContent='🎌 Podróż trwa — miłego zwiedzania!';else el.style.display='none';})();
+(function(){const el=document.getElementById('cdHead');if(!el||!D.meta.start)return;const diff=daysUntil(D.meta.start);if(diff>0)el.innerHTML=PLANE_SVG+' Do wylotu: '+diff+(diff===1?' dzień':' dni');else if(diff===0)el.innerHTML=PLANE_SVG+' Dziś start podróży! 🎌';else if(diff>=-21)el.textContent='🎌 Podróż trwa — miłego zwiedzania!';else el.style.display='none';})();
 
 // Zegar: pokazuje czas w Tokio (dla urządzeń spoza Japonii) albo w Polsce (dla urządzeń w japońskiej strefie)
 function renderTzClock(){
