@@ -1088,6 +1088,8 @@ a.tel-inline{color:var(--red);font-weight:600;text-decoration:none;white-space:n
 .mchip svg{flex:none}
 .info-note{display:flex;gap:13px;align-items:flex-start;border-top:1px solid var(--text);border-bottom:1px solid var(--text);padding:11px 4px;margin-bottom:20px;font-size:.82em;color:var(--muted);line-height:1.55}
 .info-note .nseal{font-family:var(--font-serif);font-weight:700;font-size:.95em;color:var(--red);border:1.5px solid var(--red);border-radius:2px;padding:2px 8px;letter-spacing:.15em;flex:none;margin-top:1px}
+.info-note.sync-note .nseal{color:var(--teal);border-color:var(--teal)}
+.backup-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
 #p3 .ck-gt2,#p4 .ck-gt2,#p5 .ck-gt2,#p6 .ck-gt2,#pbud .ck-gt2{flex:0 1 auto;min-width:0}
 #p3 .ck-grp::after,#p4 .ck-grp::after,#p5 .ck-grp::after,#p6 .ck-grp::after,#pbud .ck-grp::after{content:'';flex:1;min-width:20px;height:1px;background:var(--border)}
 #p3 .ck-grp.mon-fill .ck-mon{background:var(--pc,var(--red));border-color:var(--pc,var(--red));color:var(--card)}
@@ -1114,7 +1116,7 @@ a.tel-inline{color:var(--red);font-weight:600;text-decoration:none;white-space:n
 /* Nowe zakładki: checklisty, rozmówki, terminy */
 .hdr-info-row{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:10px;margin-top:6px}
 .cd-head{font-size:.9em;color:var(--teal);font-weight:700}
-.tz-clock{font-size:.8em;font-weight:700;color:var(--muted);background:var(--card);border:1px solid var(--border);border-radius:2px;padding:3px 11px;letter-spacing:.02em}
+.tz-clock{font-size:.8em;font-weight:700;line-height:1.5;color:var(--muted);background:var(--card);border:1px solid var(--border);border-radius:2px;padding:3px 11px;letter-spacing:.02em}
 .tz-clock:empty{display:none}
 .chk-on{opacity:.6}
 .chk-on .chk-txt strong{text-decoration:line-through}
@@ -1416,7 +1418,7 @@ function stripEmo(s){const t=s.replace(/[\p{Extended_Pictographic}\u{FE0F}\u{200
 function telHref(s){const d=s.replace(/[^\d+]/g,'');return d.length>=3?'tel:'+d:null}
 function linkTels(html){return html.replace(/\+81[\d\s-]*\d/g,m=>`<a class="tel-inline" href="${telHref(m)}">${m}</a>`)}
 function renderInfo(){
-  let h3='<div class="info-note"><span class="nseal">注意</span><div><strong>Bezpieczeństwo:</strong> pola edytowalne (✏️) zapisują się <strong>tylko w tej przeglądarce</strong> — nie trafiają do repo. Mimo to nie wpisuj numerów kart płatniczych ani PIN-ów. Skany dokumentów trzymaj w osobnym, zabezpieczonym miejscu.</div></div>';
+  let h3='';
   let lastGrp='';
   D.info.forEach(it=>{
     let mm;const rx=/\[\[([a-z0-9_]+)\|([^\]]+)\]\]/g;while((mm=rx.exec(it.dt)))INFO_PH[mm[1]]=mm[2];
@@ -1439,6 +1441,14 @@ function renderInfo(){
     h3+=`<div class="info-row"><div class="irm"><div class="irl">${esc(stripEmo(it.lb))}</div>${body}</div>${val}</div>`;
   });
   if(lastGrp)h3+='</div>';
+  h3+='<div class="info-note"><span class="nseal">注意</span><div><strong>Bezpieczeństwo:</strong> pola edytowalne (✏️) zapisują się <strong>tylko w tej przeglądarce</strong> — nie trafiają do repo. Mimo to nie wpisuj numerów kart płatniczych ani PIN-ów. Skany dokumentów trzymaj w osobnym, zabezpieczonym miejscu.</div></div>';
+  h3+='<div class="info-note sync-note"><span class="nseal">同期</span><div><strong>Kopia zapasowa / przeniesienie na inne urządzenie:</strong> eksportuj dane z tej przeglądarki do pliku (np. zapisz go w Google Drive), a na drugim telefonie/laptopie zaimportuj — checkboxy, linki i zdjęcia wrócą na miejsce. Ważne, Terminy i Zakupy eksportują się jako osobne pliki.'
+    +'<div class="backup-actions">'
+    +'<button class="link-btn" onclick="exportWazne()">⬇️ Eksportuj: Ważne</button>'
+    +'<button class="link-btn" onclick="exportTerminy()">⬇️ Eksportuj: Terminy</button>'
+    +'<button class="link-btn" onclick="exportZakupy()">⬇️ Eksportuj: Zakupy</button>'
+    +'<button class="link-btn" onclick="pickImportFiles()">⬆️ Importuj plik(i)</button>'
+    +'</div></div></div>';
   document.getElementById('p3').innerHTML=h3;
 }
 renderInfo();
@@ -2008,6 +2018,92 @@ function buildZakupy(){
   renderShopping();renderBudget();renderCoins();
 }
 buildZakupy();
+
+// ── Eksport / import (kopia zapasowa, Ważne / Terminy / Zakupy jako osobne pliki) ──
+function blobToDataURL(blob){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(blob)})}
+function dataURLToBlob(durl){return fetch(durl).then(r=>r.blob())}
+async function collectPhotos(keyFilter){
+  const m=await idbAll().catch(()=>({}));const out={};
+  for(const k of Object.keys(m)){if(m[k]&&keyFilter(k))out[k]=await blobToDataURL(m[k])}
+  return out;
+}
+async function putPhotos(photos){
+  for(const k of Object.keys(photos||{})){
+    const blob=await dataURLToBlob(photos[k]);
+    await idbPut(k,blob);
+    if(IMG_URLS[k])URL.revokeObjectURL(IMG_URLS[k]);
+    IMG_URLS[k]=URL.createObjectURL(blob);
+  }
+}
+function todayStamp(){return new Date().toISOString().slice(0,10)}
+function downloadFile(name,text){
+  const blob=new Blob([text],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),2000);
+}
+async function shareOrDownload(name,text){
+  try{
+    const file=new File([text],name,{type:'application/json'});
+    if(navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({files:[file],title:name});return}
+  }catch(e){if(e&&e.name==='AbortError')return}
+  downloadFile(name,text);
+}
+async function exportWazne(){
+  const data={type:'jp26-wazne',v:1,exportedAt:new Date().toISOString(),info:getInfoState()};
+  await shareOrDownload(`japonia2026-wazne-${todayStamp()}.json`,JSON.stringify(data));
+  toast('Wyeksportowano: Ważne');
+}
+async function exportTerminy(){
+  const photos=await collectPhotos(k=>k.startsWith('res-'));
+  const data={type:'jp26-terminy',v:1,exportedAt:new Date().toISOString(),res:getResState(),photos};
+  await shareOrDownload(`japonia2026-terminy-${todayStamp()}.json`,JSON.stringify(data));
+  const n=Object.keys(photos).length;
+  toast('Wyeksportowano: Terminy'+(n?` (${n} zdj.)`:''));
+}
+async function exportZakupy(){
+  const photos=await collectPhotos(k=>!k.startsWith('res-'));
+  const data={type:'jp26-zakupy',v:1,exportedAt:new Date().toISOString(),chk:getChk('jp26_shop'),custom:getCustom(),photos};
+  await shareOrDownload(`japonia2026-zakupy-${todayStamp()}.json`,JSON.stringify(data));
+  const n=Object.keys(photos).length;
+  toast('Wyeksportowano: Zakupy'+(n?` (${n} zdj.)`:''));
+}
+function pickImportFiles(){
+  const inp=document.createElement('input');inp.type='file';inp.accept='application/json,.json';inp.multiple=true;
+  inp.onchange=()=>{if(inp.files&&inp.files.length)importFiles(inp.files)};
+  inp.click();
+}
+async function importOne(file){
+  let data;
+  try{data=JSON.parse(await file.text())}catch(e){return{ok:false,label:file.name+': nieprawidłowy plik'}}
+  if(data.type==='jp26-wazne'){
+    saveInfoState(data.info||{});renderInfo();
+    return{ok:true,label:'Ważne'};
+  }
+  if(data.type==='jp26-terminy'){
+    saveResState(data.res||{});
+    await putPhotos(data.photos);
+    renderAllRes();
+    const n=Object.keys(data.photos||{}).length;
+    return{ok:true,label:'Terminy'+(n?` (${n} zdj.)`:'')};
+  }
+  if(data.type==='jp26-zakupy'){
+    saveChk('jp26_shop',data.chk||{});saveCustom(data.custom||{});
+    await putPhotos(data.photos);
+    renderShopping();
+    const n=Object.keys(data.photos||{}).length;
+    return{ok:true,label:'Zakupy'+(n?` (${n} zdj.)`:'')};
+  }
+  return{ok:false,label:file.name+': nieznany typ pliku'};
+}
+async function importFiles(fileList){
+  const results=[];
+  for(const f of Array.from(fileList))results.push(await importOne(f));
+  const ok=results.filter(r=>r.ok).map(r=>r.label),bad=results.filter(r=>!r.ok).map(r=>r.label);
+  let msg=ok.length?`Zaimportowano: ${ok.join(', ')}`:'';
+  if(bad.length)msg+=(msg?' — ':'')+`błąd: ${bad.join(', ')}`;
+  toast(msg||'Nic nie zaimportowano');
+}
 
 // ── Ściąga monet i banknotów (Zakupy → Monety) — w całości offline ──
 function coinSVG(o){
