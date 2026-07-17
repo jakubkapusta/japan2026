@@ -954,7 +954,8 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px
 .ck-row:hover{background:#faf6ee}
 .ck-cb{flex:0 0 auto;width:20px;height:20px;border:2px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:700;margin-top:1px;transition:.15s}
 .ck-on .ck-cb{background:var(--teal);border-color:var(--teal)}
-.ck-tx{font-size:.9em;line-height:1.45;padding-top:1px}
+.ck-tx{font-size:.9em;line-height:1.45;padding-top:1px;flex:1;min-width:0}
+.shop-wh .mchip{white-space:normal}
 .ck-tx b{font-weight:700}
 .ck-on .ck-tx{text-decoration:line-through;opacity:.5}
 .ck-d{color:var(--muted);font-weight:400}
@@ -984,43 +985,43 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px
 .bud-note{font-size:.78em;color:var(--muted);line-height:1.45}
 .bud-total{display:flex;justify-content:space-between;align-items:baseline;padding:11px 15px;border-top:2px solid var(--border);font-family:var(--font-serif);font-weight:700;margin-top:4px}
 .bud-total b{color:var(--p1)}
-.bud-conv{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--card);border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow);padding:12px 16px;margin-bottom:16px}
+.bud-conv{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--card);border:1px solid var(--border);border-radius:2px;padding:12px 16px;margin-bottom:16px}
 .bud-conv-l{font-weight:700;font-size:.9em}
-.bud-conv input{width:120px;padding:7px 11px;border:1px solid var(--border);border-radius:8px;font-size:1em;font-family:var(--font);background:#fffdf8;color:var(--text);text-align:right}
+.bud-conv input{width:120px;padding:7px 11px;border:1px solid var(--border);border-radius:2px;font-size:1em;font-family:var(--font);background:var(--card);color:var(--text);text-align:right}
 .bud-conv input:focus{outline:none;border-color:var(--indigo)}
 .bud-conv-eq{color:var(--muted)}
 .bud-conv-out{font-family:var(--font-serif);font-weight:700;font-size:1.18em;color:var(--p1)}
 /* Sub-tabs (Zakupy: Co kupić / Budżet) */
-.subtabs{display:flex;gap:4px;background:#ece5d6;border-radius:11px;padding:4px;margin-bottom:20px}
-.subtab{flex:1;text-align:center;padding:9px 8px;font-family:var(--font);font-weight:700;font-size:.86em;border:none;border-radius:8px;cursor:pointer;color:var(--muted);background:none;transition:.15s;user-select:none}
-.subtab.on{background:var(--card);color:var(--p1);box-shadow:var(--shadow)}
-.subtab:hover:not(.on){color:var(--text)}
+.subtabs{display:flex;border:1px solid var(--border);border-radius:2px;overflow:hidden;background:var(--card);margin-bottom:20px}
+.subtab{flex:1;text-align:center;padding:9px 8px;font-family:var(--font);font-weight:700;font-size:.86em;border:none;border-left:1px solid var(--border);border-radius:0;cursor:pointer;color:var(--muted);background:none;transition:.15s;user-select:none}
+.subtab:first-child{border-left:none}
+.subtab.on{background:var(--p1);color:var(--card)}
+.subtab:hover:not(.on){color:var(--text);background:var(--bg)}
 .subpane{display:none}
 .subpane.on{display:block}
-.shop-wh{display:block;font-size:.92em;color:var(--p2);font-weight:600;margin-top:3px}
-.shop-wh .mlink{color:var(--p2);border-bottom:1px dotted var(--p2)}
-.shop-wh .mlink:hover{color:var(--red);border-bottom-color:var(--red)}
+.shop-wh{display:block;margin-top:7px}
+.shop-wh.plain{font-size:.88em;color:var(--muted);margin-top:3px}
 .ck-on .shop-wh{color:var(--muted)}
-.ck-on .shop-wh .mlink{color:var(--muted);border-bottom-color:var(--muted)}
-.shop-own{display:inline-block;font-size:.62em;font-weight:700;color:var(--kin);background:#f6efdd;border-radius:10px;padding:1px 7px;margin-left:7px;vertical-align:middle;text-transform:uppercase;letter-spacing:.05em}
-.shop-del{flex:0 0 auto;align-self:center;width:24px;height:24px;border:none;border-radius:7px;background:none;color:#b9b0a3;font-size:19px;line-height:1;cursor:pointer;transition:.15s}
+.ck-on .shop-wh .mchip{color:var(--muted);border-color:var(--border);background:none}
+.shop-own{display:inline-block;font-size:.62em;font-weight:700;color:var(--kin);border:1px solid var(--kin);border-radius:2px;padding:1px 7px;margin-left:7px;vertical-align:middle;text-transform:uppercase;letter-spacing:.05em}
+.shop-del{flex:0 0 auto;align-self:center;width:24px;height:24px;border:none;border-radius:2px;background:none;color:#b9b0a3;font-size:19px;line-height:1;cursor:pointer;transition:.15s}
 .shop-del:hover{background:#f3d9d3;color:var(--red)}
-.shop-add{padding:4px 10px 10px}
-.shop-add-btn{width:100%;padding:9px;border:1.5px dashed var(--border);border-radius:9px;background:none;color:var(--muted);font-family:var(--font);font-weight:700;font-size:.84em;cursor:pointer;transition:.15s}
+.shop-add{padding:10px 16px;border-top:1px solid var(--border)}
+.shop-add-btn{width:100%;padding:9px;border:1.5px dashed var(--border);border-radius:2px;background:none;color:var(--muted);font-family:var(--font);font-weight:700;font-size:.84em;cursor:pointer;transition:.15s}
 .shop-add-btn:hover{border-color:var(--p2);color:var(--p2);background:#f6fbf9}
 .shop-add-form{display:flex;flex-direction:column;gap:7px}
 .shop-add-form[hidden]{display:none}
-.shop-add-in{padding:9px 11px;border:1px solid var(--border);border-radius:8px;font-family:var(--font);font-size:.9em;background:#fffdf8;color:var(--text)}
+.shop-add-in{padding:9px 11px;border:1px solid var(--border);border-radius:2px;font-family:var(--font);font-size:.9em;background:var(--card);color:var(--text)}
 .shop-add-in:focus{outline:none;border-color:var(--p2)}
 .shop-add-act{display:flex;gap:8px}
-.shop-add-save{flex:1;padding:9px;border:none;border-radius:8px;background:var(--p2);color:#fff;font-family:var(--font);font-weight:700;font-size:.86em;cursor:pointer}
+.shop-add-save{flex:1;padding:9px;border:none;border-radius:2px;background:var(--p2);color:#fff;font-family:var(--font);font-weight:700;font-size:.86em;cursor:pointer}
 .shop-add-save:hover{filter:brightness(1.06)}
-.shop-add-cancel{padding:9px 16px;border:1px solid var(--border);border-radius:8px;background:none;color:var(--muted);font-family:var(--font);font-weight:600;font-size:.86em;cursor:pointer}
+.shop-add-cancel{padding:9px 16px;border:1px solid var(--border);border-radius:2px;background:none;color:var(--muted);font-family:var(--font);font-weight:600;font-size:.86em;cursor:pointer}
 .shop-add-cancel:hover{color:var(--text)}
-.shop-cam{margin-left:auto;flex:0 0 auto;align-self:center;width:30px;height:30px;border:none;border-radius:8px;background:none;font-size:15px;line-height:1;cursor:pointer;opacity:.38;transition:.15s;padding:0}
+.shop-cam{margin-left:auto;flex:0 0 auto;align-self:center;width:30px;height:30px;border:1px solid var(--border);border-radius:2px;background:none;color:var(--muted);display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:.55;transition:.15s;padding:0}
 .ck-row:hover .shop-cam{opacity:.8}
 .shop-cam:hover{opacity:1;background:#efe9dc}
-.shop-thumb{margin-left:auto;flex:0 0 auto;align-self:center;width:40px;height:40px;border:1px solid var(--border);border-radius:8px;background-size:cover;background-position:center;background-repeat:no-repeat;cursor:pointer;padding:0}
+.shop-thumb{margin-left:auto;flex:0 0 auto;align-self:center;width:40px;height:40px;border:1px solid var(--border);border-radius:2px;background-size:cover;background-position:center;background-repeat:no-repeat;cursor:pointer;padding:0}
 .shop-thumb:hover{border-color:var(--p2)}
 .lightbox{position:fixed;inset:0;background:rgba(30,22,14,.85);z-index:100;display:none;align-items:center;justify-content:center;padding:20px}
 .lb-inner{max-width:94vw;max-height:92vh;display:flex;flex-direction:column;gap:14px;align-items:center}
@@ -1038,7 +1039,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px
 .img-credits-b a{color:var(--indigo);text-decoration:none}
 /* Stats tab */
 .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:24px}
-.stat-card{background:var(--card);border-radius:10px;padding:14px;text-align:center;box-shadow:var(--shadow)}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:2px;padding:14px;text-align:center}
 .stat-label{font-size:.75em;color:var(--muted);margin-bottom:2px}
 .stat-val{font-size:1.4em;font-weight:700}
 .stat-val.red{color:var(--red)}
@@ -1109,17 +1110,17 @@ a.tel-inline{color:var(--red);font-weight:600;text-decoration:none;white-space:n
 .mchip svg{flex:none}
 .info-note{display:flex;gap:13px;align-items:flex-start;border-top:1px solid var(--text);border-bottom:1px solid var(--text);padding:11px 4px;margin-bottom:20px;font-size:.82em;color:var(--muted);line-height:1.55}
 .info-note .nseal{font-family:var(--font-serif);font-weight:700;font-size:.95em;color:var(--red);border:1.5px solid var(--red);border-radius:2px;padding:2px 8px;letter-spacing:.15em;flex:none;margin-top:1px}
-#p3 .ck-gt2,#p4 .ck-gt2,#p5 .ck-gt2,#p6 .ck-gt2{flex:0 1 auto;min-width:0}
-#p3 .ck-grp::after,#p4 .ck-grp::after,#p5 .ck-grp::after,#p6 .ck-grp::after{content:'';flex:1;min-width:20px;height:1px;background:var(--border)}
+#p3 .ck-gt2,#p4 .ck-gt2,#p5 .ck-gt2,#p6 .ck-gt2,#pbud .ck-gt2{flex:0 1 auto;min-width:0}
+#p3 .ck-grp::after,#p4 .ck-grp::after,#p5 .ck-grp::after,#p6 .ck-grp::after,#pbud .ck-grp::after{content:'';flex:1;min-width:20px;height:1px;background:var(--border)}
 #p3 .ck-grp.mon-fill .ck-mon{background:var(--pc,var(--red));border-color:var(--pc,var(--red));color:var(--card)}
-/* Pakowanie + Jedzenie: arkusze zamiast kart, keisen między wierszami, kwadratowe checkboxy */
-#p4 .ck-gc2,#p5 .ck-gc2{order:1;background:none;border-radius:0;padding:0}
-#p4 .ck-card,#p5 .ck-card{border-radius:2px;box-shadow:none;margin-bottom:6px}
-#p4 .ck-items,#p5 .ck-items{padding:0}
-#p4 .ck-row,#p5 .ck-row{border-radius:0;padding:10px 16px}
-#p4 .ck-row+.ck-row,#p5 .ck-row+.ck-row{border-top:1px solid var(--border)}
-#p4 .ck-cb,#p5 .ck-cb{border-radius:2px;border-width:1.5px;width:18px;height:18px;font-size:12px}
-#p4 .ck-bar,#p5 .ck-bar,#p4 .ck-bar-f,#p5 .ck-bar-f{border-radius:2px}
+/* Pakowanie + Jedzenie + Zakupy: arkusze zamiast kart, keisen między wierszami, kwadratowe checkboxy */
+#p4 .ck-gc2,#p5 .ck-gc2,#pbud .ck-gc2{order:1;background:none;border-radius:0;padding:0}
+#p4 .ck-card,#p5 .ck-card,#pbud .ck-card{border-radius:2px;box-shadow:none;margin-bottom:6px}
+#p4 .ck-items,#p5 .ck-items,#pbud .ck-items{padding:0}
+#p4 .ck-row,#p5 .ck-row,#pbud .ck-row{border-radius:0;padding:10px 16px}
+#p4 .ck-row+.ck-row,#p5 .ck-row+.ck-row,#pbud .ck-row+.ck-row{border-top:1px solid var(--border)}
+#p4 .ck-cb,#p5 .ck-cb,#pbud .ck-cb{border-radius:2px;border-width:1.5px;width:18px;height:18px;font-size:12px}
+#p4 .ck-bar,#p5 .ck-bar,#pbud .ck-bar,#p4 .ck-bar-f,#p5 .ck-bar-f,#pbud .ck-bar-f{border-radius:2px}
 .ph-row{display:flex;align-items:center;gap:14px;padding:11px 16px}
 .ph-row+.ph-row{border-top:1px solid var(--border)}
 .ph-m{flex:1;min-width:0}
@@ -1127,7 +1128,7 @@ a.tel-inline{color:var(--red);font-weight:600;text-decoration:none;white-space:n
 .ph-jp{font-family:var(--font-jp);font-size:1.22em;font-weight:500;color:var(--text);line-height:1.45}
 .ph-rom{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:5px;font-size:.85em;color:var(--p3);font-style:italic}
 .ph-pron{display:inline-block;font-size:.76em;color:#8a6d1f;background:#fdf6e7;border-radius:2px;padding:2px 9px;letter-spacing:.02em;font-style:normal}
-.info-warn{background:#fff7ed;border:1px solid #f3d9b8;border-radius:10px;padding:11px 14px;font-size:.82em;color:#8a5a18;margin-bottom:18px;line-height:1.5}
+.info-warn{background:#fff7ed;border:1px solid #f3d9b8;border-radius:2px;padding:11px 14px;font-size:.82em;color:#8a5a18;margin-bottom:18px;line-height:1.5}
 .ival{font-weight:700;color:var(--text)}
 .ibtn{font-family:var(--font);background:none;border:1px dashed var(--kin);color:var(--kin);cursor:pointer;font-size:.9em;padding:1px 7px;border-radius:2px;transition:.15s;white-space:nowrap}
 .ibtn:hover{border-color:var(--teal);color:var(--teal);background:#f0faf8}
@@ -1228,18 +1229,18 @@ html.dark .dog-egg img{filter:drop-shadow(-6px 8px 16px rgba(0,0,0,.55))}
 /* ── Jedzenie: polecane lokale (chipy z linkiem do mapy) ── */
 .food-recs{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
 /* ── Ściąga monet (Zakupy → Monety) ── */
-.coin-tip{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--kin);border-radius:0 12px 12px 0;box-shadow:var(--shadow);padding:12px 16px;margin-bottom:14px;font-size:.85em;line-height:1.6}
+.coin-tip{background:var(--card);border:1px solid var(--border);border-left:3px solid var(--kin);border-radius:0;padding:12px 16px;margin-bottom:14px;font-size:.85em;line-height:1.6}
 .coin-tip b{color:var(--text)}
 .coin-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:10px;margin-bottom:8px}
-.coin-card{display:flex;gap:14px;align-items:center;background:var(--card);border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow);padding:12px 14px}
+.coin-card{display:flex;gap:14px;align-items:center;background:var(--card);border:1px solid var(--border);border-radius:2px;padding:12px 14px}
 .coin-card svg{flex:none;filter:drop-shadow(0 2px 3px rgba(0,0,0,.18))}
 .coin-body{min-width:0}
 .coin-name{font-weight:700;font-size:1.02em}
 .coin-name .coin-jp{font-family:var(--font-jp);color:var(--muted);font-weight:500;font-size:.8em;margin-left:7px}
 .coin-desc{font-size:.8em;color:var(--muted);line-height:1.5;margin-top:3px}
 .coin-desc b{color:var(--text)}
-.note-row{display:flex;gap:13px;align-items:center;background:var(--card);border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow);padding:11px 14px;margin-bottom:9px}
-.note-chip{flex:none;width:76px;height:36px;border-radius:5px;border:1px solid rgba(0,0,0,.18);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.78em;color:rgba(0,0,0,.55);letter-spacing:.02em}
+.note-row{display:flex;gap:13px;align-items:center;background:var(--card);border:1px solid var(--border);border-radius:2px;padding:11px 14px;margin-bottom:6px}
+.note-chip{flex:none;width:76px;height:36px;border-radius:3px;border:1px solid rgba(0,0,0,.18);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.78em;color:rgba(0,0,0,.55);letter-spacing:.02em}
 /* ── Przełącznik motywu ── */
 .theme-btn{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:3px 11px;cursor:pointer;font-size:.8em;line-height:1.5;transition:.15s}
 .theme-btn:hover{border-color:var(--kin)}
@@ -1267,13 +1268,12 @@ html.dark .res-left.cd-past,html.dark .cd-pill.cd-past{background:#2b2831;color:
 html.dark .res-left.dl-done{background:#1c352e;color:#7fd0b8}
 html.dark .ck-row:hover{background:#282430}
 html.dark .ck-bar,html.dark .bud-track{background:#332f3b}
-html.dark .subtabs{background:#282430}
 html.dark .dmenu-btn:hover,html.dark .dmenu-pop button:hover,html.dark .link-rm:hover,html.dark .shop-cam:hover{background:#2e2a37}
 html.dark .bud-conv input,html.dark .shop-add-in,html.dark .day-edit-ta{background:#17151b;border-color:#3a3542}
 html.dark .info-warn{background:#2f2718;border-color:#584722;color:#d9b878}
 html.dark .ph-pron{background:#332d20;color:#cba653}
 html.dark .link-btn:hover,html.dark .ibtn:hover{background:#1d2a27}
-html.dark .shop-own{background:#332c1e;color:#c9a355}
+html.dark .shop-own{border-color:#8a733c;color:#c9a355}
 html.dark .dn-1{background:#3a2521;color:#eba28c;border-color:#4d2f28}
 html.dark .dn-2{background:#1d332c;color:#8fd3c0;border-color:#28453d}
 html.dark .dn-3{background:#232e3c;color:#a5c0e2;border-color:#2f3d50}
@@ -1303,7 +1303,7 @@ html.dark .hrs{color:#5cc0ab}
   <div class="tab on" onclick="selectTab(0)"><svg class="tic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2Z"/><path d="M9 4v14M15 6v14"/></svg>Plan</div>
   <div class="tab" onclick="selectTab(1)"><svg class="tic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="16" height="14" rx="2.5"/><path d="M4 10h16M8.5 4v4M15.5 4v4"/></svg>Terminy</div>
   <div class="tab" onclick="selectTab(2)"><svg class="tic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M7 20v-7M12 20V8M17 20v-4"/></svg>Dystanse</div>
-  <div class="tab" onclick="selectTab(3)"><svg class="tic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l-1.1 11.2a1 1 0 0 1-1 .8H8.1a1 1 0 0 1-1-.8L6 8Z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg>Zakupy</div>
+  <div class="tab" onclick="selectTab(3)"><svg class="tic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>Zakupy</div>
   <div class="tab" onclick="selectTab(4)"><svg class="tic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5M12 8h.01"/></svg>Ważne</div>
   <div class="tab" onclick="selectTab(5)"><svg class="tic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="8" width="14" height="11" rx="2"/><path d="M9 8V6h6v2M5 13h14"/></svg>Pakowanie</div>
   <div class="tab" onclick="selectTab(6)"><svg class="tic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11h16a8 8 0 0 1-16 0Z"/><path d="M10 4v3M13 3v4M16 5v2"/></svg>Jedzenie</div>
@@ -1801,7 +1801,7 @@ h2+='<div class="chart-wrap">'+buildChart(DAYS)+'</div>';
 h2+='<div class="legend-row"><span><span class="legend-dot" style="background:#1D9E75"></span> pieszo (km)</span><span><span class="legend-dot" style="background:#EF9F27;width:10px;height:2px;border-radius:0"></span> 12+ km (dużo)</span><span><span class="legend-dot" style="background:#E24B4A;width:10px;height:2px;border-radius:0"></span> 15+ km (bardzo dużo)</span></div>';
 
 h2+='<div class="sl" style="margin-top:28px">Szczegóły dzień po dniu</div>';
-h2+='<table class="dist-tbl"><thead><tr><th>Dzień</th><th>Miejsce</th><th class="r">Pieszo</th><th class="r">Metro/bus</th><th class="r">Auto</th><th class="r">Pociąg</th></tr></thead><tbody>';
+h2+='<div style="overflow-x:auto;-webkit-overflow-scrolling:touch"><table class="dist-tbl"><thead><tr><th>Dzień</th><th>Miejsce</th><th class="r">Pieszo</th><th class="r">Metro/bus</th><th class="r">Auto</th><th class="r">Pociąg</th></tr></thead><tbody>';
 
 let lastPart=0;
 DAYS.forEach(d=>{
@@ -1813,7 +1813,7 @@ DAYS.forEach(d=>{
   h2+=`<tr${d.walk>=14?' class="warn"':''}><td>${d.d}</td><td>${esc(d.n)}</td><td class="r ${cls}">${d.walk} km</td><td class="r">${d.metro?d.metro+' min':'—'}</td><td class="r">${d.car?d.car+' km':'—'}</td><td class="r">${d.train?d.train+' min':'—'}</td></tr>`;
 });
 h2+=`<tr style="border-top:2px solid var(--border);font-weight:700"><td colspan="2">RAZEM</td><td class="r">${Math.round(totalWalk)} km</td><td class="r">${DAYS.reduce((s,d)=>s+d.metro,0)} min</td><td class="r">${totalCar} km</td><td class="r">${totalTrain} min</td></tr>`;
-h2+='</tbody></table>';
+h2+='</tbody></table></div>';
 document.getElementById('p2').innerHTML=h2;
 
 // Checklisty (Pakowanie #p4, Jedzenie #p5) — generyczne, localStorage
@@ -1910,7 +1910,7 @@ function renderBudget(){
   document.getElementById('budPane').innerHTML=h;
 }
 // Lista zakupów (#shopPane) — co warto kupić / pomyśleć o kupnie, z opisem i miejscem
-const SHOP_MON={'Moda i odzież':['👕','p-1'],'Kosmetyki i pielęgnacja':['💄','p-gold'],'Smakołyki i prezenty':['🍵','p-gold'],'Kuchnia, noże, rzemiosło':['🔪','p-2'],'Dla Michała — anime i gry':['🎮','p-3'],'Papiernia i design':['🖋️','p-gold'],'Alkohol':['🥃','p-2'],'Elektronika i zegarki':['🔌','p-3'],'Tax-free i gdzie kupować':['🛍️','p-gold']};
+const SHOP_MON={'Moda i odzież':['服','p-1'],'Kosmetyki i pielęgnacja':['美','p-gold'],'Smakołyki i prezenty':['菓','p-gold'],'Kuchnia, noże, rzemiosło':['匠','p-2'],'Dla Michała — anime i gry':['遊','p-3'],'Papiernia i design':['文','p-gold'],'Alkohol':['酒','p-2'],'Elektronika i zegarki':['電','p-3'],'Tax-free i gdzie kupować':['免','p-gold']};
 function linkify(text){
   const re=/(https?:\/\/[^\s]+|www\.[^\s]+)/g;let out='',last=0,m;
   while((m=re.exec(text))){
@@ -1964,10 +1964,11 @@ function pickPhoto(key){
   };inp.click();
 }
 function delPhoto(key){idbDel(key).then(()=>{if(IMG_URLS[key]){URL.revokeObjectURL(IMG_URLS[key]);delete IMG_URLS[key]}closeLightbox();renderShopping();}).catch(()=>{});}
+const CAM_SVG='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.4"/></svg>';
 function photoCtrl(key){const url=IMG_URLS[key];
   return url
     ?`<button class="shop-thumb" style="background-image:url('${url}')" onclick="event.stopPropagation();openLightbox('${key}')" title="Zobacz / zmień zdjęcie"></button>`
-    :`<button class="shop-cam" onclick="event.stopPropagation();pickPhoto('${key}')" title="Dodaj zdjęcie">📷</button>`;
+    :`<button class="shop-cam" onclick="event.stopPropagation();pickPhoto('${key}')" title="Dodaj zdjęcie">${CAM_SVG}</button>`;
 }
 function openLightbox(key){const url=IMG_URLS[key];if(!url)return;
   let ov=document.getElementById('imgLightbox');
@@ -2011,10 +2012,9 @@ function renderShopping(){
     g.items.forEach(it=>{const key=slug(it.lb),ck=!!s[key];
       let wh='';
       if(it.wh&&it.wh!=='—'){
-        const inner=it.mq
-          ?`<a class="mlink" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(it.mq)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${esc(it.wh)}</a>`
-          :esc(it.wh);
-        wh=`<span class="shop-wh">📍 ${inner}</span>`;
+        wh=it.mq
+          ?`<span class="shop-wh">${mapChip(it.mq,esc(it.wh))}</span>`
+          :`<span class="shop-wh plain">${esc(it.wh)}</span>`;
       }
       h+=`<div class="ck-row ${ck?'ck-on':''}" onclick="toggleShop('${key}')"><span class="ck-cb">${ck?'✓':''}</span><span class="ck-tx"><b>${esc(it.lb)}</b><span class="ck-d"> — ${esc(it.dt)}</span>${wh}</span>${photoCtrl(key)}</div>`;
     });
@@ -2029,7 +2029,7 @@ function selSub(i){document.querySelectorAll('#pbud .subtab').forEach((b,j)=>b.c
 function buildZakupy(){
   document.getElementById('pbud').innerHTML=
     '<div class="bud-conv"><span class="bud-conv-l">Przelicznik</span><input id="convJpy" type="number" inputmode="numeric" min="0" value="1000" oninput="convCalc()"><span class="bud-conv-eq">¥ =</span><span id="convPln" class="bud-conv-out">'+fmtN(1000*PLN_RATE)+' zł</span></div>'+
-    '<div class="subtabs"><button class="subtab on" onclick="selSub(0)">🛍️ Co kupić</button><button class="subtab" onclick="selSub(1)">💴 Budżet</button><button class="subtab" onclick="selSub(2)">🪙 Monety</button></div>'+
+    '<div class="subtabs"><button class="subtab on" onclick="selSub(0)">Co kupić</button><button class="subtab" onclick="selSub(1)">Budżet</button><button class="subtab" onclick="selSub(2)">Monety</button></div>'+
     '<div id="shopPane" class="subpane on"></div><div id="budPane" class="subpane"></div><div id="coinPane" class="subpane"></div>';
   renderShopping();renderBudget();renderCoins();
 }
