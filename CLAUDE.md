@@ -45,6 +45,45 @@ Format punktu harmonogramu: `- CZAS | EMOJI TYTUŁ | OPIS | OPCJONALNY_MAP_QUERY
 
 Części (parts): 1 = Kioto/Osaka/Nara, 2 = Alpy/Nagano, 3 = Tokio.
 
+### Warianty dnia A/B (rozwidlenia)
+
+Dni, które rozgrywa się na dwa sposoby (pogoda, upał, poziom sił), mają przełącznik z przyciskami. Wybór zapisuje się w `localStorage` (`jp26_variant`), `'ALL'` = pokaż oba warianty naraz z badge'ami A/B.
+
+Deklaracja w bloku dnia, **zaraz pod linią opisu dnia**:
+
+```
+? ⚖️ Wariant dnia — kiedy i na jakiej podstawie zapada decyzja.     ← nagłówek (linia bez „ | ")
+? A | 🌿 Etykieta | Krótki opis wariantu | Kiedy go wybrać
+? B* | 🍣 Etykieta | Krótki opis wariantu | Kiedy go wybrać
+```
+
+- `*` przy kluczu = wariant domyślny (bez gwiazdki domyślny jest pierwszy)
+- Klucz to jedna wielka litera (`A`, `B`, …)
+
+Punkt należący do wariantu dostaje prefiks przed czasem:
+
+```
+- A> 12:05 | 🏯 Kenroku-en | Opis... | Kenrokuen Garden, Kanazawa
+- B> 12:05 | 🍣 Omicho Market | Opis... | Omicho Market, Kanazawa
+- 17:35 | 🚗 Wyjazd do Takayamy | Punkt bez prefiksu = wspólny dla obu wariantów
+```
+
+**Zasady pisania rozwidleń:**
+1. Punkty **wspólne** (bez prefiksu) muszą mieć czas identyczny w obu wariantach. Jeśli po rozwidleniu godzina się rozjeżdża (np. przyjazd 15:20 vs 14:35) — punkt trzeba zduplikować do obu gałęzi, a nie zostawiać jako wspólny.
+2. W źródle pisz **całą gałąź A, potem całą gałąź B**. W obrębie jednej gałęzi czasy muszą rosnąć — dzięki temu po wybraniu wariantu oś czasu jest chronologiczna.
+3. Każdy wariant musi mieć wypełnione pole „kiedy go wybrać" — to jest realne kryterium decyzji w terenie, nie ozdobnik.
+
+**Ciekawostki dla punktów wariantowych** — pole czasu przyjmuje ten sam prefiks, a kilka punktów naraz rozdziela się średnikiem:
+
+```
+D2 | A>16:00; B>6:00 | 🎭 | Skok z Kiyomizu | Ta sama ciekawostka przykleja się do Kiyomizu w obu wariantach, mimo różnych godzin.
+D6 | A>12:05 | ⚡ | Poke-studzienka Milotic | Tylko w wariancie A (Kenroku-en).
+```
+
+Dni z wariantami: **2** (klasyczny / odwrócony pod upał), **6** (ogród / targ), **9** (wasabi / Tsugaike), **17** (muzeum / Yanaka), **18** (baza+Shibuya / Odaiba).
+
+⚠️ Tabele `DAYS` i `BUDGET` mają **jeden wiersz na dzień** i nie znają wariantów — wartości odpowiadają wariantowi domyślnemu.
+
 ## Ciekawostki (sekcja CIEKAWOSTKI)
 
 Rozwijane detale przyczepiające się do punktów harmonogramu po dopasowaniu dnia i godziny.
@@ -65,6 +104,14 @@ D11 | 11:30 | 💡 | Piekarnia ponad chmurami | 横手山頂ヒュッテ to najw
 - Treść — jeden ciągły akapit, bez łamania linii
 
 **Po każdej zmianie harmonogramu** sprawdź, czy czasy istniejących ciekawostek nadal pasują do punktów. Jeśli punkt się przesunął — zaktualizuj czas ciekawostki. Dodaj nowe ciekawostki do nowych/zmienionych punktów tam, gdzie pasują.
+
+Szybki test „osieroconych" ciekawostek (wklej w konsoli przeglądarki na otwartej stronie) — powinien zwrócić pustą tablicę:
+
+```js
+(()=>{const days={};D.parts.flatMap(p=>p.days).forEach(d=>{const m=d.lb.match(/\d+/);if(m)days[m[0]]=d});
+const orphan=[];D.tips.forEach(t=>(t.keys||[]).forEach(k=>{const d=days[t.day];
+if(d&&!d.sc.some(s=>s.tm===k.tm&&(s.v||'')===(k.v||'')))orphan.push('D'+t.day+' '+(k.v?k.v+'>':'')+k.tm+' :: '+t.ti)}));return orphan})()
+```
 
 ## Tablica dystansów (zakładka Statystyki)
 
