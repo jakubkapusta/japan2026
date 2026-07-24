@@ -43,6 +43,21 @@ Format punktu harmonogramu: `- CZAS | EMOJI TYTUŁ | OPIS | OPCJONALNY_MAP_QUERY
 - Map query (po ostatnim `|`) — trafia do linku Google Maps (`maps/search/?api=1&query=...`)
 - Emoji na początku tytułu to ikona punktu
 
+⚠️ **Segment `🕐` musi być OSTATNIĄ rzeczą w opisie.** `fmtNote()` nie ma ogranicznika końca — owija wszystko od pierwszego `🕐` do końca opisu w `<span class="hrs">` (turkus + pogrubienie = „twarde ograniczenie czasowe"). Zdanie dopisane po godzinach zostanie pomalowane jak godziny otwarcia i rozmyje ten sygnał.
+
+```
+- 16:15 | 🛕 Byōdō-in | ... 700 ¥. Wnętrze pawilonu odpuszczamy. 🕐 Teren do 17:30. | Byodo-in Temple, Uji   ✅
+- 16:15 | 🛕 Byōdō-in | ... 700 ¥. 🕐 Teren do 17:30. Wnętrze pawilonu odpuszczamy. | Byodo-in Temple, Uji   ❌
+```
+
+Test (konsola przeglądarki) — powinien zwrócić pustą tablicę:
+
+```js
+[...document.querySelectorAll('.sr')].filter(e=>{const h=e.querySelector('.hrs');
+return h&&/\.\s+[A-ZŻŹĆĄŚĘŁÓŃ]/.test(h.textContent.replace(/^🕐\s*/,''))})
+.map(e=>e.dataset.tm+' '+e.querySelector('.hrs').textContent)
+```
+
 Części (parts): 1 = Kioto/Osaka/Nara, 2 = Alpy/Nagano, 3 = Tokio.
 
 ### Warianty dnia A/B (rozwidlenia)
