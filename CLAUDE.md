@@ -115,7 +115,7 @@ D11 | 11:30 | 💡 | Piekarnia ponad chmurami | 横手山頂ヒュッテ to najw
 
 - `DNUM` — numer dnia z prefiksem `D` (np. `D11`)
 - `CZAS` — musi dokładnie zgadzać się z czasem punktu w harmonogramie, do którego ma się przykleić
-- Ikony: `💡` = praktyczna porada, `🎭` = historia/kultura, `📖` = legenda/opowieść, `⚡` = Pokémon (sklepy Pokémon Center i poke-studzienki Pokéfuta na trasie — pod kątem Michała/Pokémon GO)
+- Ikony: `💡` = praktyczna porada, `🎭` = historia/kultura, `📖` = legenda/opowieść, `⚡` = Pokémon (sklepy Pokémon Center i poke-studzienki Pokéfuta na trasie — pod kątem Michała/Pokémon GO), `⚙️` = inżynieria/architektura (Kuba jest inżynierem, syn w technikum — te wpisy mają mieć konkretne liczby: rozpiętości, masy, głębokości, zasada działania, a nie ogólniki „imponująca budowla")
 - Treść — jeden ciągły akapit, bez łamania linii
 
 **Po każdej zmianie harmonogramu** sprawdź, czy czasy istniejących ciekawostek nadal pasują do punktów. Jeśli punkt się przesunął — zaktualizuj czas ciekawostki. Dodaj nowe ciekawostki do nowych/zmienionych punktów tam, gdzie pasują.
