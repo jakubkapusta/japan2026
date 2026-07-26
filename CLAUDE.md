@@ -118,6 +118,14 @@ D11 | 11:30 | 💡 | Piekarnia ponad chmurami | 横手山頂ヒュッテ to najw
 - Ikony: `💡` = praktyczna porada, `🎭` = historia/kultura, `📖` = legenda/opowieść, `⚡` = Pokémon (sklepy Pokémon Center i poke-studzienki Pokéfuta na trasie — pod kątem Michała/Pokémon GO), `⚙️` = inżynieria/architektura (Kuba jest inżynierem, syn w technikum — te wpisy mają mieć konkretne liczby: rozpiętości, masy, głębokości, zasada działania, a nie ogólniki „imponująca budowla")
 - Treść — jeden ciągły akapit, bez łamania linii
 
+⚠️ **Przed dodaniem ciekawostki sprawdź, co już wisi na tym punkcie** — inaczej łatwo o duplikat (zdarzyło się przy KIX i Skytree). Test w konsoli:
+
+```js
+(d,tm)=>D.tips.filter(t=>t.day===d&&(t.keys||[]).some(k=>k.tm===tm)).map(t=>t.icon+' '+t.ti)
+```
+
+Kilka ciekawostek na jednym punkcie jest OK i częste — ale każda musi brać inny kąt (np. D14 13:30: `🎭` liczba 634 i podświetlenie, `⚙️` tłumienie centralnym słupem).
+
 **Po każdej zmianie harmonogramu** sprawdź, czy czasy istniejących ciekawostek nadal pasują do punktów. Jeśli punkt się przesunął — zaktualizuj czas ciekawostki. Dodaj nowe ciekawostki do nowych/zmienionych punktów tam, gdzie pasują.
 
 Szybki test „osieroconych" ciekawostek (wklej w konsoli przeglądarki na otwartej stronie) — powinien zwrócić pustą tablicę:
