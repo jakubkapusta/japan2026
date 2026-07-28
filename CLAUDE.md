@@ -197,7 +197,10 @@ Komentarz nad tablicą: `// Budżet — szacunki wydatków na miejscu, per dzie�
 
 Jedno zapytanie do Open-Meteo (`fetchWx()`, bez klucza) pobiera dane dzienne **i** godzinowe (`hourly=precipitation_probability,precipitation`). Do `localStorage['jp26_wx']` trafia tylko wycinek **6:00–23:00** dla daty danego dnia: `hp` (18× szansa %) i `hm` (18× mm/h). Cache 3 h, offline pokazuje ostatni pobrany stan.
 
+⚠️ **Zmieniasz kształt zapisu w cache → podbij `WX_V`.** `fetchWx()` przerywa, gdy cache jest młodszy niż 3 h, więc bez podbicia wersji przeglądarki ze świeżym zapisem w starym formacie czekają z odświeżeniem do wygaśnięcia TTL — i wygląda to dokładnie tak, jakby zmiana w ogóle nie weszła (zdarzyło się przy wdrożeniu paska godzinowego). Niezgodna wersja wymusza pobranie od razu.
+
 - `dayWxStrip(dnum)` — pasek pod nagłówkiem dnia. Wysokość słupka = szansa opadów, ciemniejszy rdzeń od dołu = mm/h (skala do 4 mm/h = pełny słupek). Gdy max <20% **i** max <0,2 mm → jedna linijka „☀️ Bez opadów w prognozie".
+- Pod paskiem linijka `.wxs-out` z odczytem. Bez zaznaczenia pokazuje szczyt dnia; dotknięcie albo przeciągnięcie palcem po pasku (na desktopie hover) pokazuje wartości wybranej godziny. Wartość każdej godziny siedzi w `data-r` komórki, obsługa jest delegowana na `document` (pointerdown/move/up), więc przeżywa przerysowanie przez `renderPlanTab()`. `.wxs-bars` ma `touch-action:pan-y` — pionowe przewijanie strony działa normalnie, przechwytujemy tylko ruch poziomy.
 - `wxMark(dnum, tm, nextTm)` — parasolka w kolumnie godziny. Bierze **maksimum z okna do następnego punktu, przycięte do 3 h** (brak następnego / czas cofnięty przy wariancie ALL → okno 2 h).
 - Progi (`wxLevel`): <40% nic · 40–69% indygo · ≥70% albo ≥2 mm/h czerwone. Druga linijka z mm tylko od 0,5 mm/h.
 - Parasolka to inline SVG (`WX_UMB`), nie emoji — dziedziczy kolor z poziomu progu.

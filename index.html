@@ -1077,7 +1077,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);padding:20px
 .sc .mlink{color:var(--indigo);text-decoration:none;border-bottom:1px dotted var(--indigo)}
 .sc .mlink:hover{color:var(--red);border-bottom-color:var(--red)}
 .ft{text-align:center;margin-top:36px;font-size:.78em;color:var(--muted);font-family:var(--font-jp);line-height:1.6}
-@media(max-width:520px){body{padding:12px}.hdr{margin:-12px -12px 0}.hdr h1{font-size:1.6em}.tab{flex:1 1 22%;font-size:.72em;padding:9px 3px}.dh{padding:11px 13px}.day-collage{height:82px}.day-collage.single{height:170px}.db{padding:13px 14px}.sr{grid-template-columns:40px 14px 1fr}.sch::before{left:54px}.wxs{padding:9px 13px 6px;gap:2px}.wxs.dry{padding:7px 13px}.wxs-b{height:28px}.dnt-i{padding-left:9px;gap:7px;grid-template-columns:19px minmax(0,1fr)}}
+@media(max-width:520px){body{padding:12px}.hdr{margin:-12px -12px 0}.hdr h1{font-size:1.6em}.tab{flex:1 1 22%;font-size:.72em;padding:9px 3px}.dh{padding:11px 13px}.day-collage{height:82px}.day-collage.single{height:170px}.db{padding:13px 14px}.sr{grid-template-columns:40px 14px 1fr}.sch::before{left:54px}.wxs{padding:9px 13px 7px}.wxs-bars{gap:2px}.wxs.dry{padding:7px 13px}.wxs-b{height:28px}.dnt-i{padding-left:9px;gap:7px;grid-template-columns:19px minmax(0,1fr)}}
 /* Reservation checkboxes & done state */
 .chk-wrap{display:flex;align-items:center;cursor:pointer;margin-right:8px;flex-shrink:0}
 .chk-wrap input{display:none}
@@ -1391,9 +1391,14 @@ a.tel-inline{color:var(--red);font-weight:600;text-decoration:none;white-space:n
 /* ── Pogoda + słońce w nagłówku dnia ── */
 .dwx{font-size:.72em;color:var(--muted);margin-top:3px;letter-spacing:.01em}
 /* ── Pasek godzinowy opadów (pod nagłówkiem dnia) ── */
-.wxs{display:flex;align-items:flex-end;gap:3px;padding:10px 18px 7px;background:#fbf7ee;border-bottom:1px solid #f1ebde}
-.wxs.dry{display:block;padding:7px 18px;font-size:.72em;color:var(--muted);letter-spacing:.01em}
+.wxs{padding:10px 18px 8px;background:#fbf7ee;border-bottom:1px solid #f1ebde}
+.wxs.dry{padding:7px 18px;font-size:.72em;color:var(--muted);letter-spacing:.01em}
+.wxs-bars{display:flex;align-items:flex-end;gap:3px;cursor:pointer;touch-action:pan-y}
+.wxs-out{margin-top:6px;font-size:.68em;color:var(--muted);letter-spacing:.01em;line-height:1.25;min-height:1.25em}
+.wxs-out.on{color:var(--text);font-weight:700}
 .wxs-c{flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:stretch;gap:4px}
+.wxs-c.sel .wxs-b{outline:1.5px solid var(--kin)}
+.wxs-c.sel .wxs-h{color:var(--kin);font-weight:700}
 .wxs-b{position:relative;height:34px;border-bottom:1px solid #e2d9c8}
 .wxs-b i{position:absolute;left:0;right:0;bottom:0;display:block;min-height:2px}
 .wxs-b .wxs-p{opacity:.38}
@@ -1906,7 +1911,9 @@ function sunTimes(ds,lat,lon){
 function getWxCache(){try{return JSON.parse(localStorage.getItem('jp26_wx')||'{}')}catch(e){return{}}}
 // ── Prognoza godzinowa opadów: pasek w nagłówku dnia + parasolki na osi czasu ──
 // Dane godzinowe trzymamy dla okna 6:00–23:00 (18 wartości: szansa % i mm/h)
-const WX_H0=6,WX_HN=18;
+// WX_V = wersja formatu cache. Podbij, gdy zmieniasz kształt zapisu — inaczej przeglądarki
+// ze świeżym cache w starym formacie czekają z odświeżeniem do wygaśnięcia TTL.
+const WX_V=2,WX_H0=6,WX_HN=18;
 const WX_UMB='<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1.4 8.3a6.6 6.6 0 0 1 13.2 0z" fill="currentColor"/><path d="M8 1.6V12.2a1.8 1.8 0 0 1-3.6 0" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>';
 function wxHours(n){const wx=(getWxCache().d||{})[n];return(wx&&wx.hp&&wx.hp.length===WX_HN)?wx:null}
 function wxLevel(p,mm){if(p>=70||mm>=2)return 2;if(p>=40)return 1;return 0}
@@ -1915,17 +1922,52 @@ function hhmmToMin(t){const m=/^(\d{1,2}):(\d{2})$/.exec(String(t||'').trim());r
 function dayWxStrip(dnum){
   const n=+dnum,wx=dnum?wxHours(n):null;if(!wx)return'';
   if(Math.max.apply(null,wx.hp)<20&&Math.max.apply(null,wx.hm)<0.2)return'<div class="wxs dry noprint">☀️ Bez opadów w prognozie</div>';
-  let h='<div class="wxs noprint" title="Prognoza godzinowa opadów 6:00–23:00 (Open-Meteo). Wysokość słupka = szansa opadów, ciemniejszy rdzeń = ilość mm/h.">';
+  let bi=0;for(let i=1;i<WX_HN;i++)if((wx.hp[i]||0)>(wx.hp[bi]||0))bi=i;
+  const rd=i=>{const p=Math.round(wx.hp[i]||0),mm=wx.hm[i]||0;return(WX_H0+i)+':00 · '+p+'%'+(mm>=0.1?' · '+fmtMm(mm)+' mm':' · bez opadów')};
+  const def='szczyt '+rd(bi);
+  let h='<div class="wxs noprint"><div class="wxs-bars" title="Prognoza godzinowa opadów 6:00–23:00 (Open-Meteo). Wysokość słupka = szansa opadów, ciemniejszy rdzeń = ilość mm/h. Dotknij paska (albo przeciągnij palcem), żeby zobaczyć wartości.">';
   for(let i=0;i<WX_HN;i++){
     const hr=WX_H0+i,p=Math.round(wx.hp[i]||0),mm=wx.hm[i]||0,lv=wxLevel(p,mm);
     const ph=p>0?Math.max(4,p):0,mh=mm>0?Math.min(ph,Math.max(4,Math.round(Math.min(100,mm/4*100)))):0;
-    h+=`<div class="wxs-c"><div class="wxs-b lv${lv}" title="${hr}:00 · ${p}%${mm>=0.1?' · '+fmtMm(mm)+' mm':''}">`
+    h+=`<div class="wxs-c" data-r="${esc(rd(i))}"><div class="wxs-b lv${lv}">`
       +(ph?`<i class="wxs-p" style="height:${ph}%"></i>`:'')
       +(mh?`<i class="wxs-m" style="height:${mh}%"></i>`:'')
       +`</div><span class="wxs-h">${hr%3===0?hr:''}</span></div>`;
   }
-  return h+'</div>';
+  return h+`</div><div class="wxs-out" data-def="${esc(def)}">${esc(def)}</div></div>`;
 }
+// Odczyt wartości pod paskiem: dotyk/przeciągnięcie na telefonie, hover przy myszy.
+// Bez zaznaczenia pasek pokazuje szczyt dnia, więc linijka nigdy nie stoi pusta.
+let wxDrag=null,wxHover=null;
+function wxPick(bars,x){let best=null,bd=Infinity;
+  for(const c of bars.children){const r=c.getBoundingClientRect(),d=Math.abs(x-(r.left+r.width/2));if(d<bd){bd=d;best=c}}
+  return best;
+}
+function wxShow(bars,cell){
+  if(!bars)return;
+  const prev=bars.querySelector('.wxs-c.sel');if(prev)prev.classList.remove('sel');
+  const out=bars.parentNode.querySelector('.wxs-out');if(!out)return;
+  if(cell){cell.classList.add('sel');out.textContent=cell.dataset.r;out.classList.add('on')}
+  else{out.textContent=out.dataset.def;out.classList.remove('on')}
+}
+function wxBarsAt(e){return e.target&&e.target.closest?e.target.closest('.wxs-bars'):null}
+document.addEventListener('pointerdown',e=>{
+  const bars=wxBarsAt(e);
+  if(wxDrag&&wxDrag!==bars)wxShow(wxDrag,null);
+  const sel=document.querySelector('.wxs-c.sel');
+  if(sel&&sel.parentNode!==bars)wxShow(sel.parentNode,null);
+  if(!bars)return;
+  wxDrag=bars;wxShow(bars,wxPick(bars,e.clientX));
+},{passive:true});
+document.addEventListener('pointermove',e=>{
+  if(wxDrag){wxShow(wxDrag,wxPick(wxDrag,e.clientX));return}
+  if(e.pointerType!=='mouse')return;
+  const bars=wxBarsAt(e);
+  if(bars!==wxHover){wxShow(wxHover,null);wxHover=bars}
+  if(bars)wxShow(bars,wxPick(bars,e.clientX));
+},{passive:true});
+document.addEventListener('pointerup',()=>{wxDrag=null},{passive:true});
+document.addEventListener('pointercancel',()=>{if(wxDrag)wxShow(wxDrag,null);wxDrag=null},{passive:true});
 // Znacznik przy punkcie: maksimum z okna do następnego punktu (przycięte do 3 h)
 function wxMark(dnum,tm,nextTm){
   const wx=dnum?wxHours(+dnum):null;if(!wx)return'';
@@ -2689,7 +2731,7 @@ setInterval(updateNowMode,60000);
 function fetchWx(){
   if(!navigator.onLine)return;
   const c=getWxCache();
-  if(c.ts&&Date.now()-c.ts<3*3600*1000)return;
+  if(c.ts&&c.v===WX_V&&Date.now()-c.ts<3*3600*1000)return; // cache w starym formacie = odśwież od razu, nie czekaj na TTL
   if(!D.meta.start)return;
   const jp=tzParts('Asia/Tokyo');if(!jp)return;
   const addD=(ds,k)=>{const t=new Date(ds+'T00:00:00Z');t.setUTCDate(t.getUTCDate()+k);return t.toISOString().slice(0,10)};
@@ -2726,7 +2768,7 @@ function fetchWx(){
       byDay[n]=rec;
     }
     if(Object.keys(byDay).length){
-      try{localStorage.setItem('jp26_wx',JSON.stringify({ts:Date.now(),d:byDay}))}catch(e){}
+      try{localStorage.setItem('jp26_wx',JSON.stringify({v:WX_V,ts:Date.now(),d:byDay}))}catch(e){}
       renderPlanTab();
     }
   }).catch(()=>{});
