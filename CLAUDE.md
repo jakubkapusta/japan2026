@@ -60,6 +60,29 @@ return h&&/\.\s+[A-ZŻŹĆĄŚĘŁÓŃ]/.test(h.textContent.replace(/^🕐\s*/,'
 
 Części (parts): 1 = Kioto/Osaka/Nara, 2 = Alpy/Nagano, 3 = Tokio.
 
+### Notki dnia (`>`)
+
+Opis dnia to **wyłącznie narracja: max 3 zdania o tym, czym jest ten dzień**. Wszystko inne — pogoda, tłok, gotówka, parking, plan B, akcje do wykonania — to osobne notki pod opisem, jedna notka = jeden wątek.
+
+```
+== Dzień 7 | czw 06.08 | Takayama + Hida Furukawa | WAT Hotel, Takayama
+Narracja dnia, 2–3 zdania.
+> 🌡️ Ubranie | Takayama to góry — wieczorem 20–22°C, bluza się przyda.
+>! 📋 Wieczorem dnia 6 | Sprawdźcie rozkład Takayama↔Hida-Furukawa i pod niego dopasujcie blok.
+```
+
+Format: `> EMOJI ETYKIETA | treść`
+- `>!` zamiast `>` = **akcja do wykonania** (nie informacja) — kreska indygo + delikatne tło
+- Etykieta opcjonalna: bez ` | ` cała reszta linii jest treścią
+- Emoji na początku = ikona notki; **emoji nie rozsypujemy po zdaniach** wewnątrz treści
+- Segment `🕐` działa jak w punktach (patrz ostrzeżenie wyżej) — musi być ostatni
+
+**Zasady redakcyjne:**
+1. Etykieta 1–4 słowa i ma nieść treść („Wsiadajcie do Local, nie Hida", nie samo „Uwaga").
+2. Wątki-kontynuacje scalamy w jedną notkę zamiast ciągu `⚠️ … ⚠️ …`.
+3. CAPS-y tylko tam, gdzie naprawdę „nie przegap" (nazwy stacji, „NIE Nakanoshima"). Jeśli krzyczy każdy segment, nie krzyczy żaden.
+4. Notka dłuższa niż 2 zdania = sygnał, że szczegóły należą do punktu harmonogramu. Wtedy: **w notce zostaje krótka informacja, że coś jest ważne, a rozwinięcie idzie do punktu dnia** (i notka odsyła: „Szczegóły przy punkcie 11:45").
+
 ### Warianty dnia A/B (rozwidlenia)
 
 Dni, które rozgrywa się na dwa sposoby (pogoda, upał, poziom sił), mają przełącznik z przyciskami. Wybór zapisuje się w `localStorage` (`jp26_variant`), `'ALL'` = pokaż oba warianty naraz z badge'ami A/B.
@@ -169,6 +192,17 @@ Tablica `BUDGET` w JS (~linia 1256):
 **Wszystkie kwoty są NA OSOBĘ w jenach (¥).** Kod mnoży ×3 automatycznie dla „cała trójka". Nie mnóż ×3 w danych.
 
 Komentarz nad tablicą: `// Budżet — szacunki wydatków na miejscu, per dzień, na osobę (bez hoteli/lotów/auta)`
+
+## Pogoda godzinowa (pasek w nagłówku dnia + parasolki na osi)
+
+Jedno zapytanie do Open-Meteo (`fetchWx()`, bez klucza) pobiera dane dzienne **i** godzinowe (`hourly=precipitation_probability,precipitation`). Do `localStorage['jp26_wx']` trafia tylko wycinek **6:00–23:00** dla daty danego dnia: `hp` (18× szansa %) i `hm` (18× mm/h). Cache 3 h, offline pokazuje ostatni pobrany stan.
+
+- `dayWxStrip(dnum)` — pasek pod nagłówkiem dnia. Wysokość słupka = szansa opadów, ciemniejszy rdzeń od dołu = mm/h (skala do 4 mm/h = pełny słupek). Gdy max <20% **i** max <0,2 mm → jedna linijka „☀️ Bez opadów w prognozie".
+- `wxMark(dnum, tm, nextTm)` — parasolka w kolumnie godziny. Bierze **maksimum z okna do następnego punktu, przycięte do 3 h** (brak następnego / czas cofnięty przy wariancie ALL → okno 2 h).
+- Progi (`wxLevel`): <40% nic · 40–69% indygo · ≥70% albo ≥2 mm/h czerwone. Druga linijka z mm tylko od 0,5 mm/h.
+- Parasolka to inline SVG (`WX_UMB`), nie emoji — dziedziczy kolor z poziomu progu.
+- Horyzont prognozy Open-Meteo to 16 dni — dalsze dni po prostu nie mają paska ani parasolek. Oba elementy mają klasę `noprint`.
+- Gdy pasek się renderuje, `dayMetaLine()` pomija dzienne `☔ X%` (byłoby zdublowane).
 
 ## Service worker (`sw.js`) — cache offline
 
