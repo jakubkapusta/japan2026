@@ -1379,7 +1379,10 @@ a.tel-inline{color:var(--red);font-weight:600;text-decoration:none;white-space:n
 .vbadge{display:inline-block;font-size:.72em;font-weight:700;font-family:var(--font-jp);background:color-mix(in srgb,var(--indigo) 12%,transparent);color:var(--indigo);border:1px solid color-mix(in srgb,var(--indigo) 30%,transparent);border-radius:2px;padding:0 5px;margin-right:6px;vertical-align:1px}
 /* ── Tryb „TERAZ" — bieżący dzień i punkt planu ── */
 .today-pill{display:inline-block;font-size:.62em;font-weight:700;background:var(--red);color:#fff;border-radius:12px;padding:2px 9px;margin-left:8px;vertical-align:middle;letter-spacing:.09em}
-.sr-past{opacity:.5}
+/* Minione punkty: wyszarzamy tylko godzinę i kropkę — opis zostaje w pełni czytelny,
+   bo przy poślizgu w planie „już minięte" punkty wciąż się realizuje. */
+.sr-past .st{color:var(--muted)}
+.sr-past .sdot::before{background:var(--border)}
 .sr-now{background:linear-gradient(90deg,rgba(184,64,47,.08),transparent 70%);border-radius:2px}
 .sr-now .sdot::before{background:var(--red);animation:nowPulse 2.2s ease-in-out infinite}
 @keyframes nowPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.3)}}
