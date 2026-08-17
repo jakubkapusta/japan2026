@@ -118,7 +118,7 @@ D2 | A>16:00; B>6:00 | 🎭 | Skok z Kiyomizu | Ta sama ciekawostka przykleja si
 D6 | A>12:05 | ⚡ | Poke-studzienka Milotic | Tylko w wariancie A (Kenroku-en).
 ```
 
-Dni z wariantami: **2** (klasyczny / odwrócony pod upał), **6** (ogród / targ), **9** (wasabi / Tsugaike), **15** (Daikoku autem / Odaiba koleją), **17** (muzeum / Yanaka), **18** (baza+Shibuya / Odaiba).
+Dni z wariantami: **2** (klasyczny / odwrócony pod upał), **6** (ogród / targ), **9** (wasabi / Tsugaike), **15** (Daikoku autem / Odaiba koleją), **17** (muzeum / Yanaka), **18** (baza+Shibuya / Odaiba), **19** (pełna Kamakura + Enoshima / skrót bez wyspy).
 
 ⚠️ Tabele `DAYS` i `BUDGET` mają **jeden wiersz na dzień** i nie znają wariantów — wartości odpowiadają wariantowi domyślnemu.
 
